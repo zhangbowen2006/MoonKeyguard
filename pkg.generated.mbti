@@ -1,0 +1,696 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "zhangbowen2006/moonkeyguard"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn accessible_profile() -> PolicyProfile
+
+pub fn active_bindings(Keymap, String, String) -> Array[BindingQuery]
+
+pub fn analysis_exit_code(Analysis, fail_on_warning? : Bool) -> Int
+
+pub fn analysis_to_json(Analysis) -> String
+
+pub fn analysis_to_markdown(Analysis) -> String
+
+pub fn analysis_to_sarif(Analysis) -> String
+
+pub fn analysis_to_text(Analysis) -> String
+
+pub fn analyze(Keymap) -> Analysis
+
+pub fn analyze_with_rules(Keymap, ProjectRules) -> Analysis
+
+pub fn apply_keymap_diff(Keymap, Keymap, include_removed? : Bool) -> Keymap
+
+pub fn apply_reserved_catalog(Keymap, Array[ReservedRule]) -> Keymap
+
+pub fn audit(String, name? : String) -> (ParseResult, Analysis)
+
+pub fn audit_with_catalog(Keymap, Array[ReservedRule]) -> CatalogReport
+
+pub fn audit_with_named_profile(String, String, String) -> ProfileReport
+
+pub fn audit_with_profile(String, String, PolicyProfile) -> ProfileReport
+
+pub fn behavioral_changes(KeymapDiff) -> Array[BindingChange]
+
+pub fn benchmark_case(String, Array[String], context? : String, platform? : String, expected_status? : DispatchStatus, repetitions? : Int) -> BenchmarkCase
+
+pub fn benchmark_result_to_json(BenchmarkResult) -> String
+
+pub fn benchmark_results_to_markdown(Array[BenchmarkResult]) -> String
+
+pub fn benchmark_suite(Keymap, Array[BenchmarkCase]) -> Array[BenchmarkResult]
+
+pub fn build_conflict_graph(Keymap, Analysis) -> ConflictGraph
+
+pub fn canonical_keys(String) -> String
+
+pub fn catalog_report_to_markdown(CatalogReport) -> String
+
+pub fn catalog_to_json(Array[ReservedRule]) -> String
+
+pub fn clean_demo_source() -> String
+
+pub fn complexity_report(Keymap, Analysis) -> ComplexityReport
+
+pub fn complexity_to_markdown(ComplexityReport) -> String
+
+pub fn conflict_component(ConflictGraph, String) -> Array[String]
+
+pub fn conflict_graph_to_json(ConflictGraph) -> String
+
+pub fn conflict_graph_to_markdown(ConflictGraph, limit? : Int) -> String
+
+pub fn conflict_hotspots(ConflictGraph, limit? : Int) -> Array[ConflictNode]
+
+pub fn default_reserved_rules() -> Array[ReservedRule]
+
+pub fn demo_analysis() -> Analysis
+
+pub fn demo_keymap() -> Keymap
+
+pub fn demo_source() -> String
+
+pub fn desktop_profile() -> PolicyProfile
+
+pub fn diff_keymaps(Keymap, Keymap) -> KeymapDiff
+
+pub fn dispatch(Keymap, String, context? : String, platform? : String) -> DispatchResult
+
+pub fn dispatch_result_to_json(DispatchResult) -> String
+
+pub fn dispatch_trace_to_markdown(DispatchTrace) -> String
+
+pub fn evaluate_project_rules(Keymap, ProjectRules) -> RuleReport
+
+pub fn explain_reserved(Binding, Array[ReservedRule]) -> Array[ReservedRule]
+
+pub fn export_csv(Keymap) -> String
+
+pub fn find_binding(Keymap, String) -> Binding?
+
+pub fn find_command(Keymap, String) -> Array[Binding]
+
+pub fn health_recommendations(Keymap, Analysis) -> Array[Recommendation]
+
+pub fn import_csv(String, name? : String) -> ImportReport
+
+pub fn import_pipe(String, name? : String) -> ImportReport
+
+pub fn import_report_to_text(ImportReport) -> String
+
+pub fn import_rows(Array[BindingRow], name? : String) -> ImportReport
+
+pub fn import_tsv(String, name? : String) -> ImportReport
+
+pub fn key_prefix(KeySequence, KeySequence) -> Bool
+
+pub fn keymap_diff_to_json(KeymapDiff) -> String
+
+pub fn keymap_from_bindings(String, Array[Binding]) -> Keymap
+
+pub fn keymap_metrics(Keymap) -> KeymapMetrics
+
+pub fn keymap_schema() -> KeymapSchema
+
+pub fn keymap_to_dsl(Keymap) -> String
+
+pub fn merge_keymaps(Keymap, Keymap) -> MergeResult
+
+pub fn metrics_to_json(KeymapMetrics) -> String
+
+pub fn migration_plan(KeymapDiff) -> String
+
+pub fn normalize_keymap(Keymap) -> Keymap
+
+pub fn overlap_explanation(Keymap, Binding, Binding) -> String
+
+pub fn parse_diagnostics_to_json(Array[ParseDiagnostic]) -> String
+
+pub fn parse_keymap(String, name? : String) -> ParseResult
+
+pub fn parse_keys(String) -> Result[KeySequence, String]
+
+pub fn platforms_overlap(String, String) -> Bool
+
+pub fn primary_commands(Keymap, String, String) -> Array[Binding]
+
+pub fn profile_by_name(String) -> PolicyProfile
+
+pub fn profile_report_to_json(ProfileReport) -> String
+
+pub fn profile_report_to_markdown(ProfileReport) -> String
+
+pub fn project_capabilities() -> Array[String]
+
+pub fn recommendations(Analysis) -> Array[Recommendation]
+
+pub fn recommendations_to_json(Array[Recommendation]) -> String
+
+pub fn recommendations_to_markdown(Array[Recommendation]) -> String
+
+pub fn release_gate(String, String, ReleaseInput) -> ReleaseGate
+
+pub fn release_gate_to_json(ReleaseGate) -> String
+
+pub fn release_gate_to_markdown(ReleaseGate) -> String
+
+pub fn release_input(Keymap, profile? : PolicyProfile?, baseline? : Keymap?) -> ReleaseInput
+
+pub fn replay(Keymap, Array[String], context? : String, platform? : String) -> DispatchTrace
+
+pub fn row(String, String, String, context? : String, platform? : String, priority? : String, enabled? : String, description? : String) -> BindingRow
+
+pub fn rule_report_to_json(RuleReport) -> String
+
+pub fn rule_report_to_markdown(RuleReport) -> String
+
+pub fn run_benchmark(Keymap, BenchmarkCase) -> BenchmarkResult
+
+pub fn schema_to_json(KeymapSchema) -> String
+
+pub fn schema_to_markdown(KeymapSchema) -> String
+
+pub fn select_bindings(Keymap, command? : String, context? : String, platform? : String, enabled_only? : Bool) -> KeymapSelection
+
+pub fn selection_to_text(KeymapSelection) -> String
+
+pub fn shortcut_final_key(KeySequence) -> String
+
+pub fn shortcut_has_modifier(KeySequence) -> Bool
+
+pub fn structural_issue_to_json(StructuralIssue) -> String
+
+pub fn suggest_all(Keymap, Analysis, limit? : Int) -> Array[Suggestion]
+
+pub fn suggest_for(Keymap, Binding, limit? : Int) -> Array[Suggestion]
+
+pub fn suggestions_to_markdown(Array[Suggestion]) -> String
+
+pub fn support_matrix() -> Array[(String, String, Bool)]
+
+pub fn terminal_profile() -> PolicyProfile
+
+pub fn timeline_append(AuditTimeline, String, String, TimelineEventKind, Analysis, note? : String) -> AuditTimeline
+
+pub fn timeline_delta(AuditTimeline) -> TimelineDelta?
+
+pub fn timeline_latest(AuditTimeline) -> TimelineEvent?
+
+pub fn timeline_record_gate(AuditTimeline, String, String, Analysis, note? : String) -> AuditTimeline
+
+pub fn timeline_regressions(AuditTimeline) -> Array[TimelineDelta]
+
+pub fn timeline_summary(AuditTimeline) -> String
+
+pub fn timeline_to_json(AuditTimeline) -> String
+
+pub fn timeline_to_markdown(AuditTimeline) -> String
+
+pub fn unreachable_bindings(Keymap, String, String) -> Array[Binding]
+
+pub fn unreachable_commands(Keymap, String, String) -> Array[String]
+
+pub fn validate_catalog(Array[ReservedRule]) -> Array[String]
+
+pub fn validate_keymap(Keymap) -> ValidationReport
+
+pub fn validation_to_json(ValidationReport) -> String
+
+pub fn validation_to_markdown(ValidationReport) -> String
+
+// Errors
+
+// Types and methods
+pub(all) struct Analysis {
+  keymap_name : String
+  findings : Array[Finding]
+  checked_bindings : Int
+  enabled_bindings : Int
+  error_count : Int
+  warning_count : Int
+  info_count : Int
+  score : Int
+  fingerprint : String
+} derive(Eq, @debug.Debug)
+pub fn Analysis::count_kind(Self, IssueKind) -> Int
+pub fn Analysis::ok(Self) -> Bool
+pub fn Analysis::summary(Self) -> String
+
+pub(all) struct AuditTimeline {
+  project : String
+  events : Array[TimelineEvent]
+  baseline : String
+} derive(Eq, @debug.Debug)
+pub fn AuditTimeline::new(String, baseline? : String) -> Self
+
+pub(all) struct BenchmarkCase {
+  name : String
+  inputs : Array[String]
+  context : String
+  platform : String
+  expected_status : DispatchStatus
+  repetitions : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BenchmarkResult {
+  name : String
+  operations : Int
+  matched : Int
+  prefixes : Int
+  misses : Int
+  mismatches : Int
+  score : Int
+  notes : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Binding {
+  id : String
+  command : String
+  keys : KeySequence
+  context : String
+  platform : String
+  source : String
+  line : Int
+  priority : Int
+  enabled : Bool
+  description : String
+} derive(Eq, @debug.Debug)
+pub fn Binding::label(Self) -> String
+pub fn Binding::new(String, String, KeySequence, context? : String, platform? : String, source? : String, line? : Int, priority? : Int, enabled? : Bool, description? : String) -> Self
+
+pub(all) struct BindingChange {
+  kind : ChangeKind
+  id : String
+  before : Binding?
+  after : Binding?
+  summary : String
+  risk : Severity
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BindingQuery {
+  binding : Binding
+  context_distance : Int
+  platform_match : Bool
+  command_match : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct BindingRow {
+  id : String
+  command : String
+  keys : String
+  context : String
+  platform : String
+  priority : String
+  enabled : String
+  description : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CatalogReport {
+  keymap : Keymap
+  matched : Array[ReservedRule]
+  unmatched : Array[ReservedRule]
+  findings : Array[Finding]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum ChangeKind {
+  Added
+  Removed
+  Modified
+  Unchanged
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ComplexityReport {
+  bindings : Int
+  contexts : Int
+  findings : Int
+  parse_complexity : String
+  analysis_complexity : String
+  dispatch_complexity : String
+  memory_notes : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ConflictEdge {
+  left : String
+  right : String
+  code : String
+  severity : Severity
+  weight : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ConflictGraph {
+  nodes : Array[ConflictNode]
+  edges : Array[ConflictEdge]
+  components : Array[Array[String]]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ConflictNode {
+  id : String
+  command : String
+  degree : Int
+  error_degree : Int
+  warning_degree : Int
+  info_degree : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Context {
+  name : String
+  parent : String
+  rank : Int
+  description : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DispatchResult {
+  status : DispatchStatus
+  input : String
+  canonical : String
+  command : String
+  binding_ids : Array[String]
+  context : String
+  platform : String
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum DispatchStatus {
+  Matched
+  Prefix
+  NoMatch
+  Ambiguous
+  Disabled
+  Invalid
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DispatchStep {
+  input : String
+  result : DispatchResult
+  elapsed_ms : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DispatchTrace {
+  context : String
+  platform : String
+  steps : Array[DispatchStep]
+  matched_count : Int
+  prefix_count : Int
+  no_match_count : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Effort {
+  Small
+  Medium
+  Large
+} derive(Eq, @debug.Debug)
+
+pub(all) struct FieldSpec {
+  name : String
+  required : Bool
+  description : String
+  example : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Finding {
+  code : String
+  kind : IssueKind
+  severity : Severity
+  message : String
+  primary_id : String
+  secondary_id : String
+  shortcut : String
+  context : String
+  source : String
+  line : Int
+  suggestion : String
+} derive(Eq, @debug.Debug)
+pub fn Finding::to_line(Self) -> String
+
+pub(all) struct GateItem {
+  code : String
+  title : String
+  passed : Bool
+  severity : Severity
+  evidence : String
+  remediation : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ImportReport {
+  keymap : Keymap
+  rows_seen : Int
+  rows_imported : Int
+  diagnostics : Array[ParseDiagnostic]
+} derive(Eq, @debug.Debug)
+
+pub(all) enum IssueKind {
+  ExactConflict
+  PrefixConflict
+  ShadowedBinding
+  DuplicateCommand
+  ReservedShortcut
+  AccessibilityRisk
+  InvalidKey
+  InvalidContext
+  InvalidRecord
+  DisabledBinding
+  PlatformOverlap
+} derive(Eq, @debug.Debug)
+pub fn IssueKind::name(Self) -> String
+
+pub(all) struct KeySequence {
+  raw : String
+  steps : Array[String]
+  canonical : String
+  has_modifier : Bool
+  modifier_count : Int
+  key_count : Int
+} derive(Eq, @debug.Debug)
+pub fn KeySequence::new(String, Array[String], String, Bool, Int) -> Self
+
+pub(all) struct Keymap {
+  name : String
+  version : String
+  bindings : Array[Binding]
+  contexts : Array[Context]
+  reserved : Array[String]
+} derive(Eq, @debug.Debug)
+pub fn Keymap::empty(name? : String) -> Self
+
+pub(all) struct KeymapDiff {
+  from_name : String
+  to_name : String
+  changes : Array[BindingChange]
+  added : Int
+  removed : Int
+  modified : Int
+  unchanged : Int
+  context_added : Int
+  context_removed : Int
+  reserved_added : Int
+  reserved_removed : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct KeymapMetrics {
+  binding_count : Int
+  enabled_count : Int
+  context_count : Int
+  platform_count : Int
+  command_count : Int
+  max_chord_length : Int
+  average_chord_length : Int
+  modifierless_count : Int
+  documented_count : Int
+  duplicate_command_count : Int
+  density_score : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct KeymapSchema {
+  version : String
+  directives : Array[String]
+  fields : Array[FieldSpec]
+  formats : Array[String]
+  guarantees : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct KeymapSelection {
+  name : String
+  bindings : Array[Binding]
+  contexts : Array[Context]
+  query : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MergeResult {
+  keymap : Keymap
+  conflicts : Array[String]
+  adopted : Int
+  skipped : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ParseDiagnostic {
+  line : Int
+  code : String
+  message : String
+  source : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ParseResult {
+  keymap : Keymap
+  diagnostics : Array[ParseDiagnostic]
+  ok : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PolicyProfile {
+  name : String
+  reserved : Array[String]
+  max_chord_length : Int
+  max_modifier_count : Int
+  require_description : Bool
+  allow_disabled : Bool
+  fail_on_warning : Bool
+  allowed_platforms : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ProfileReport {
+  profile : PolicyProfile
+  parse : ParseResult
+  analysis : Analysis
+  metrics : KeymapMetrics
+  passed : Bool
+  gate_messages : Array[String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ProjectRules {
+  command_prefix : String
+  required_contexts : Array[String]
+  allowed_platforms : Array[String]
+  max_bindings_per_context : Int
+  require_modifier : Bool
+  require_description : Bool
+  fail_on_info : Bool
+} derive(Eq, @debug.Debug)
+pub fn ProjectRules::default() -> Self
+
+pub(all) struct Recommendation {
+  code : String
+  title : String
+  priority : Int
+  severity : Severity
+  effort : Effort
+  affected_ids : Array[String]
+  rationale : String
+  action : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReleaseGate {
+  project : String
+  version : String
+  items : Array[GateItem]
+  passed : Bool
+  score : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReleaseInput {
+  keymap : Keymap
+  analysis : Analysis
+  validation : ValidationReport
+  profile : ProfileReport?
+  benchmark : Array[BenchmarkResult]
+  diff : KeymapDiff?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReservedRule {
+  platform : String
+  shortcut : String
+  rationale : String
+  source : String
+  severity : Severity
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RuleReport {
+  rules : ProjectRules
+  findings : Array[Finding]
+  passed : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Severity {
+  Info
+  Warning
+  Error
+} derive(Eq, @debug.Debug)
+pub fn Severity::name(Self) -> String
+
+pub(all) struct StructuralIssue {
+  kind : StructuralKind
+  code : String
+  message : String
+  id : String
+  line : Int
+  severity : Severity
+} derive(Eq, @debug.Debug)
+
+pub(all) enum StructuralKind {
+  MissingRootContext
+  DuplicateId
+  EmptyId
+  EmptyCommand
+  InvalidIdentifier
+  MissingParent
+  ContextCycle
+  NegativeRank
+  InvalidPlatform
+  InvalidReservedMarker
+  InvalidShortcut
+  EmptyDescription
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Suggestion {
+  binding_id : String
+  command : String
+  current : String
+  replacement : String
+  reason : String
+  confidence : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TimelineDelta {
+  previous : TimelineEvent?
+  current : TimelineEvent
+  score_delta : Int
+  errors_delta : Int
+  warnings_delta : Int
+  regressed : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TimelineEvent {
+  sequence : Int
+  label : String
+  actor : String
+  kind : TimelineEventKind
+  fingerprint : String
+  errors : Int
+  warnings : Int
+  score : Int
+  note : String
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TimelineEventKind {
+  Imported
+  Analyzed
+  Approved
+  Rejected
+  Migrated
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ValidationReport {
+  keymap_name : String
+  issues : Array[StructuralIssue]
+  error_count : Int
+  warning_count : Int
+  valid : Bool
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
