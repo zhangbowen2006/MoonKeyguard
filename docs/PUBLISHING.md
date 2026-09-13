@@ -1,6 +1,6 @@
 # Mooncakes 发布流程
 
-当前仓库的 `moon.mod` 已使用模块名 `zhangbowen2006/moonkeyguard`、版本 `0.1.0`、Apache-2.0、README 和预期 GitHub 地址。尚未在本地声称已发布到 Mooncakes。
+当前仓库的 `moon.mod` 使用模块名 `zhangbowen2006/moonkeyguard`、版本 `0.1.0`、Apache-2.0、README 和 GitHub 地址。
 
 发布前：
 
@@ -19,4 +19,9 @@ moon package --list
 moon publish --frozen
 ```
 
-把命令的真实输出、版本、日期和 Mooncakes 页面链接写入 `submission/ACCEPTANCE_REPORT.md` 与 CHANGELOG。若登录失败、网络失败或包名已占用，记录真实错误并暂停，不得用推测链接替代。
+2026-09-13 已用 `moon whoami` 确认账户为 `zhangbowen2006`，执行
+`moon publish --frozen` 成功。Mooncakes manifest 返回 `200`，模块为
+`zhangbowen2006/moonkeyguard@0.1.0`，`build_status=success`，`has_package=true`。
+页面链接：[Mooncakes 文档](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，
+接口证据：[manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard)。
+若后续版本发布失败，必须记录真实错误，不得用推测链接替代。
