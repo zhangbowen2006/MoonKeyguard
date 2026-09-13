@@ -135,7 +135,7 @@ pub fn Keymap::empty(name? : String = "keymap") -> Keymap {
     version: "1",
     bindings: [],
     contexts: [
-      { name: "global", parent: "", rank: 0, description: "all windows" },
+      { name: "global", parent: "", rank: 0, description: "all windows", },
     ],
     reserved: [],
   }

@@ -276,7 +276,7 @@ pub fn apply_keymap_diff(
       Modified =>
         match change.after {
           Some(binding) =>
-            match binding_index({ ..base, bindings: result }, binding.id) {
+            match binding_index({ ..base, bindings: result, }, binding.id) {
               Some(index) => result[index] = binding
               None => result.push(binding)
             }
@@ -286,5 +286,5 @@ pub fn apply_keymap_diff(
       Unchanged => ()
     }
   }
-  { ..target, bindings: result }
+  { ..target, bindings: result, }
 }
