@@ -1,0 +1,10 @@
+# A small keymap document for library integrations.
+keymap name=editor version=1
+context global parent= rank=0 description=all-windows
+context editor parent=global rank=10 description=text-editor
+context terminal parent=global rank=10 description=terminal-pane
+reserve Cmd+Q platform=mac
+bind save command=editor.save keys=Ctrl+S context=editor platform=all priority=10 description=save-buffer
+bind quick_open command=editor.quick_open keys=Ctrl+P context=editor platform=all priority=10 description=quick-open
+bind palette command=editor.palette keys=Ctrl+Shift+P context=editor platform=all priority=10 description=command-palette
+bind terminal_interrupt command=terminal.interrupt keys=Ctrl+C context=terminal platform=all priority=10 description=interrupt

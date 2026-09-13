@@ -1,0 +1,55 @@
+name: MoonKeyguard CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  moonbit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Show MoonBit version
+        run: moon version --all
+
+      - name: Check
+        run: moon check --deny-warn
+
+      - name: Build
+        run: moon build
+
+      - name: Test
+        run: moon test --deny-warn
+
+      - name: Format
+        run: moon fmt --check
+
+      - name: Public API snapshot
+        run: |
+          moon info
+          git diff --exit-code -- '*.mbti'
+
+      - name: Package inspection
+        run: moon package --list
+
+      - name: CLI smoke test
+        run: moon run cmd/main -- --format json --metrics --suggest
+
+      - name: Example smoke test
+        run: moon run examples/basic

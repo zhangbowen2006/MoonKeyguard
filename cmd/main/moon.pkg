@@ -1,0 +1,6 @@
+import {
+  "zhangbowen2006/moonkeyguard",
+  "moonbitlang/core/env",
+}
+
+pkgtype(kind: "executable")
