@@ -53,3 +53,6 @@ jobs:
 
       - name: Example smoke test
         run: moon run examples/basic
+
+      - name: Baseline example smoke test
+        run: moon run examples/baseline

@@ -39,7 +39,14 @@ moon run cmd/main -- --format json
 moon run cmd/main -- --format markdown --suggest
 moon run cmd/main -- --format sarif --fail-on-warning
 moon run cmd/main -- --metrics
+moon run cmd/main -- --source "bind save command=save keys=Ctrl+S" --name quick-demo
 ```
+
+`--source` accepts a small inline keymap for shell smoke tests and demos. For
+larger files, call `parse_keymap` from MoonBit and pass the resulting keymap to
+`analyze`; this keeps file-system policy in the host application. When
+`--fail-on-warning` is supplied, the CLI exits with status 1 for any error or
+warning so it can be used as a release gate.
 
 ## DSL 示例
 
@@ -78,6 +85,24 @@ println(@moonkeyguard.suggestions_to_markdown(suggestions))
 | `analysis_to_text/json/markdown/sarif` | 生成终端、文档、机器和 GitHub 代码扫描报告 |
 | `build_conflict_graph` | 计算冲突边、连通分量和 hotspot |
 | `diff_keymaps` / `migration_plan` | 对两个版本做按 id 的语义 diff |
+| `compare_baseline` / `baseline_report_to_*` | 只阻止新增风险，保留历史问题作为可追踪债务 |
+
+## Baseline regression gate
+
+Teams that already have accepted findings can ratchet quality without hiding
+old debt. Compare two deterministic analyses and fail only when a new error is
+introduced:
+
+```moonbit
+let baseline = @moonkeyguard.analyze(@moonkeyguard.parse_keymap(old_source).keymap)
+let current = @moonkeyguard.analyze(@moonkeyguard.parse_keymap(new_source).keymap)
+let report = @moonkeyguard.compare_baseline(baseline, current)
+println(@moonkeyguard.baseline_report_to_markdown(report))
+```
+
+Finding identities omit source line numbers, so moving a declaration does not
+create a false regression. Set `fail_on_warning=true` when warnings are also
+blocking for a release.
 | `import_csv` / `import_tsv` / `import_pipe` | 导入常见表格或管道格式 |
 | `dispatch` / `replay` | 在纯 MoonBit 模拟器中检查解析结果的可达性 |
 | `audit_with_profile` | 应用 desktop、terminal、accessible 或自定义策略 |

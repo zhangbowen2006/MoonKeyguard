@@ -1,7 +1,5 @@
 import {
-  "moonbitlang/core/abort",
   "zhangbowen2006/moonkeyguard",
-  "moonbitlang/core/env",
 }
 
 pkgtype(kind: "executable")

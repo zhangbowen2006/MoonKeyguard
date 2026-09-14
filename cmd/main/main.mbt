@@ -29,12 +29,13 @@ fn print_help() -> Unit {
     #|
     #|Usage:
     #|  moon run cmd/main
+    #|  moon run cmd/main -- --source "bind save command=save keys=Ctrl+S"
     #|  moon run cmd/main -- --format json
     #|  moon run cmd/main -- --format markdown --suggest
     #|  moon run cmd/main -- --format sarif --fail-on-warning
     #|
-    #|The CLI audits the bundled demo keymap. Library users can call
-    #|parse_keymap(source) and analyze(keymap) for their own files.
+    #|The CLI audits the bundled demo by default. Use --source for an inline
+    #|keymap; library users can call parse_keymap(source) for larger files.
   println(help)
 }
 
@@ -59,8 +60,14 @@ fn main {
     print_help()
     return
   }
-  let source = @moonkeyguard.demo_source()
-  let (parsed, analysis) = @moonkeyguard.audit(source, name="editor-demo")
+  let requested_source = value_after(args, "--source", "")
+  let source = if requested_source.length() == 0 {
+    @moonkeyguard.demo_source()
+  } else {
+    requested_source
+  }
+  let name = value_after(args, "--name", "editor-demo")
+  let (parsed, analysis) = @moonkeyguard.audit(source, name~)
   if parsed.diagnostics.length() > 0 {
     print_diagnostics(parsed)
   }
@@ -87,6 +94,7 @@ fn main {
     let code = @moonkeyguard.analysis_exit_code(analysis, fail_on_warning=true)
     if code != 0 {
       println("CI gate: failed")
+      @abort.abort("MoonKeyguard CI gate failed")
     }
   }
 }

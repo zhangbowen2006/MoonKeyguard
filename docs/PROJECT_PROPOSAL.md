@@ -29,6 +29,7 @@ MoonKeyguard 的目标是提供一个 MoonBit 原生、可嵌入、可离线运�
 - 分析父子 context 继承、兄弟 context 隔离和平台集合重叠；
 - 检查系统/终端/焦点导航保留键及键盘可访问性风险；
 - 输出冲突图、语义 diff、迁移建议、dispatcher replay 和 release gate；
+- 提供基线回归门禁，只阻止新增风险并保留历史问题作为可追踪债务；
 - 支持 Text、Markdown、JSON、SARIF 2.1.0、schema、CSV/TSV/pipe 适配；
 - 提供纯函数 API、CLI 和可直接运行的 `examples/basic` 示例。
 
