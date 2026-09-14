@@ -40,20 +40,22 @@ jobs:
       - name: Format
         run: |
           set -o pipefail
-          if moon fmt --check 2>&1 | tee fmt-check.log; then
+          if moon fmt --check 2>&1 | tee "$RUNNER_TEMP/moonkeyguard-fmt-check.log"; then
             exit 0
           fi
           # Emit the formatter's exact diff as check annotations so a logged-out
           # reviewer can inspect the remaining mismatch without job-log access.
           moon fmt >/dev/null
-          git diff --no-ext-diff --unified=0 -- . ':(exclude)_build' > fmt.diff || true
+          git diff --no-ext-diff --unified=0 -- . ':(exclude)_build' > "$RUNNER_TEMP/moonkeyguard-fmt.diff"
           python3 - <<'PY'
           import re
+          import os
           from pathlib import Path
 
           current = None
           line = 0
-          for raw in Path("fmt.diff").read_text(encoding="utf-8", errors="replace").splitlines():
+          diff = Path(os.environ["RUNNER_TEMP"]) / "moonkeyguard-fmt.diff"
+          for raw in diff.read_text(encoding="utf-8", errors="replace").splitlines():
               if raw.startswith("+++ b/"):
                   current = raw[6:]
                   continue
@@ -69,7 +71,7 @@ jobs:
               elif current and raw.startswith("-") and not raw.startswith("---"):
                   continue
           PY
-          cat fmt.diff
+          cat "$RUNNER_TEMP/moonkeyguard-fmt.diff"
           exit 1
 
       - name: Public API snapshot
