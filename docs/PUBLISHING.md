@@ -1,6 +1,6 @@
 # Mooncakes 发布流程
 
-当前仓库的 `moon.mod` 使用模块名 `zhangbowen2006/moonkeyguard`、版本 `0.1.0`、Apache-2.0、README 和 GitHub 地址。
+当前仓库的 `moon.mod` 使用模块名 `zhangbowen2006/moonkeyguard`、版本 `0.2.0`、Apache-2.0、README 和 GitHub 地址。0.2.0 包含可达性矩阵和方向性 dispatcher 修复。
 
 发布前：
 

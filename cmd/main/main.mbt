@@ -92,8 +92,12 @@ fn main {
   }
   if has_arg(args, "--fail-on-warning") {
     let code = @moonkeyguard.analysis_exit_code(analysis, fail_on_warning=true)
-    if code != 0 {
+    let parse_failed = parsed.diagnostics.length() > 0
+    if code != 0 || parse_failed {
       println("CI gate: failed")
+      if parse_failed {
+        println("CI gate: parser diagnostics are blocking")
+      }
       @abort.abort("MoonKeyguard CI gate failed")
     }
   }

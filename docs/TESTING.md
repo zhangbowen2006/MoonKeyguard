@@ -2,15 +2,16 @@
 
 ## 本地命令
 
-以下命令在 2026-09-13 的本地 MoonBit 0.10.10 工具链上实际执行：
+以下命令在 2026-09-14 的本地 MoonBit 0.10.10 工具链上实际执行：
 
 ```text
 moon fmt --check       PASS
 moon check --deny-warn PASS
 moon build             PASS
-moon test --deny-warn  PASS (81 tests)
+moon test --deny-warn  PASS (89 tests)
 moon run cmd/main -- --format text --metrics --suggest PASS
 moon run examples/basic PASS
+moon run cmd/main -- --source "wat value=1" --fail-on-warning  # expected exit 1
 ```
 
 ## 覆盖范围

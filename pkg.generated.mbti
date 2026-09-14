@@ -154,6 +154,12 @@ pub fn profile_report_to_markdown(ProfileReport) -> String
 
 pub fn project_capabilities() -> Array[String]
 
+pub fn reachability_matrix(Keymap, contexts? : Array[String], platforms? : Array[String]) -> ReachabilityReport
+
+pub fn reachability_to_json(ReachabilityReport) -> String
+
+pub fn reachability_to_markdown(ReachabilityReport) -> String
+
 pub fn recommendations(Analysis) -> Array[Recommendation]
 
 pub fn recommendations_to_json(Array[Recommendation]) -> String
@@ -593,6 +599,37 @@ pub(all) struct ProjectRules {
   fail_on_info : Bool
 } derive(Eq, @debug.Debug)
 pub fn ProjectRules::default() -> Self
+
+pub(all) struct ReachabilityCell {
+  binding_id : String
+  context : String
+  platform : String
+  status : ReachabilityStatus
+  selected_id : String
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ReachabilityReport {
+  keymap_name : String
+  contexts : Array[String]
+  platforms : Array[String]
+  cells : Array[ReachabilityCell]
+  binding_count : Int
+  reachable_count : Int
+  shadowed_count : Int
+  ambiguous_count : Int
+  unavailable_count : Int
+  disabled_count : Int
+} derive(Eq, @debug.Debug)
+pub fn ReachabilityReport::summary(Self) -> String
+
+pub(all) enum ReachabilityStatus {
+  Reachable
+  Shadowed
+  Ambiguous
+  Unavailable
+  Disabled
+} derive(Eq, @debug.Debug)
 
 pub(all) struct Recommendation {
   code : String

@@ -84,7 +84,7 @@ pub fn active_bindings(
   let result : Array[BindingQuery] = []
   for binding in keymap.bindings {
     if binding.enabled &&
-      contexts_overlap(keymap, binding.context, context) &&
+      binding_active_in_context(keymap, binding.context, context) &&
       platforms_overlap(binding.platform, platform) {
       let distance = match context_distance(keymap, binding.context, context) {
         Some(value) => value
@@ -114,7 +114,7 @@ pub fn select_bindings(
   for binding in keymap.bindings {
     let command_ok = command.length() == 0 || binding.command == command
     let context_ok = context.length() == 0 ||
-      contexts_overlap(keymap, binding.context, context)
+      binding_active_in_context(keymap, binding.context, context)
     let platform_ok = platforms_overlap(binding.platform, platform)
     let enabled_ok = !enabled_only || binding.enabled
     if command_ok && context_ok && platform_ok && enabled_ok {
@@ -168,7 +168,7 @@ pub fn normalize_keymap(keymap : Keymap) -> Keymap {
   })
   let reserved = keymap.reserved.copy()
   reserved.sort()
-  { ..keymap, bindings, contexts, reserved, }
+  { ..keymap, bindings, contexts, reserved }
 }
 
 ///|
@@ -258,7 +258,7 @@ pub fn merge_keymaps(base : Keymap, overlay : Keymap) -> MergeResult {
   }
   let merged_contexts = base.contexts.copy()
   for incoming in overlay.contexts {
-    if !context_exists({ ..base, contexts: merged_contexts, }, incoming.name) {
+    if !context_exists({ ..base, contexts: merged_contexts }, incoming.name) {
       merged_contexts.push(incoming)
     }
   }
@@ -292,7 +292,7 @@ pub fn unreachable_bindings(
   keymap.bindings.filter(binding => {
     binding.enabled &&
     (
-      !contexts_overlap(keymap, binding.context, context) ||
+      !binding_active_in_context(keymap, binding.context, context) ||
       !platforms_overlap(binding.platform, platform)
     )
   })
@@ -309,7 +309,7 @@ pub fn primary_commands(
   let commands : Array[String] = []
   for binding in keymap.bindings {
     if binding.enabled &&
-      contexts_overlap(keymap, binding.context, context) &&
+      binding_active_in_context(keymap, binding.context, context) &&
       platforms_overlap(binding.platform, platform) {
       let mut command_index = -1
       for i, command in commands {

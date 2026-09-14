@@ -150,7 +150,7 @@ pub fn build_conflict_graph(
       info_degree: infos,
     })
   }
-  { nodes, edges, components: graph_components(nodes, edges), }
+  { nodes, edges, components: graph_components(nodes, edges) }
 }
 
 ///|

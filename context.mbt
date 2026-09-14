@@ -60,6 +60,18 @@ fn contexts_overlap(keymap : Keymap, left : String, right : String) -> Bool {
 }
 
 ///|
+/// A binding is active when its declared context is an ancestor of the
+/// currently active context. This is directional: a child binding must not
+/// leak into the global context merely because the two scopes overlap.
+fn binding_active_in_context(
+  keymap : Keymap,
+  binding_context : String,
+  active_context : String,
+) -> Bool {
+  context_is_ancestor(keymap, binding_context, active_context)
+}
+
+///|
 fn platform_parts(platform : String) -> Array[String] {
   platform
   .replace(old="|", new=",")

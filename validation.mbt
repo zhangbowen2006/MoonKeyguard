@@ -61,7 +61,7 @@ fn structural_issue(
   line : Int,
   severity : Severity,
 ) -> StructuralIssue {
-  { kind, code: "SV-" + structural_name(kind), message, id, line, severity, }
+  { kind, code: "SV-" + structural_name(kind), message, id, line, severity }
 }
 
 ///|

@@ -85,7 +85,23 @@ println(@moonkeyguard.suggestions_to_markdown(suggestions))
 | `analysis_to_text/json/markdown/sarif` | 生成终端、文档、机器和 GitHub 代码扫描报告 |
 | `build_conflict_graph` | 计算冲突边、连通分量和 hotspot |
 | `diff_keymaps` / `migration_plan` | 对两个版本做按 id 的语义 diff |
+| `reachability_matrix` / `reachability_to_*` | 按 context/platform 证明绑定可达、遮蔽和不可用状态 |
 | `compare_baseline` / `baseline_report_to_*` | 只阻止新增风险，保留历史问题作为可追踪债务 |
+
+## Reachability matrix
+
+冲突分析回答“声明是否可能重叠”，而可达性矩阵回答“在真实的 context/platform 组合中谁会被 dispatcher 选中”。
+
+```moonbit
+let report = @moonkeyguard.reachability_matrix(
+  parsed.keymap,
+  contexts=["global", "editor"],
+  platforms=["all", "mac"],
+)
+println(@moonkeyguard.reachability_to_markdown(report))
+```
+
+探针数组为空时自动使用 keymap 中声明的 context 和 `all` 平台；输入会去重、规范化并排序，适合把 JSON 结果作为 CI artifact。子 context 的绑定不会反向泄漏到父 context。
 
 ## Baseline regression gate
 

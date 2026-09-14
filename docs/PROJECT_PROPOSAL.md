@@ -32,6 +32,7 @@ MoonKeyguard 的目标是提供一个 MoonBit 原生、可嵌入、可离线运�
 - 提供基线回归门禁，只阻止新增风险并保留历史问题作为可追踪债务；
 - 支持 Text、Markdown、JSON、SARIF 2.1.0、schema、CSV/TSV/pipe 适配；
 - 提供纯函数 API、CLI 和可直接运行的 `examples/basic` 示例。
+- 提供方向性的 context/platform 可达性矩阵，证明绑定在真实探针中的赢家、遮蔽和不可用状态。
 
 ## 四、创新点与独立价值
 
@@ -59,9 +60,9 @@ MoonKeyguard 的独立价值不是重新实现一个按键运行时，而是把�
 
 ## 六、工程化与验收证据
 
-- 生产 MoonBit 代码约 5k 行，测试覆盖 81 个用例；
-- 本地已通过 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、
-  `moon fmt --check`、`moon info` 和 `moon package --list`；
+- 生产 MoonBit 代码约 5k 行，测试覆盖 89 个用例；
+- 本地已通过 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、`moon fmt --check`、
+  `moon info` 和 `moon package --list`；
 - GitHub Actions 已在提交 `bd8681e` 上成功完成 check、build、test、fmt、info、
   package 和示例 smoke test；
 - 已执行 `moon publish --frozen`，Mooncakes manifest 返回 200，版本为

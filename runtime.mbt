@@ -84,7 +84,7 @@ fn matching_bindings(
   keymap.bindings.filter(binding => {
     binding.enabled &&
     binding.keys.canonical == sequence.canonical &&
-    contexts_overlap(keymap, binding.context, context) &&
+    binding_active_in_context(keymap, binding.context, context) &&
     platforms_overlap(binding.platform, platform)
   })
 }
@@ -99,7 +99,7 @@ fn prefix_bindings(
   keymap.bindings.filter(binding => {
     binding.enabled &&
     key_prefix(sequence, binding.keys) &&
-    contexts_overlap(keymap, binding.context, context) &&
+    binding_active_in_context(keymap, binding.context, context) &&
     platforms_overlap(binding.platform, platform)
   })
 }
@@ -160,11 +160,11 @@ pub fn dispatch(
           exact[0].priority == exact[1].priority &&
           binding_context_rank(keymap, exact[0]) ==
           binding_context_rank(keymap, exact[1]) {
-          Ambiguous
+          DispatchStatus::Ambiguous
         } else {
           Matched
         }
-        let message = if status == Ambiguous {
+        let message = if status == DispatchStatus::Ambiguous {
           "multiple equally specific bindings"
         } else {
           "selected highest-priority binding"
@@ -247,7 +247,7 @@ pub fn replay(
       _ => misses += 1
     }
     elapsed += 1
-    steps.push({ input, result, elapsed_ms: elapsed, })
+    steps.push({ input, result, elapsed_ms: elapsed })
   }
   {
     context,

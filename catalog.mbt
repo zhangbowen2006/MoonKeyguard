@@ -23,7 +23,7 @@ fn reserved_rule(
   rationale : String,
   source : String,
 ) -> ReservedRule {
-  { platform, shortcut, rationale, source, severity: Error, }
+  { platform, shortcut, rationale, source, severity: Error }
 }
 
 ///|
@@ -189,7 +189,7 @@ pub fn audit_with_catalog(
       unmatched.push(rule)
     }
   }
-  { keymap, matched, unmatched, findings, }
+  { keymap, matched, unmatched, findings }
 }
 
 ///|
@@ -207,7 +207,7 @@ pub fn apply_reserved_catalog(
       result.push(marker)
     }
   }
-  { ..keymap, reserved: result, }
+  { ..keymap, reserved: result }
 }
 
 ///|

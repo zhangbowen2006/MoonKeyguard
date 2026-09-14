@@ -13,9 +13,15 @@ fn main {
     context="editor",
   )
   println(@moonkeyguard.dispatch_trace_to_markdown(trace))
+  let reachability = @moonkeyguard.reachability_matrix(
+    parsed.keymap,
+    contexts=["global", "editor", "terminal"],
+    platforms=["all", "mac"],
+  )
+  println(@moonkeyguard.reachability_to_markdown(reachability))
   let gate = @moonkeyguard.release_gate(
     "basic-example",
-    "0.1.0",
+    "0.2.0",
     @moonkeyguard.release_input(parsed.keymap),
   )
   println(@moonkeyguard.release_gate_to_markdown(gate))
