@@ -8,7 +8,7 @@
 | 要求 | 当前证据 | 风险/下一步 |
 | --- | --- | --- |
 | MoonBit 为主要语言 | 根目录 生产 `.mbt` 约 5.3k 行；89 个测试；`moon.mod` | 远程 CI 需再次验证 |
-| 公开可访问仓库 | [GitHub](https://github.com/zhangbowen2006/MoonKeyguard) 为 public，默认分支 `main`；最新本地提交 `371d13e`（尚待推送） | 持续维护 |
+| 公开可访问仓库 | [GitHub](https://github.com/zhangbowen2006/MoonKeyguard) 为 public，默认分支 `main`；最新本地提交 `352a238`（尚待推送；功能提交为 `371d13e`） | 持续维护 |
 | README 完整 | `README.md` 覆盖用途、API、边界、示例、测试和发布 | 推送后复核远程页面渲染 |
 | 可运行示例 | `examples/basic`，`moon run examples/basic` 已验证 | CI 保持示例步骤 |
 | CI | [历史 Actions run 34755575667；本轮提交待新 run](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34755575667) success | 推送后等待本轮 CI 绿色记录 |

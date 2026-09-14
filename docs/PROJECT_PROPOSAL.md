@@ -60,7 +60,7 @@ MoonKeyguard 的独立价值不是重新实现一个按键运行时，而是把�
 
 ## 六、工程化与验收证据
 
-- 生产 MoonBit 代码约 5k 行，测试覆盖 89 个用例；
+- 生产 MoonBit 代码约 6.1k 行，测试覆盖 89 个用例；
 - 本地已通过 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、`moon fmt --check`、
   `moon info` 和 `moon package --list`；
 - GitHub Actions 已在提交 `bd8681e` 上成功完成 check、build、test、fmt、info、
