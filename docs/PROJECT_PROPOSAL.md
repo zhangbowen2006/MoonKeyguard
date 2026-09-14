@@ -65,8 +65,8 @@ MoonKeyguard 的独立价值不是重新实现一个按键运行时，而是把�
   `moon info` 和 `moon package --list`；
 - GitHub Actions 已在提交 `bd8681e` 上成功完成 check、build、test、fmt、info、
   package 和示例 smoke test；
-- 已执行 `moon publish --frozen`，Mooncakes manifest 返回 200，版本为
-  `0.2.0`，构建状态为 success；
+- 已执行 `moon publish --frozen`，终端返回 `Server status: 200 OK`，版本为
+  `0.2.0`；发布前打包校验和抽取包 `moon check` 均通过；
 - 根目录提供 README、Apache-2.0 LICENSE、CHANGELOG、第三方来源说明、AI 使用
   说明、设计文档、测试记录、发布清单和验收差距表；
 - 所有实现、测试 fixture 和示例均为本项目重新编写，没有复制来源不明的代码、

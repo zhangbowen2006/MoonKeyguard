@@ -14,7 +14,7 @@
 | CI | [历史 Actions run 34755575667；本轮提交待新 run](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34755575667) success | 推送后等待本轮 CI 绿色记录 |
 | 可运行测试 | 89 tests，`moon test --deny-warn` PASS | 不伪造远程徽章 |
 | 正常构建 | `moon build` PASS | 发布前再次在干净树执行 |
-| Mooncakes | [manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard) 返回 200，`0.2.0`、构建成功、包存在 | 已完成 0.2.0 发布；推送后复核远程 CI |
+| Mooncakes | `moon publish --frozen` 退出码 0，终端返回 `Server status: 200 OK`；版本 `0.2.0` 的发布前打包校验和抽取包 `moon check` 通过 | 已完成 0.2.0 发布；推送后复核远程 CI |
 | 可追踪开发过程 | 本地 `main` 已包含本轮真实提交；远程 `origin/main` 仍为 7 个提交 | 继续保留真实提交 |
 | 功能边界/维护价值 | `docs/ARCHITECTURE.md`、`PROJECT_PROPOSAL.md`、schema API | 持续维护 Issue/CHANGELOG |
 | 开源许可证 | 根目录 Apache-2.0 `LICENSE` | 检查远程包清单 |
