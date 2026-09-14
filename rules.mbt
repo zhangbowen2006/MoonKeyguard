@@ -177,7 +177,7 @@ pub fn evaluate_project_rules(
       !rules.fail_on_info ||
       findings.filter(item => item.severity == Info).length() == 0
     )
-  { rules, findings, passed }
+  { rules, findings, passed, }
 }
 
 ///|

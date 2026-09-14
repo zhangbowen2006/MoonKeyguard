@@ -39,7 +39,7 @@ fn parse_header(tokens : Array[String], keymap : Keymap) -> Keymap {
   let attrs = parse_attributes(tokens, 1)
   let name = attr(attrs, "name", keymap.name)
   let version = attr(attrs, "version", keymap.version)
-  { ..keymap, name, version }
+  { ..keymap, name, version, }
 }
 
 ///|
@@ -81,7 +81,7 @@ fn add_context(
       let old = keymap.contexts[index]
       if name == "global" && old.parent.length() == 0 {
         let contexts = keymap.contexts.copy()
-        contexts[index] = { name, parent, rank, description }
+        contexts[index] = { name, parent, rank, description, }
         { ..keymap, contexts, }
       } else {
         diagnostics.push({
@@ -96,7 +96,7 @@ fn add_context(
     None =>
       {
         ..keymap,
-        contexts: keymap.contexts + [{ name, parent, rank, description }],
+        contexts: keymap.contexts + [{ name, parent, rank, description, }],
       }
   }
 }
@@ -123,7 +123,7 @@ fn add_reserved(
       let platform = attr(parse_attributes(tokens, 2), "platform", "all")
       let marker = platform + ":" + sequence.canonical
       if !array_contains(keymap.reserved, marker) {
-        { ..keymap, reserved: keymap.reserved + [marker] }
+        { ..keymap, reserved: keymap.reserved + [marker], }
       } else {
         keymap
       }
@@ -196,7 +196,7 @@ fn add_binding(
         enabled~,
         description~,
       )
-      { ..keymap, bindings: keymap.bindings + [binding] }
+      { ..keymap, bindings: keymap.bindings + [binding], }
     }
     Err(message) => {
       diagnostics.push({
@@ -245,7 +245,7 @@ pub fn parse_keymap(source : String, name? : String = "keymap") -> ParseResult {
         keymap = add_binding(keymap, tokens, line_number, name, diagnostics)
       "version" =>
         if tokens.length() > 1 {
-          keymap = { ..keymap, version: tokens[1] }
+          keymap = { ..keymap, version: tokens[1], }
         }
       other =>
         diagnostics.push({
@@ -256,7 +256,7 @@ pub fn parse_keymap(source : String, name? : String = "keymap") -> ParseResult {
         })
     }
   }
-  { keymap, diagnostics, ok: diagnostics.length() == 0 }
+  { keymap, diagnostics, ok: diagnostics.length() == 0, }
 }
 
 ///|
