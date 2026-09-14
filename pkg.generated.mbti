@@ -36,6 +36,10 @@ pub fn audit_with_named_profile(String, String, String) -> ProfileReport
 
 pub fn audit_with_profile(String, String, PolicyProfile) -> ProfileReport
 
+pub fn baseline_report_to_json(BaselineReport) -> String
+
+pub fn baseline_report_to_markdown(BaselineReport) -> String
+
 pub fn behavioral_changes(KeymapDiff) -> Array[BindingChange]
 
 pub fn benchmark_case(String, Array[String], context? : String, platform? : String, expected_status? : DispatchStatus, repetitions? : Int) -> BenchmarkCase
@@ -55,6 +59,8 @@ pub fn catalog_report_to_markdown(CatalogReport) -> String
 pub fn catalog_to_json(Array[ReservedRule]) -> String
 
 pub fn clean_demo_source() -> String
+
+pub fn compare_baseline(Analysis, Analysis, fail_on_warning? : Bool) -> BaselineReport
 
 pub fn complexity_report(Keymap, Analysis) -> ComplexityReport
 
@@ -248,6 +254,22 @@ pub(all) struct AuditTimeline {
   baseline : String
 } derive(Eq, @debug.Debug)
 pub fn AuditTimeline::new(String, baseline? : String) -> Self
+
+pub(all) struct BaselineReport {
+  baseline_fingerprint : String
+  current_fingerprint : String
+  baseline_count : Int
+  current_count : Int
+  new_findings : Array[Finding]
+  resolved_findings : Array[Finding]
+  retained_count : Int
+  new_error_count : Int
+  new_warning_count : Int
+  new_info_count : Int
+  fail_on_warning : Bool
+  passed : Bool
+} derive(Eq, @debug.Debug)
+pub fn BaselineReport::summary(Self) -> String
 
 pub(all) struct BenchmarkCase {
   name : String
