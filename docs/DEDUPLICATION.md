@@ -4,7 +4,7 @@
 
 ## 检索范围
 
-- GitHub MoonBit 仓库搜索：`language:MoonBit created:2026-08-20..2026-09-13`，抽查近期约 239 个结果及其 README/包描述。
+- GitHub MoonBit 仓库搜索：`language:MoonBit created:2026-08-20..2026-09-14`，抽查近期约 239 个结果及其 README/包描述。
 - Mooncakes API：`https://mooncakes.io/api/v0/search?kw=<keyword>&limit=20`。
 - 关键词：`keybinding`、`keyboard shortcut`、`shortcut conflict`、`keymap`、`hotkey`、`accessibility`、`conflict graph`、`SARIF`、`chord parser`。
 
@@ -19,6 +19,7 @@
 | `moonverity`、`moon-stream-quality` | CSV/JSONL 数据质量 | CSV 在本项目只是 keymap 适配输入，不做通用数据契约 |
 | `moonchange`、`moondiff` | 仓库/文本变更治理 | 本项目的 diff 针对快捷键语义：命令、context、platform、dispatcher 风险 |
 | 运行时 hotkey/输入路由库 | 负责注册或分发按键 | 本项目新增方向性可达性矩阵，证明声明在具体 context/platform 中的实际赢家 |
+| [`moonbit-community/proton_global_hotkey@0.2.8`](https://mooncakes.io/docs/moonbit-community/proton_global_hotkey%400.2.8) | 跨平台原生全局热键注册/分发 | 运行时 OS backend 与权限范围不同；MoonKeyguard 只做离线声明分析、冲突图、可达性和 CI 门禁 |
 
 ## 独立价值结论
 
