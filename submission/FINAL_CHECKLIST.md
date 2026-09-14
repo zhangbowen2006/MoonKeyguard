@@ -1,19 +1,18 @@
 # 9 月 24 日验收前最后检查清单
 
-## 需要申请人完成
+## 申请人需要完成
 
-- [ ] 在 GitHub 创建 `zhangbowen2006/MoonKeyguard` 空的公开仓库，默认分支使用 `main`。
-- [ ] 确认仓库 owner、报名账户和选手信息均为张博文，不要把 MoonBVHKit 的报名资料复制到本项目。
-- [ ] 提供远程仓库 URL 和默认分支确认结果。
-- [ ] 在有权限的环境执行 `moon publish --frozen`；把真实 Mooncakes 页面链接发给负责人。
-- [ ] 重新搜索 GitHub/Mooncakes，确认没有新的同类项目。
+- [ ] 在网络可用环境将本地 `main` 的 `371d13e` 推送到 `origin/main`（GitHub Desktop 点击 Push origin，或执行 `git push origin main`）。
+- [ ] 确认 GitHub 仓库仍为 public、默认分支为 `main`，且仓库 owner、报名账户和选手信息均为张博文。
+- [ ] 在报名表中提交公开申报书；手机号和邮箱只填报名平台，不上传到 GitHub。
+- [ ] 重新搜索 GitHub/Mooncakes，记录查重日期和关键词；不得承诺绝对没有相似项目。
 
-## 负责人完成
+## 负责人已完成/验收前复核
 
-- [ ] `git remote show origin` 确认默认分支，检查最新提交位于默认分支。
-- [ ] GitHub Actions 至少成功一次，保存真实运行链接。
-- [ ] 执行 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、`moon fmt --check`、`moon info`。
-- [ ] 执行 `moon package --list`，检查无 `_build`、缓存、临时文件和敏感信息。
-- [ ] 发布前检查 `moon.mod` 的 name/version/license/repository/readme。
-- [ ] 更新 CHANGELOG、测试记录、发布记录和申报书，不填写推测数据。
-- [ ] 验收材料只提交本项目；8 月 MoonBVHKit 作为独立旧项目单独说明。
+- [x] 本地 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、`moon fmt --check`、`moon info` 通过。
+- [x] `moon package --list` 已确认不包含 `_build`、缓存、报名版或临时文件。
+- [x] `moon publish --frozen` 已实际发布 `zhangbowen2006/moonkeyguard@0.2.0`，终端返回 `Server status: 200 OK`。
+- [ ] GitHub Actions 在 `371d13e` 上成功运行，并保存真实 run 链接。
+- [ ] 远程默认分支最新提交与本地 `371d13e` 一致。
+- [ ] 复核 README、LICENSE、CHANGELOG、第三方来源、AI 使用说明、设计/测试/发布文档渲染。
+- [ ] 验收材料只提交 MoonKeyguard；8 月项目 MoonBVHKit 单独说明，不混用代码或参赛资料。

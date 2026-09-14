@@ -5,7 +5,7 @@
 - 项目名称：MoonKeyguard
 - 参赛方向：新项目赛道；与 8 月项目 MoonBVHKit 完全独立
 - GitHub：[zhangbowen2006/MoonKeyguard](https://github.com/zhangbowen2006/MoonKeyguard)
-- Mooncakes：[zhangbowen2006/moonkeyguard@0.1.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)
+- Mooncakes：[zhangbowen2006/moonkeyguard@0.2.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)
 - 许可证：Apache-2.0
 
 ## 二、项目背景与目标
@@ -41,7 +41,7 @@ MoonKeyguard 的独立价值不是重新实现一个按键运行时，而是把�
 平台范围、保留键、可访问性、冲突图和发布门禁。这样，快捷键变更可以像代码
 一样进入 CI，并能输出面向开发者和代码扫描平台的解释性证据。
 
-截至 2026-09-13，已对 GitHub 与 Mooncakes 使用 `keymap`、`keybinding`、
+截至 2026-09-14，已对 GitHub 与 Mooncakes 使用 `keymap`、`keybinding`、
 `shortcut conflict`、`hotkey`、`accessibility`、`SARIF` 等关键词进行初步查重，
 未发现同时覆盖上述功能组合的 MoonBit 项目。该结论是带日期的初步审查，不能
 承诺永久没有相近项目；项目将持续维护查重记录并明确功能边界。
@@ -66,7 +66,7 @@ MoonKeyguard 的独立价值不是重新实现一个按键运行时，而是把�
 - GitHub Actions 已在提交 `bd8681e` 上成功完成 check、build、test、fmt、info、
   package 和示例 smoke test；
 - 已执行 `moon publish --frozen`，Mooncakes manifest 返回 200，版本为
-  `0.1.0`，构建状态为 success；
+  `0.2.0`，构建状态为 success；
 - 根目录提供 README、Apache-2.0 LICENSE、CHANGELOG、第三方来源说明、AI 使用
   说明、设计文档、测试记录、发布清单和验收差距表；
 - 所有实现、测试 fixture 和示例均为本项目重新编写，没有复制来源不明的代码、

@@ -24,4 +24,4 @@ moon publish --frozen
 `zhangbowen2006/moonkeyguard@0.1.0`，`build_status=success`，`has_package=true`。
 页面链接：[Mooncakes 文档](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，
 接口证据：[manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard)。
-若后续版本发布失败，必须记录真实错误，不得用推测链接替代。
+2026-09-14 已实际执行 `moon publish --frozen` 发布 0.2.0，命令退出码为 0，终端返回 `Server status: 200 OK`。对应页面仍使用稳定包文档地址：[Mooncakes 文档](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)。若后续版本发布失败，必须记录真实错误，不得用推测链接替代。
