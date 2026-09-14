@@ -38,7 +38,39 @@ jobs:
         run: moon test --deny-warn
 
       - name: Format
-        run: moon fmt --check
+        run: |
+          set -o pipefail
+          if moon fmt --check 2>&1 | tee fmt-check.log; then
+            exit 0
+          fi
+          # Emit the formatter's exact diff as check annotations so a logged-out
+          # reviewer can inspect the remaining mismatch without job-log access.
+          moon fmt >/dev/null
+          git diff --no-ext-diff --unified=0 -- . ':(exclude)_build' > fmt.diff || true
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          current = None
+          line = 0
+          for raw in Path("fmt.diff").read_text(encoding="utf-8", errors="replace").splitlines():
+              if raw.startswith("+++ b/"):
+                  current = raw[6:]
+                  continue
+              if raw.startswith("@@"):
+                  match = re.search(r"\+(\d+)", raw)
+                  if match:
+                      line = int(match.group(1))
+                  continue
+              if current and raw.startswith("+") and not raw.startswith("+++"):
+                  message = raw[1:].replace("%", "%25").replace("\r", "").replace("\n", "")
+                  print(f"::error file={current},line={line}::{message}")
+                  line += 1
+              elif current and raw.startswith("-") and not raw.startswith("---"):
+                  continue
+          PY
+          cat fmt.diff
+          exit 1
 
       - name: Public API snapshot
         run: |
