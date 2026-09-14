@@ -249,7 +249,7 @@ pub fn row(
   enabled? : String = "true",
   description? : String = "",
 ) -> BindingRow {
-  { id, command, keys, context, platform, priority, enabled, description, }
+  { id, command, keys, context, platform, priority, enabled, description }
 }
 
 ///|
@@ -298,7 +298,7 @@ pub fn import_rows(
       }
     }
   }
-  { keymap, rows_seen: rows.length(), rows_imported: imported, diagnostics, }
+  { keymap, rows_seen: rows.length(), rows_imported: imported, diagnostics }
 }
 
 ///|

@@ -293,7 +293,7 @@ test "project rules enforce prefix and modifier" {
 
 ///|
 test "rules integrate into analysis" {
-  let rules = { ..ProjectRules::default(), require_description: true, }
+  let rules = { ..ProjectRules::default(), require_description: true }
   let analysis = analyze_with_rules(
     parse_keymap("bind x command=app.x keys=Ctrl+X").keymap,
     rules,

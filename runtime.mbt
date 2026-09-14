@@ -247,7 +247,7 @@ pub fn replay(
       _ => misses += 1
     }
     elapsed += 1
-    steps.push({ input, result, elapsed_ms: elapsed, })
+    steps.push({ input, result, elapsed_ms: elapsed })
   }
   {
     context,

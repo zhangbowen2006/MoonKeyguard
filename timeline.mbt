@@ -43,7 +43,7 @@ pub fn AuditTimeline::new(
   project : String,
   baseline? : String = "",
 ) -> AuditTimeline {
-  { project, events: [], baseline, }
+  { project, events: [], baseline }
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn timeline_append(
     score: analysis.score,
     note,
   }
-  { ..timeline, events: timeline.events + [event], }
+  { ..timeline, events: timeline.events + [event] }
 }
 
 ///|

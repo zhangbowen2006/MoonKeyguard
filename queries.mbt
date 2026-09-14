@@ -168,7 +168,7 @@ pub fn normalize_keymap(keymap : Keymap) -> Keymap {
   })
   let reserved = keymap.reserved.copy()
   reserved.sort()
-  { ..keymap, bindings, contexts, reserved, }
+  { ..keymap, bindings, contexts, reserved }
 }
 
 ///|
@@ -258,7 +258,7 @@ pub fn merge_keymaps(base : Keymap, overlay : Keymap) -> MergeResult {
   }
   let merged_contexts = base.contexts.copy()
   for incoming in overlay.contexts {
-    if !context_exists({ ..base, contexts: merged_contexts, }, incoming.name) {
+    if !context_exists({ ..base, contexts: merged_contexts }, incoming.name) {
       merged_contexts.push(incoming)
     }
   }
