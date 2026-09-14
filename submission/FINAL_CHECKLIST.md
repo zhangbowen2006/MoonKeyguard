@@ -1,18 +1,26 @@
-# 9 月 24 日验收前最后检查清单
+# 9 月 24 日前重新申报/验收检查清单
 
-## 申请人需要完成
+日期依据：申请人提供的九月初审通知允许在 2026-09-24 前修改报名表、提交最新信息；具体截止时刻以组委会为准。
 
-- [ ] 在网络可用环境将本地 `main` 的 `371d13e` 推送到 `origin/main`（GitHub Desktop 点击 Push origin，或执行 `git push origin main`）。
-- [ ] 确认 GitHub 仓库仍为 public、默认分支为 `main`，且仓库 owner、报名账户和选手信息均为张博文。
-- [ ] 在报名表中提交公开申报书；手机号和邮箱只填报名平台，不上传到 GitHub。
-- [ ] 重新搜索 GitHub/Mooncakes，记录查重日期和关键词；不得承诺绝对没有相似项目。
+## 当前需要申请人操作
 
-## 负责人已完成/验收前复核
+- [ ] 在 GitHub Desktop 选择 MoonKeyguard（本地目录 C:/Users/11619/Documents/Codex/2026-09-12/MoonKeyguard），点击 Push origin；如要求登录，使用 zhangbowen2006。
+- [ ] 推送后打开 Actions，等待默认分支最新提交显示绿色成功；失败时保留日志继续修复，不引用旧绿色记录。
+- [ ] 用本轮申报书和整改说明更新原报名表，申请重新审核，不创建虚假的重复报名。
+- [ ] 表单申请人为张博文，联系方式仅填官方表单；仓库为 zhangbowen2006/MoonKeyguard。
+- [ ] 按已收到的表单修改提醒，推荐人栏不要留空，可填写“无”；具体行为以表单当前提示为准。
 
-- [x] 本地 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、`moon fmt --check`、`moon info` 通过。
-- [x] `moon package --list` 已确认不包含 `_build`、缓存、报名版或临时文件。
-- [x] `moon publish --frozen` 已实际发布 `zhangbowen2006/moonkeyguard@0.2.0`，终端返回 `Server status: 200 OK`。
-- [ ] GitHub Actions 在 `371d13e` 上成功运行，并保存真实 run 链接。
-- [ ] 远程默认分支最新提交与本地 `371d13e` 一致。
-- [ ] 复核 README、LICENSE、CHANGELOG、第三方来源、AI 使用说明、设计/测试/发布文档渲染。
-- [ ] 验收材料只提交 MoonKeyguard；8 月项目 MoonBVHKit 单独说明，不混用代码或参赛资料。
+## 已验证及最后复核
+
+- [x] 在配套 MoonBit 0.10.12 下运行 check/build/test/fmt/info，89/89 测试通过。
+- [x] .mbti 无变化，两个示例和非法输入门禁经过实际运行。
+- [x] moon package --list 成功，不包含临时克隆或私有报名版。
+- [x] Mooncakes manifest 证实 0.2.0 已存在且构建成功；本轮不重复发布。
+- [x] 自查脚本对 native 非零退出立即报错，经过模拟失败回归验证。
+- [x] 初审后新增功能有真实提交和对应源码/测试，不凑空提交。
+- [ ] 最新本地 HEAD 与公开 main 一致，最新 CI 全绿；当前仍需登录推送。
+- [ ] 在提交前复核 README、公开一页申报书和整改说明链接可正常打开，并更新所有“待推送”状态。
+- [ ] 更新有限范围的相似项目检索记录；不承诺绝对唯一或获奖。
+- [ ] 确认只申报九月新项目 MoonKeyguard，不把八月 MoonBVHKit 的成果重复申报。
+
+只有组委会重新审核后，才能声称初审通过。报名复审与最终验收是两个不同阶段。

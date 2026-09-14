@@ -1,23 +1,19 @@
 # 9 月黑客松验收差距表
 
-审查日期：2026-09-14。表格只记录当前可验证证据；远程未同步的本地提交不视为已完成。
+核验日期：2026-09-14。区分本地证据、公开证据和组委会结论，不用提交总数代替有效开发。
 
-| 要求 | 当前证据 | 状态 | 风险/下一步 |
-| --- | --- | --- | --- |
-| MoonBit 为主要实现语言 | 生产 MoonBit 源码约 6.1k 行；`moon.mod`；89 个可运行测试 | 已满足（本地） | 推送后等待远程 CI |
-| 代码仓库公开可访问 | GitHub public 仓库 `zhangbowen2006/MoonKeyguard`；远程默认分支 `main` | 已满足 | 当前网络无法完成本轮推送，需在 GitHub Desktop 点击 Push origin |
-| 最新提交位于默认分支 | 本地 `main` 已包含本轮真实功能与证据提交；`origin/main` 仍为 `267c605`（缓存） | 待同步 | 推送 `main` 后再次核对 |
-| README 清晰完整 | 根 `README.md` 覆盖用途、安装、API、边界、示例、测试、CI 和发布 | 已满足（本地） | 推送后检查 GitHub 渲染 |
-| 用途、功能、使用方法 | README、`docs/KEYMAP_FORMAT.md`、`docs/PROJECT_PROPOSAL.md` | 已满足 | 无 |
-| 可运行示例 | `examples/basic`、`examples/baseline`；本地 `moon run` 通过 | 已满足（本地） | 远程 CI 复跑 |
-| CI | 已有历史绿色 Actions；本轮工作流配置包含 check/build/test/fmt/info/package/示例 | 部分满足 | 推送后保存新提交的绿色 run 链接 |
-| 可运行测试 | `moon test --deny-warn`：89/89 通过 | 已满足（本地） | 推送后等待 CI |
-| 正常构建 | `moon build` 通过 | 已满足（本地） | 发布前干净树复跑 |
-| Mooncakes 发布 | `moon publish --frozen` 实际退出码 0，终端返回 `Server status: 200 OK`；包版本 `0.2.0` | 已满足 | 页面：[Mooncakes 文档](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard) |
-| 提交记录可追踪 | 本地新增真实功能提交 `371d13e`，并有后续真实文档/验收提交；包含可达性矩阵和方向性 dispatcher 修复 | 部分满足 | 推送后在 GitHub 公开该提交 |
-| 功能边界与维护价值 | `docs/ARCHITECTURE.md`、`docs/DEDUPLICATION.md`、CHANGELOG 和申报书 | 已满足 | 持续维护真实 Issue/PR |
-| 开源许可证 | 根目录 Apache-2.0 `LICENSE` | 已满足 | 无 |
-| 查重独立性 | `docs/DEDUPLICATION.md` 记录 GitHub/Mooncakes 关键词检索；新增可达性矩阵属于独立静态审查能力 | 初步满足 | 报名前重新检索，不能承诺绝对无相似项目 |
-| 个人信息隔离 | 手机号/邮箱只在被 `.gitignore` 排除的报名版文件中；公开材料仅保留申请人姓名 | 已满足（本地） | `moon package --list` 已确认未打包报名版 |
+| 要求 | 当前证据 | 风险或下一步 |
+| --- | --- | --- |
+| 截图中的赛期开发记录与 MVP | 默认分支已有解析分析、适配策略、基线门禁、CLI 输入/示例、可达性分析五项功能提交，见 `submission/RESUBMISSION_NOTE.md` | 是否认可有效提交和 MVP，由组委会复审决定；格式/重复修复不计作新增功能 |
+| MoonBit 主要实现语言及规模 | 28 个根目录生产 .mbt 文件：剔除空行和整行注释 5681 行，再剔除纯分隔符行 4643 行；不含测试、cmd/、examples/ | 此为明确口径的本地计数，不等于评委的有效代码认定 |
+| 公开仓库及默认分支 | GitHub API 确认 public、默认分支 main；本轮核对远程为 5c84363 | 格式和脚本修复已在本地提交，但 Git 推送尚缺可用认证 |
+| README、API、文档 | README 含安装、快速开始、API、边界、测试、CI 和发布；已修复 API 表格断裂及过期发布说法 | 文档修改随本轮提交同步 |
+| 可运行示例 | `moon run examples/basic` 和 `moon run examples/baseline` 均退出 0 | 等待修复提交的远程复跑 |
+| 可运行测试与构建 | 配套 MoonBit 0.10.12 上 check/build 成功，89/89 测试通过；非法输入门禁按预期退出 1 | 不将预期负向测试记为项目构建失败 |
+| CI | [最近已核验运行](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34842814155)：check/build/test 成功，Format 失败，后续步骤跳过 | 尚未闭环。用 0.10.12 精确格式化后的代码本地 fmt 通过，需推送并取得新绿色运行 |
+| API 与包清单 | `moon info` 后 .mbti 无差异；`moon package --list` 成功，未包含临时克隆或报名版 | CI 诊断日志改放 RUNNER_TEMP，避免混入包 |
+| Mooncakes | [manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard) 返回 0.2.0、build_status=success、has_package=true、yanked=false | 已发布包不包含随后仅在仓库进行的工程修复；本轮不重复发布 0.2.0 |
+| 开源及维护边界 | Apache-2.0 LICENSE、THIRD_PARTY_NOTICES、AI_USAGE、CHANGELOG、架构与来源记录 | 独立价值不等于全球首创；不承诺获奖 |
+| 个人信息隔离 | 公开材料申请人为张博文，Git 作者账户为 zhangbowen2006；公开 Markdown/源码未匹配申请人电话邮箱 | 报名联系方式只填官方表单；提交前继续检查包清单 |
 
-结论：本地工程和 0.2.0 Mooncakes 包已达到提交前状态；唯一未闭环项是把本地 `main` 的真实提交推送到 GitHub 并取得新 CI 绿色记录。
+结论：截图提出的缺少开发记录/MVP已有具体整改成果，可供重新审核；不能据此声称初审或最终验收已通过。本地工程检查已通过，仍需完成正常 HTTPS 推送和最新 CI 全绿，再更新报名材料。

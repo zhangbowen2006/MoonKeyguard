@@ -19,7 +19,8 @@ MoonKeyguard 是声明分析库和 dispatcher 模拟器，不是操作系统级�
 
 ## 环境
 
-- MoonBit 0.10.10 或更新版本（本地验收使用 `moon 0.1.20260824` / `moonc 0.10.10`）。
+- 本轮完整验证使用 MoonBit `moonc 0.10.12+1634b282e`、`moon 0.1.20260904` 及配套标准库。
+- 格式化请使用同一版工具链：0.10.10 与 0.10.12 的结构体尾逗号规则不同。升级编译器时必须同时更新标准库；可使用官方 `moon upgrade`。CI 会输出实际版本，不能用旧版本的本地通过代替最新远程结果。
 - 本项目只使用 `moonbitlang/core`，没有额外运行时依赖。
 
 ## 快速开始
@@ -63,6 +64,20 @@ bind jump_line command=editor.jump_line keys=Ctrl+K,Ctrl+L context=editor platfo
 
 ## MoonBit API
 
+在自己的 MoonBit 模块中安装已发布的版本：
+
+```bash
+moon add zhangbowen2006/moonkeyguard@0.2.0
+```
+
+在调用方的 `moon.pkg` 中添加导入：
+
+```text
+import {
+  "zhangbowen2006/moonkeyguard" @moonkeyguard,
+}
+```
+
 ```moonbit
 let parsed = @moonkeyguard.parse_keymap(source, name="editor")
 if !parsed.ok {
@@ -87,6 +102,10 @@ println(@moonkeyguard.suggestions_to_markdown(suggestions))
 | `diff_keymaps` / `migration_plan` | 对两个版本做按 id 的语义 diff |
 | `reachability_matrix` / `reachability_to_*` | 按 context/platform 证明绑定可达、遮蔽和不可用状态 |
 | `compare_baseline` / `baseline_report_to_*` | 只阻止新增风险，保留历史问题作为可追踪债务 |
+| `import_csv` / `import_tsv` / `import_pipe` | 导入常见表格或管道格式 |
+| `dispatch` / `replay` | 在纯 MoonBit 模拟器中检查解析结果的可达性 |
+| `audit_with_profile` | 应用 desktop、terminal、accessible 或自定义策略 |
+| `release_gate` | 汇总结构校验、冲突分析、策略、基准和迁移证据 |
 
 ## Reachability matrix
 
@@ -119,15 +138,12 @@ println(@moonkeyguard.baseline_report_to_markdown(report))
 Finding identities omit source line numbers, so moving a declaration does not
 create a false regression. Set `fail_on_warning=true` when warnings are also
 blocking for a release.
-| `import_csv` / `import_tsv` / `import_pipe` | 导入常见表格或管道格式 |
-| `dispatch` / `replay` | 在纯 MoonBit 模拟器中检查解析结果的可达性 |
-| `audit_with_profile` | 应用 desktop、terminal、accessible 或自定义策略 |
-| `release_gate` | 汇总结构校验、冲突分析、策略、基准和迁移证据 |
 
 ## 可运行示例
 
 ```bash
 moon run examples/basic
+moon run examples/baseline
 ```
 
 示例会解析一个 editor/terminal keymap，输出冲突摘要、冲突图热点、dispatcher 回放和建议修复。`examples/basic/main.mbt` 只依赖公开 API，可以直接复制为集成测试的起点。
@@ -180,7 +196,7 @@ moon test --deny-warn
 
 - 变更应保持一个有意义的提交一个主题，保留真实 Git 提交、Issue、PR、测试和发布记录。
 - 发布前运行 `moon package --list`，确认包中没有 `_build`、临时文件或敏感数据。
-- 只有真实执行 `moon publish --frozen` 并拿到 Mooncakes 页面后，才在申报材料中填写发布链接；当前仓库尚未声称已发布。
+- `0.2.0` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)；2026-09-14 复核 manifest 的 `build_status=success`、`has_package=true`。后续仓库的格式/CI/文档修复不等于重新发布同版本。
 - 发布流程、验收证据和风险记录见 `docs/` 与 `submission/`。
 
 ## 查重结论（截至 2026-09-13）

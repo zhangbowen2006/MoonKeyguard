@@ -1,40 +1,24 @@
-# 验收证据报告（持续更新）
+# MoonKeyguard 验收证据摘要
 
-项目：MoonKeyguard  
-申请人：张博文  
-模块：`zhangbowen2006/moonkeyguard`  
-状态：已完成本地自审和 0.2.0 Mooncakes 发布；本轮 GitHub 提交待网络恢复后推送。
+申请人：张博文。账户：zhangbowen2006。核验日期：2026-09-14。
 
-| 要求 | 当前证据 | 风险/下一步 |
-| --- | --- | --- |
-| MoonBit 为主要语言 | 根目录 生产 `.mbt` 约 5.3k 行；89 个测试；`moon.mod` | 远程 CI 需再次验证 |
-| 公开可访问仓库 | [GitHub](https://github.com/zhangbowen2006/MoonKeyguard) 为 public，默认分支 `main`；本轮本地功能与证据提交（功能提交 `371d13e`）尚待推送 | 持续维护 |
-| README 完整 | `README.md` 覆盖用途、API、边界、示例、测试和发布 | 推送后复核远程页面渲染 |
-| 可运行示例 | `examples/basic`，`moon run examples/basic` 已验证 | CI 保持示例步骤 |
-| CI | [历史 Actions run 34755575667；本轮提交待新 run](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34755575667) success | 推送后等待本轮 CI 绿色记录 |
-| 可运行测试 | 89 tests，`moon test --deny-warn` PASS | 不伪造远程徽章 |
-| 正常构建 | `moon build` PASS | 发布前再次在干净树执行 |
-| Mooncakes | `moon publish --frozen` 退出码 0，终端返回 `Server status: 200 OK`；版本 `0.2.0` 的发布前打包校验和抽取包 `moon check` 通过 | 已完成 0.2.0 发布；推送后复核远程 CI |
-| 可追踪开发过程 | 本地 `main` 已包含本轮真实提交；远程 `origin/main` 仍为 7 个提交 | 继续保留真实提交 |
-| 功能边界/维护价值 | `docs/ARCHITECTURE.md`、`PROJECT_PROPOSAL.md`、schema API | 持续维护 Issue/CHANGELOG |
-| 开源许可证 | 根目录 Apache-2.0 `LICENSE` | 检查远程包清单 |
-| 查重独立性 | `docs/DEDUPLICATION.md` | 报名前重跑搜索 |
+## 当前结论
 
-## 已实际运行命令
+项目已有可运行 MVP、可追踪功能提交和真实 Mooncakes 0.2.0 发布。
+本轮在 MoonBit 0.10.12 及配套标准库下通过本地完整检查。
+尚未完成：将最新格式/自查脚本/文档修复推送到默认分支，并确认该分支最新 CI 全绿。
+这不是组委会的通过通知。
 
-```text
-moon fmt --check                 PASS
-moon check --deny-warn           PASS
-moon build                       PASS
-moon test --deny-warn            PASS (89 tests)
-moon run cmd/main -- --format text --metrics --suggest  PASS
-moon run examples/basic          PASS
-```
+## 逐项证据
 
-发布后复核命令：
+- 公开仓库：[MoonKeyguard](https://github.com/zhangbowen2006/MoonKeyguard)，API 确认 public、默认分支 main。
+- 实质开发记录：[整改说明](RESUBMISSION_NOTE.md)列明五项功能提交，不把格式提交当功能。
+- 核心实现：28 个根目录生产 MoonBit 文件；剔除空行、整行注释和纯分隔符行共 4643 行（明确排除测试、cmd/、examples/）。
+- 本地检查：check/build/test/fmt/info、接口差异检查、package 和两例运行成功；89/89 测试。
+- 负向验证：非法 DSL 在 --fail-on-warning 下按预期退出 1；自查脚本在模拟构建错误时立即停止。
+- 最新已核验 [CI](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34842814155) 仍因 Format 失败；本地修复待推送复跑。
+- [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard) 已有 0.2.0；manifest 返回 build_status=success、has_package=true、yanked=false。
+- README、LICENSE、CHANGELOG、第三方来源、AI 使用、设计、测试和发布文档齐备。
+- 联系方式不放入公开报名资料；提交内容不混用八月项目 MoonBVHKit。
 
-```text
-moon info
-moon package --list
-moon publish --frozen  # 重复发布同版本应返回真实 409，不重复伪造发布
-```
+详见 [差距表](../docs/ACCEPTANCE_GAP.md)、[真实测试记录](../docs/TESTING.md)和[最后检查清单](FINAL_CHECKLIST.md)。

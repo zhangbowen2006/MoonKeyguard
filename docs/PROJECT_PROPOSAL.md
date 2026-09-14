@@ -1,85 +1,30 @@
-# MoonKeyguard：2026 MoonBit 9 月黑客松项目申报书
+# MoonKeyguard｜2026 MoonBit 9 月黑客松项目申报书
+申请人：张博文｜账户：zhangbowen2006｜赛道：新项目｜许可证：Apache-2.0。
 
-## 一、项目基本信息
+项目仓库：[zhangbowen2006/MoonKeyguard](https://github.com/zhangbowen2006/MoonKeyguard)。
+已发布模块：[zhangbowen2006/moonkeyguard 0.2.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)。
 
-- 项目名称：MoonKeyguard
-- 参赛方向：新项目赛道；与 8 月项目 MoonBVHKit 完全独立
-- GitHub：[zhangbowen2006/MoonKeyguard](https://github.com/zhangbowen2006/MoonKeyguard)
-- Mooncakes：[zhangbowen2006/moonkeyguard@0.2.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)
-- 许可证：Apache-2.0
+## 用途与独立价值
+面向编辑器、桌面应用、终端/TUI 及插件维护者，在合并快捷键声明后、启动应用之前，分析冲突、遮蔽和命令可达性。
+核心定位是可嵌入 CI 的离线静态审查与分派模拟，不是操作系统按键 hook。
+相似项目检索见 [查重记录](DEDUPLICATION.md)：暂未发现同等功能组合的 MoonBit 项目，不宣称全球首创或绝对没有相近功能。
+本项目与八月参赛项目 MoonBVHKit 的选题、仓库及核心实现独立，不重复申报旧成果。
 
-## 二、项目背景与目标
+## 已完成 MVP 与技术方案
+以 MoonBit 实现 DSL 解析、快捷键规范化、上下文继承/平台交集规则、冲突图和可解释诊断。
+支持精确/前缀冲突、保留键与可访问性风险、语义差异、修改建议、CSV/TSV/pipe 适配及 Text/Markdown/JSON/SARIF 输出。
+初审反馈后已新增基线回归门禁、CLI inline 输入、可运行基线示例，以及方向性的 context/platform 可达性矩阵与 dispatcher 修复。
+核心为 MoonBit 纯函数 API，仅依赖官方 core；不采集真实键盘数据、不自动修改桌面配置，也不承诺覆盖宿主应用的一切动态行为。
+分析器采用规范化序列比较、上下文祖先关系与平台集合运算；当前成对冲突分析具有平方级规模限制。
 
-桌面应用、终端工具、编辑器、TUI 和多平台 GUI 的快捷键，往往分散在
-配置文件、插件和代码中。它们在合并后可能产生重复绑定、Chord 前缀遮蔽、
-父子上下文误覆盖、平台专用键误用、系统保留键冲突和不可发现的单键操作。
-现有运行时输入库通常负责“绑定”，却难以在代码审查和发布前回答“哪个命令
-不可达、为什么冲突、如何修复”。
+## 可复现成果与开发记录
+`moon run examples/basic` 展示解析、分析、冲突图、回放及可达性；`moon run examples/baseline` 展示新增风险门禁。
+28 个根目录生产 MoonBit 文件在剔除空行、整行注释和纯分隔符行后为 4643 行，不含测试、cmd/、examples/；最终有效规模以评委认定为准。
+本轮 MoonBit 0.10.12 配套工具链下 check/build/test/fmt/info、包清单和示例通过，89/89 测试；错误输入门禁按预期返回非零。
+[五项功能提交与初审整改证据](../submission/RESUBMISSION_NOTE.md)可追踪，不使用空提交、重写历史或格式提交凑功能数量。
+Mooncakes manifest 已确认 0.2.0 构建成功；GitHub 最新已核验 CI 尚在旧格式提交上失败，修复已本地验证，待推送后复核，不声称最终验收已通过。
 
-MoonKeyguard 的目标是提供一个 MoonBit 原生、可嵌入、可离线运行的快捷键
-静态分析工具，把快捷键声明转换为可解释的诊断、迁移建议和 CI 发布门禁。
-
-## 三、核心功能与用户
-
-项目用户是需要维护快捷键体系的应用开发者、编辑器作者、插件作者和 CI
-维护者。核心能力包括：
-
-- 用轻量 DSL 表达 `keymap`、`context`、`reserve` 和 `bind`；
-- 规范化 modifier 与连续 Chord，识别精确冲突、前缀冲突和 shadowing；
-- 分析父子 context 继承、兄弟 context 隔离和平台集合重叠；
-- 检查系统/终端/焦点导航保留键及键盘可访问性风险；
-- 输出冲突图、语义 diff、迁移建议、dispatcher replay 和 release gate；
-- 提供基线回归门禁，只阻止新增风险并保留历史问题作为可追踪债务；
-- 支持 Text、Markdown、JSON、SARIF 2.1.0、schema、CSV/TSV/pipe 适配；
-- 提供纯函数 API、CLI 和可直接运行的 `examples/basic` 示例。
-- 提供方向性的 context/platform 可达性矩阵，证明绑定在真实探针中的赢家、遮蔽和不可用状态。
-
-## 四、创新点与独立价值
-
-MoonKeyguard 的独立价值不是重新实现一个按键运行时，而是把“快捷键可达性
-和交互边界”纳入静态审查：同一个分析模型同时处理 Chord 前缀、上下文继承、
-平台范围、保留键、可访问性、冲突图和发布门禁。这样，快捷键变更可以像代码
-一样进入 CI，并能输出面向开发者和代码扫描平台的解释性证据。
-
-截至 2026-09-14，已对 GitHub 与 Mooncakes 使用 `keymap`、`keybinding`、
-`shortcut conflict`、`hotkey`、`accessibility`、`SARIF` 等关键词进行初步查重，
-未发现同时覆盖上述功能组合的 MoonBit 项目。该结论是带日期的初步审查，不能
-承诺永久没有相近项目；项目将持续维护查重记录并明确功能边界。
-
-## 五、技术路线与边界
-
-项目以 MoonBit 为主要实现语言，仅依赖 `moonbitlang/core`。解析器将 DSL
-转换为结构化 keymap，规则引擎通过规范化快捷键、context 祖先关系和平台集合
-运算生成诊断；冲突图和建议器复用同一分析结果。核心分析复杂度约为
-`O(bindings² + bindings × context-depth)`，优先保证结果稳定、可解释和可测试，
-并支持 wasm 目标。
-
-项目明确不包含操作系统级按键 hook、GUI 按键录制、云同步、用户数据采集、
-窗口管理和替应用决定最终交互设计。CLI 默认分析内置演示 keymap，真实应用
-通过 API 或脚本传入声明内容。
-
-## 六、工程化与验收证据
-
-- 生产 MoonBit 代码约 6.1k 行，测试覆盖 89 个用例；
-- 本地已通过 `moon check --deny-warn`、`moon build`、`moon test --deny-warn`、`moon fmt --check`、
-  `moon info` 和 `moon package --list`；
-- GitHub Actions 已在提交 `bd8681e` 上成功完成 check、build、test、fmt、info、
-  package 和示例 smoke test；
-- 已执行 `moon publish --frozen`，终端返回 `Server status: 200 OK`，版本为
-  `0.2.0`；发布前打包校验和抽取包 `moon check` 均通过；
-- 根目录提供 README、Apache-2.0 LICENSE、CHANGELOG、第三方来源说明、AI 使用
-  说明、设计文档、测试记录、发布清单和验收差距表；
-- 所有实现、测试 fixture 和示例均为本项目重新编写，没有复制来源不明的代码、
-  素材或其他选手的报名资料。
-
-## 七、后续维护计划
-
-后续版本将优先完善规则目录的可配置性、更多编辑器/终端适配器、诊断稳定性、
-性能基准和文档示例，并通过真实 Issue、合并请求、测试记录、CHANGELOG 和版本
-发布持续维护。每次规则变化都会同步更新测试、schema、示例和迁移说明。
-
-## 八、申报承诺
-
-本项目提交的仓库、提交记录、测试结果、CI 状态和 Mooncakes 状态均以公开可验证
-证据为准；不伪造用户数量、Issue、PR、下载量或获奖结果。项目作者将按赛事要求
-补充报名表中的个人信息，并在提交前复核仓库链接、分支、CI 和发布状态。
+## 后续维护与申报承诺
+继续维护边界/错误路径测试、诊断稳定性、规则来源、适配器与性能基准；README、设计、测试、发布、CHANGELOG 和 AI_USAGE 已提供。
+仅使用可说明来源的代码与 fixture，第三方来源与许可证记录见 THIRD_PARTY_NOTICES；不使用其他选手的报名信息。
+依照初审通知在 9 月 24 日前更新报名表申请复审；工程完成度、独立价值和获奖由组委会审核，不伪造发布、测试或用户数据。
