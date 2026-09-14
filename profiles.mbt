@@ -117,7 +117,7 @@ fn profile_reserved(keymap : Keymap, profile : PolicyProfile) -> Keymap {
       markers.push(marker)
     }
   }
-  { ..keymap, reserved: markers }
+  { ..keymap, reserved: markers, }
 }
 
 ///|
@@ -267,7 +267,7 @@ pub fn audit_with_profile(
   let passed = parsed.ok &&
     analysis.error_count == 0 &&
     (!profile.fail_on_warning || analysis.warning_count == 0)
-  { profile, parse: parsed, analysis, metrics, passed, gate_messages }
+  { profile, parse: parsed, analysis, metrics, passed, gate_messages, }
 }
 
 ///|

@@ -37,7 +37,7 @@ fn gate_item(
   evidence : String,
   remediation : String,
 ) -> GateItem {
-  { code, title, passed, severity, evidence, remediation }
+  { code, title, passed, severity, evidence, remediation, }
 }
 
 ///|
@@ -143,7 +143,7 @@ pub fn release_gate(
     .filter(item => !item.passed && item.severity == Error)
     .length() ==
     0
-  { project, version, items, passed, score: gate_score(items) }
+  { project, version, items, passed, score: gate_score(items), }
 }
 
 ///|
