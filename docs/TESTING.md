@@ -44,7 +44,10 @@ CLI 的非零退出当前通过 abort 实现，负向测试会输出 RuntimeErro
 ## 远程状态
 
 [运行 34842814155](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34842814155) 对 5c84363：
-check/build/test 成功，Format 失败，后续检查未执行。
-修复后的本地通过不代表远程通过；等待正常推送后的新运行，不能引用历史绿色结果冒充最新版本。
+check/build/test 成功，Format 失败，后续检查未执行。这条失败保留为真实修复历史。
+
+2026-09-14 推送后，[运行 34864976303](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34864976303) 对 `fa7161ad6d1fde75d464317de14f49b1d2b831ff` 返回 success。
+通过 GitHub jobs API 核验：Check、Build、Test、Format、Public API snapshot、Package inspection、CLI smoke test、Example smoke test、Baseline example smoke test 全部 success。
+该结果对应上述固定提交；本记录不代替以后新提交的 CI 验证。
 
 测试范围覆盖解析、快捷键规范化、上下文/平台冲突、适配器、图、规则、dispatcher、基线门禁和可达性矩阵。fixture 为仓库内可复现数据，不使用真实用户键盘记录。

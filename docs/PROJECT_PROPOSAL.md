@@ -22,7 +22,7 @@
 28 个根目录生产 MoonBit 文件在剔除空行、整行注释和纯分隔符行后为 4643 行，不含测试、cmd/、examples/；最终有效规模以评委认定为准。
 本轮 MoonBit 0.10.12 配套工具链下 check/build/test/fmt/info、包清单和示例通过，89/89 测试；错误输入门禁按预期返回非零。
 [五项功能提交与初审整改证据](../submission/RESUBMISSION_NOTE.md)可追踪，不使用空提交、重写历史或格式提交凑功能数量。
-Mooncakes manifest 已确认 0.2.0 构建成功；GitHub 最新已核验 CI 尚在旧格式提交上失败，修复已本地验证，待推送后复核，不声称最终验收已通过。
+Mooncakes manifest 已确认 0.2.0 构建成功；默认分支上的验证提交 `fa7161a` 已通过 [完整 CI（运行 34864976303）](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34864976303)，包括 check/build/test/fmt/info、打包及全部示例。本材料申请复审，不声称组委会已批准初审或验收。
 
 ## 后续维护与申报承诺
 继续维护边界/错误路径测试、诊断稳定性、规则来源、适配器与性能基准；README、设计、测试、发布、CHANGELOG 和 AI_USAGE 已提供。
