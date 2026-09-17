@@ -1,24 +1,17 @@
-# MoonKeyguard 验收证据摘要
+# MoonKeyguard 复审证据入口
 
-申请人：张博文。账户：zhangbowen2006。核验日期：2026-09-14。
+申请人：张博文｜更新：2026-09-17｜本轮状态：本地整改，未推送、未发布。
 
-## 当前结论
+九月第二次初审指出用途、现有方案不足和独立库必要性论证不充分。
+本轮不再用代码规模作为主要答案，而是提供具体宿主配置契约和可复用调用端。
 
-项目已有可运行 MVP、可追踪功能提交和真实 Mooncakes 0.2.0 发布。
-本轮在 MoonBit 0.10.12 及配套标准库下通过本地完整检查。
-工程修复已推送到默认分支，验证提交 fa7161a 的完整 CI 已成功，现可更新报名材料申请复审。
-这不是组委会的通过通知；有效开发记录与 MVP 是否满足初审、最终验收仍须官方审核。
+- [申报书](../docs/PROJECT_PROPOSAL.md)：目标用户、具体问题、补充价值、边界与维护计划。
+- [逐项整改](RESUBMISSION_NOTE.md)：对照本次反馈的实质修改和仍未完成的事项。
+- [用途与独立价值](../docs/USE_CASE_AND_VALUE.md)：承认内置工具能力，并说明为什么目前拆出纯内核。
+- [宿主 profile](../docs/HOST_PROFILE.md)：布尔条件、顺序、平台选择、inconclusive 与不支持项。
+- [可运行案例](../examples/vscode-review/README.md)：原生扩展贡献/处理器、反例和修复、两种调用端。
+- [本轮本地记录](../docs/LOCAL_REVIEW_20260917.md)：实际测试命令、结果和未验证的实机边界。
+- [差距表](../docs/ACCEPTANCE_GAP.md)与[最后清单](FINAL_CHECKLIST.md)。
 
-## 逐项证据
-
-- 公开仓库：[MoonKeyguard](https://github.com/zhangbowen2006/MoonKeyguard)，API 确认 public、默认分支 main。
-- 实质开发记录：[整改说明](RESUBMISSION_NOTE.md)列明五项功能提交，不把格式提交当功能。
-- 核心实现：28 个根目录生产 MoonBit 文件；剔除空行、整行注释和纯分隔符行共 4643 行（明确排除测试、cmd/、examples/）。
-- 本地检查：check/build/test/fmt/info、接口差异检查、package 和两例运行成功；89/89 测试。
-- 负向验证：非法 DSL 在 --fail-on-warning 下按预期退出 1；自查脚本在模拟构建错误时立即停止。
-- 验证提交 fa7161a 的 [CI 34864976303](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34864976303) 全部成功，覆盖格式、公开 API、打包、CLI 和两个示例。
-- [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard) 已有 0.2.0；manifest 返回 build_status=success、has_package=true、yanked=false。
-- README、LICENSE、CHANGELOG、第三方来源、AI 使用、设计、测试和发布文档齐备。
-- 联系方式不放入公开报名资料；提交内容不混用八月项目 MoonBVHKit。
-
-详见 [差距表](../docs/ACCEPTANCE_GAP.md)、[真实测试记录](../docs/TESTING.md)和[最后检查清单](FINAL_CHECKLIST.md)。
+已发布的 [Mooncakes 0.2.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard) 与历史绿色 CI 是旧工程基础，
+不是这次新增 profile 的发布或远程验收证据。组委会尚未批准本轮初审，不能提前标为通过。

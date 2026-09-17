@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "zhangbowen2006/moonkeyguard/vscode"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn audit_json(String, String, String, String, String) -> String
+
+pub fn audit_sources(String, String, String, String, String) -> AuditResult
+
+pub fn evaluate_when(String, Map[String, Bool]) -> Result[Bool, String]
+
+// Errors
+
+// Types and methods
+pub(all) struct AuditResult {
+  json : String
+  exit_code : Int
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

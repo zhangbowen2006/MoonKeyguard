@@ -1,0 +1,10 @@
+# Only the plugin chord changes; accepted prefix debt remains visible.
+keymap name=review-editor version=3
+context editor parent=global rank=10
+context terminal parent=global rank=10
+bind save command=editor.save keys=Ctrl+S context=editor
+bind palette command=editor.palette keys=Ctrl+Shift+P context=editor
+bind interrupt command=terminal.interrupt keys=Ctrl+C context=terminal
+bind prefix command=editor.prefix keys=Ctrl+K context=editor
+bind comment command=editor.comment keys=Ctrl+K,Ctrl+C context=editor
+bind plugin_export command=plugin.export keys=Ctrl+Alt+E context=editor

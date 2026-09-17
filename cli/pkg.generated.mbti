@@ -1,0 +1,44 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "zhangbowen2006/moonkeyguard/cli"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn default_options() -> Options
+
+pub fn evaluate(Options, String, baseline_source? : String) -> Response
+
+pub fn help_text() -> String
+
+pub fn input_error(String, format? : String) -> Response
+
+pub fn parse_options(Array[String]) -> Result[Options, String]
+
+// Errors
+
+// Types and methods
+pub(all) struct Options {
+  input : String?
+  source : String?
+  baseline : String?
+  name : String
+  format : String
+  metrics : Bool
+  suggest : Bool
+  fail_on_error : Bool
+  fail_on_warning : Bool
+  max_bindings : Int
+  help : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Response {
+  stdout : String
+  stderr : String
+  exit_code : Int
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

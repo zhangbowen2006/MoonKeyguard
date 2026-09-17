@@ -1,0 +1,10 @@
+# Original, hypothetical editor scenario. Not copied from any product defaults.
+keymap name=review-editor version=1
+context editor parent=global rank=10
+context terminal parent=global rank=10
+bind save command=editor.save keys=Ctrl+S context=editor
+bind palette command=editor.palette keys=Ctrl+Shift+P context=editor
+bind interrupt command=terminal.interrupt keys=Ctrl+C context=terminal
+# Existing prefix warning is accepted debt for this demonstration.
+bind prefix command=editor.prefix keys=Ctrl+K context=editor
+bind comment command=editor.comment keys=Ctrl+K,Ctrl+C context=editor

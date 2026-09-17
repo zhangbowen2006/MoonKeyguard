@@ -1,104 +1,89 @@
 ///|
-fn has_arg(args : Array[String], wanted : String) -> Bool {
-  for arg in args {
-    if arg == wanted {
-      return true
-    }
+/// Read only a user-supplied regular file. No directory traversal or discovery.
+fn read_keymap(path : String) -> Result[String, String] {
+  let regular = @fs.is_file(path) catch {
+    @fs.IOError(message) => return Err(path + ": " + message)
   }
-  false
-}
-
-///|
-fn value_after(
-  args : Array[String],
-  wanted : String,
-  default : String,
-) -> String {
-  for i in 0..<args.length() {
-    if args[i] == wanted && i + 1 < args.length() {
-      return args[i + 1]
-    }
+  if !regular {
+    return Err(path + ": expected a regular file")
   }
-  default
-}
-
-///|
-fn print_help() -> Unit {
-  let help =
-    #|MoonKeyguard — static keyboard shortcut analysis
-    #|
-    #|Usage:
-    #|  moon run cmd/main
-    #|  moon run cmd/main -- --source "bind save command=save keys=Ctrl+S"
-    #|  moon run cmd/main -- --format json
-    #|  moon run cmd/main -- --format markdown --suggest
-    #|  moon run cmd/main -- --format sarif --fail-on-warning
-    #|
-    #|The CLI audits the bundled demo by default. Use --source for an inline
-    #|keymap; library users can call parse_keymap(source) for larger files.
-  println(help)
-}
-
-///|
-fn print_diagnostics(parsed : @moonkeyguard.ParseResult) -> Unit {
-  for diagnostic in parsed.diagnostics {
-    println(
-      "parse " +
-      diagnostic.code +
-      " line " +
-      diagnostic.line.to_string() +
-      ": " +
-      diagnostic.message,
+  let bytes = @fs.read_file_to_bytes(path) catch {
+    @fs.IOError(message) => return Err(path + ": " + message)
+  }
+  if bytes.length() > 2097152 {
+    return Err(
+      path + ": file exceeds 2 MiB (file is read before checking size)",
     )
   }
+  let content = @utf8.decode(bytes[:]) catch {
+    _ => return Err(path + ": invalid UTF-8; save the keymap as UTF-8")
+  }
+  Ok(content)
+}
+
+///|
+fn run(args : Array[String]) -> @cli.Response {
+  if args.length() > 0 && args[0] == "vscode" {
+    return run_vscode(args[1:].to_owned())
+  }
+  let mut settings = match @cli.parse_options(args) {
+    Ok(settings) => settings
+    Err(message) => return @cli.input_error(message)
+  }
+  if settings.help {
+    return { stdout: @cli.help_text(), stderr: "", exit_code: 0, }
+  }
+  let source = match (settings.input, settings.source) {
+    (Some(path), _) => {
+      if !args.contains("--name") {
+        settings = { ..settings, name: path, }
+      }
+      match read_keymap(path) {
+        Ok(text) => text
+        Err(message) => return @cli.input_error(message, format=settings.format)
+      }
+    }
+    (None, Some(text)) => text
+    (None, None) => @kit.demo_source()
+  }
+  match settings.baseline {
+    None => @cli.evaluate(settings, source)
+    Some(path) =>
+      match read_keymap(path) {
+        Ok(text) => @cli.evaluate(settings, source, baseline_source=text)
+        Err(message) => @cli.input_error(message, format=settings.format)
+      }
+  }
+}
+
+///|
+#cfg(target="js")
+fn argument_offset() -> Int {
+  2
+}
+
+///|
+#cfg(not(target="js"))
+fn argument_offset() -> Int {
+  1
 }
 
 ///|
 fn main {
   let args = @env.args()
-  if has_arg(args, "--help") || has_arg(args, "-h") {
-    print_help()
-    return
+  let offset = argument_offset()
+  let response = run(
+    if args.length() >= offset {
+      args[offset:].to_owned()
+    } else {
+      []
+    },
+  )
+  if response.stdout != "" {
+    write_stream(1, response.stdout + "\n")
   }
-  let requested_source = value_after(args, "--source", "")
-  let source = if requested_source.length() == 0 {
-    @moonkeyguard.demo_source()
-  } else {
-    requested_source
+  if response.stderr != "" {
+    write_stream(2, response.stderr + "\n")
   }
-  let name = value_after(args, "--name", "editor-demo")
-  let (parsed, analysis) = @moonkeyguard.audit(source, name~)
-  if parsed.diagnostics.length() > 0 {
-    print_diagnostics(parsed)
-  }
-  let format = value_after(args, "--format", "text")
-  if format == "json" {
-    println(@moonkeyguard.analysis_to_json(analysis))
-  } else if format == "markdown" || format == "md" {
-    println(@moonkeyguard.analysis_to_markdown(analysis))
-  } else if format == "sarif" {
-    println(@moonkeyguard.analysis_to_sarif(analysis))
-  } else {
-    println(@moonkeyguard.analysis_to_text(analysis))
-  }
-  if has_arg(args, "--metrics") {
-    println(
-      @moonkeyguard.metrics_to_json(@moonkeyguard.keymap_metrics(parsed.keymap)),
-    )
-  }
-  if has_arg(args, "--suggest") {
-    let suggestions = @moonkeyguard.suggest_all(parsed.keymap, analysis)
-    println(@moonkeyguard.suggestions_to_markdown(suggestions))
-  }
-  if has_arg(args, "--fail-on-warning") {
-    let code = @moonkeyguard.analysis_exit_code(analysis, fail_on_warning=true)
-    let parse_failed = parsed.diagnostics.length() > 0
-    if code != 0 || parse_failed {
-      println("CI gate: failed")
-      if parse_failed {
-        println("CI gate: parser diagnostics are blocking")
-      }
-      @abort.abort("MoonKeyguard CI gate failed")
-    }
-  }
+  @sys.exit(response.exit_code)
 }

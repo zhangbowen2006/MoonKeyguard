@@ -1,0 +1,10 @@
+# A new plugin accidentally claims the editor's Save chord.
+keymap name=review-editor version=2
+context editor parent=global rank=10
+context terminal parent=global rank=10
+bind save command=editor.save keys=Ctrl+S context=editor
+bind palette command=editor.palette keys=Ctrl+Shift+P context=editor
+bind interrupt command=terminal.interrupt keys=Ctrl+C context=terminal
+bind prefix command=editor.prefix keys=Ctrl+K context=editor
+bind comment command=editor.comment keys=Ctrl+K,Ctrl+C context=editor
+bind plugin_export command=plugin.export keys=Ctrl+S context=editor

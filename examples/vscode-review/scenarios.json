@@ -1,0 +1,37 @@
+[
+  {
+    "name": "normal-editor-save",
+    "key": "ctrl+s",
+    "mac": "cmd+s",
+    "context": { "editorTextFocus": true, "editorReadonly": false, "editorHasSelection": false, "keyguard.wrapMode": false },
+    "expected_command": "workbench.action.files.save"
+  },
+  {
+    "name": "selection-with-mode-off-still-saves",
+    "key": "ctrl+s",
+    "mac": "cmd+s",
+    "context": { "editorTextFocus": true, "editorReadonly": false, "editorHasSelection": true, "keyguard.wrapMode": false },
+    "expected_command": "workbench.action.files.save"
+  },
+  {
+    "name": "explicit-wrap-mode",
+    "key": "ctrl+s",
+    "mac": "cmd+s",
+    "context": { "editorTextFocus": true, "editorReadonly": false, "editorHasSelection": true, "keyguard.wrapMode": true },
+    "expected_command": "keyguard.wrapSelection"
+  },
+  {
+    "name": "readonly-must-not-wrap",
+    "key": "ctrl+s",
+    "mac": "cmd+s",
+    "context": { "editorTextFocus": true, "editorReadonly": true, "editorHasSelection": true, "keyguard.wrapMode": true },
+    "expected_command": null
+  },
+  {
+    "name": "outside-editor",
+    "key": "ctrl+s",
+    "mac": "cmd+s",
+    "context": { "editorTextFocus": false, "editorReadonly": false, "editorHasSelection": false, "keyguard.wrapMode": false },
+    "expected_command": null
+  }
+]

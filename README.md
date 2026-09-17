@@ -1,10 +1,42 @@
 # MoonKeyguard
 
-MoonKeyguard 是一个 MoonBit 原生的键盘快捷键静态分析工具包。它把应用的快捷键声明看作一份可审查的策略文件，在不启动 GUI、不依赖操作系统钩子的情况下，发现快捷键冲突、Chord 前缀歧义、上下文继承遮蔽、平台范围重叠、保留快捷键和键盘可访问性风险，并生成可供 CI、代码审查和发布流程使用的报告。
+开发状态：以下文件输入、CLI 退出码和性能测量为 **Unreleased 本地改进**，
+尚未发布到 Mooncakes；已发布的 0.2.0 与其验证记录保持不变。
+本轮 CI 配置新增的检查也须等后续推送后才有远程运行记录。
 
-项目与 8 月项目 MoonBVHKit 完全独立：没有复用 BVH 代码、数据模型或实现范围，也不是拆分、改名或包装旧仓库。MoonKeyguard 的用户是桌面应用、终端工具、编辑器、TUI 和多平台 GUI 的维护者，解决的是“按键声明在合并后是否仍然可达、可发现、可解释”的工程问题。
+MoonKeyguard 本轮聚焦 **VS Code 扩展快捷键的发布前行为回归检查**：
+维护者提交相关默认规则、扩展 package.json、用户覆盖配置，以及“在这个状态下应该触发哪个命令”的场景契约。
+同一组按键只改了 when 条件，也可能让普通编辑模式下的“保存”变成某个扩展命令；
+本工具给出实际选中规则、条件判定和预期差异，方便在 CI 中拦截这种变化。
 
-## 核心价值
+目标用户是需要维护多状态、多平台快捷键行为的 VS Code 扩展或键位包作者。
+如果只是给自己的编辑器改几个快捷键，优先使用 VS Code 内置同键查看和排障日志，无需引入本库。
+它不是所有编辑器的通用解析器，更不替代 VS Code 对真实键盘、布局、焦点和命令执行的最终判定。
+本项目与八月 MoonBVHKit 的选题、仓库和核心实现独立。
+
+## 先看一个可以复验的用途
+
+```sh
+moon run cmd/main -- vscode --defaults examples/vscode-review/defaults.jsonc --extension examples/vscode-review/extension/package.regression.json --overrides examples/vscode-review/overrides.jsonc --scenarios examples/vscode-review/scenarios.json --platform windows
+```
+
+预期退出 1，普通保存、有选区但未开启模式、只读编辑三个状态发生回归。
+把 extension 参数改为同目录的 `package.json` 后，五个状态应通过，退出 0。
+反例和修复的按键均为 Ctrl+S：这里检查的是条件变化造成的行为回归，不是简单找重复字符串。
+这是原创的开发扩展和故障注入样例，**不是实际客户采用或线上故障记录**。
+
+同一个纯 MoonBit 内核也可以直接从 Node 调用，完全不启动 moonrun：
+
+```sh
+moon build --release --target js
+node scripts/check_vscode.mjs examples/vscode-review/defaults.jsonc examples/vscode-review/extension/package.json examples/vscode-review/overrides.jsonc examples/vscode-review/scenarios.json windows
+```
+
+入口 `@vscode.audit_sources` / 导出 `audit_json` 共享原生格式导入、when 判定、规则顺序和报告；
+两个调用端只负责文件和进程边界。详见 [宿主边界](docs/HOST_PROFILE.md)、
+[场景复现及手工实机核对](examples/vscode-review/README.md) 和 [为什么独立成库](docs/USE_CASE_AND_VALUE.md)。
+
+## 兼容保留的 DSL 基础能力
 
 - 用轻量 DSL 表达 `bind`、`context`、`reserve` 和 `keymap` 声明，代码审查可以直接看到每一条快捷键变更。
 - 对 `Ctrl+K` 与 `Ctrl+K,Ctrl+L` 这类序列做前缀分析，区分同一上下文、父子上下文和互斥兄弟上下文。
@@ -15,19 +47,25 @@ MoonKeyguard 是一个 MoonBit 原生的键盘快捷键静态分析工具包。�
 
 ## 当前边界
 
-MoonKeyguard 是声明分析库和 dispatcher 模拟器，不是操作系统级按键 hook、GUI 按键录制器或窗口管理器。它不读取/修改用户的桌面配置，也不会替应用决定最终的人机交互设计。CLI 默认审计仓库内置的演示 keymap；在应用、脚本或 CI 中通过 `parse_keymap` 传入真实内容。
+VS Code profile 只覆盖给定规则快照、显式布尔状态和受支持键名。
+未知 when 操作符、缺少必要状态、删除/禁用规则、命令参数、系统级快捷键、扫描码或未覆盖布局等不会被简化成安全结果；
+相关探针返回 inconclusive，退出 2。只测试列出的状态，不是遍历真实编辑器所有状态的证明。
+原有 DSL 与 dispatcher 是库自定义模型，不能被当作 VS Code 宿主语义。
+不自动扫描用户配置、不监听键盘、不自动修复或写回文件。
 
 ## 环境
 
 - 本轮完整验证使用 MoonBit `moonc 0.10.12+1634b282e`、`moon 0.1.20260904` 及配套标准库。
 - 格式化请使用同一版工具链：0.10.10 与 0.10.12 的结构体尾逗号规则不同。升级编译器时必须同时更新标准库；可使用官方 `moon upgrade`。CI 会输出实际版本，不能用旧版本的本地通过代替最新远程结果。
-- 本项目只使用 `moonbitlang/core`，没有额外运行时依赖。
+- DSL 核心和 CLI 策略层只导入 core；模块锁定 `moonbitlang/x@0.5.4`，供文件 IO、正常退出及 vscode profile 的 JSON5/JSONC 读取使用。依赖与宿主接口来源见 THIRD_PARTY_NOTICES。
+- 文件 CLI 的 wasm / wasm-gc 版本依赖配套 moonrun 的宿主 IO 接口，不声称可在任意 WASI 运行时运行；JS 版本使用 Node.js。
 
 ## 快速开始
 
 ```bash
 git clone https://github.com/zhangbowen2006/MoonKeyguard.git
 cd MoonKeyguard
+moon update
 moon check --deny-warn
 moon test --deny-warn
 moon run cmd/main
@@ -41,13 +79,29 @@ moon run cmd/main -- --format markdown --suggest
 moon run cmd/main -- --format sarif --fail-on-warning
 moon run cmd/main -- --metrics
 moon run cmd/main -- --source "bind save command=save keys=Ctrl+S" --name quick-demo
+moon run cmd/main -- --input examples/editor.keymap --format json --fail-on-error
 ```
 
-`--source` accepts a small inline keymap for shell smoke tests and demos. For
-larger files, call `parse_keymap` from MoonBit and pass the resulting keymap to
-`analyze`; this keeps file-system policy in the host application. When
-`--fail-on-warning` is supplied, the CLI exits with status 1 for any error or
-warning so it can be used as a release gate.
+`--input PATH` 只读指定的 UTF-8 配置文件，不自动发现文件或修改原配置；
+`--source TEXT` 支持短文本，显式空字符串表示空配置，不再回退到 demo。
+参数拼写错误、缺少值、重复参数及同时使用两种输入会被拒绝。
+退出码：`0` 完成或门禁通过、`1` 策略门禁失败、`2` 参数/文件/编码/DSL 输入错误；
+默认只出报告，`--fail-on-error` 或 `--fail-on-warning` 开启相应门禁。
+输入错误无论是否开启门禁都返回 2，不再通过 abort 制造崩溃堆栈。
+
+`--format json` 始终输出一个 JSON 文档：
+`schema_version`、`ok`（本次门禁是否通过）、`exit_code`、`analysis`、
+`metrics`、`suggestions`、`baseline`。报告模式下要检查风险，请读取
+`analysis.errors/warnings/ok`，不要把顶层 `ok` 当作“零风险”。
+错误文档含 `error`；人类诊断写 stderr，JSON/SARIF 写 stdout。
+参数解析阶段失败时格式选项尚未确立，直接输出 stderr；不会假装已经生成 JSON。
+SARIF 不支持附加 metrics/suggest/baseline，避免混入不符合格式的内容。
+这是未发布的 CLI 输出结构变化；核心库的 `analysis_to_json` API 不变。
+
+文件先完整读入，再检查 2 MiB 字节限制及 1048576 UTF-16 码元限制。
+解析后、成对分析前检查每份配置的绑定数量，默认 2000；
+`--max-bindings` 可设为 1..10000。不是流式读取，也不是对抗恶意输入的内存沙箱。
+完整“插件冲突—拦截—修复”步骤见 [文件审查示例](examples/review/README.md)。
 
 ## DSL 示例
 

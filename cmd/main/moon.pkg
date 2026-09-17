@@ -1,7 +1,20 @@
 import {
-  "moonbitlang/core/abort",
-  "zhangbowen2006/moonkeyguard",
+  "zhangbowen2006/moonkeyguard" @kit,
+  "zhangbowen2006/moonkeyguard/cli",
+  "zhangbowen2006/moonkeyguard/vscode",
   "moonbitlang/core/env",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/x/fs",
+  "moonbitlang/x/sys",
 }
 
 pkgtype(kind: "executable")
+
+options(
+  "native-stub": [ "streams.c" ],
+  targets: {
+    "streams_wasm.mbt": [ "wasm", "wasm-gc" ],
+    "streams_js.mbt": [ "js" ],
+    "streams_native.mbt": [ "native", "llvm" ],
+  },
+)

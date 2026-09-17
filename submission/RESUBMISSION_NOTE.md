@@ -1,25 +1,36 @@
-# 初审反馈整改说明
+# 2026-09-17 第二次初审反馈整改说明
 
-项目：MoonKeyguard。申请人：张博文。仓库：[zhangbowen2006/MoonKeyguard](https://github.com/zhangbowen2006/MoonKeyguard)。
+申请人：张博文。项目：MoonKeyguard。仓库：https://github.com/zhangbowen2006/MoonKeyguard
+本轮是本地整改，新增内容尚未推送或发布，不能据此声称评审已经通过。
 
-初审反馈为：“GitHub 仓库赛期提交数不足，请至少完成 MVP 再申报。”
-下面列出可核验的实质开发，不用提交总数、空提交、格式修复或文档重复修改替代功能成果。
+## 对反馈的理解
 
-| 日期 | 功能提交 | 可核验成果 |
+本次意见不是继续增加代码量或测试数量，而是缺少真实使用场景、现有方案对照及独立库复用价值，
+并指出快捷键冲突依赖宿主，通用库价值难以体现。我们接受这一点，不再用“很多功能组合”论证普适性。
+
+| 反馈 | 本轮具体修改 | 可核对材料及边界 |
 | --- | --- | --- |
-| 2026-09-13 | [5330649](https://github.com/zhangbowen2006/MoonKeyguard/commit/5330649) | 快捷键 DSL 解析、规范化与冲突分析 |
-| 2026-09-13 | [6112f90](https://github.com/zhangbowen2006/MoonKeyguard/commit/6112f90) | 数据适配、策略、图与发布分析 |
-| 2026-09-14 | [326ada8](https://github.com/zhangbowen2006/MoonKeyguard/commit/326ada8) | 基线回归门禁及对应测试，保留历史风险并识别新增问题 |
-| 2026-09-14 | [5b49fae](https://github.com/zhangbowen2006/MoonKeyguard/commit/5b49fae) | CLI 真实 inline 输入与可直接运行的 baseline 示例 |
-| 2026-09-14 | [371d13e](https://github.com/zhangbowen2006/MoonKeyguard/commit/371d13e) | context/platform 可达性矩阵、方向性 dispatcher 修复及回归测试 |
+| 使用场景不够明确 | 收窄到 VS Code 扩展发布前的快捷键行为契约；检查 when 变化是否让保存等约定命令被覆盖 | 可加载的原创开发扩展、相同按键的反例/修复 manifest、五状态契约；不是客户采用案例 |
+| 缺少现有方案不足的对照 | 明确承认 VS Code 已有同键查看、排障日志和实机测试；本项目补充离线配置快照的指定状态回归 | docs/USE_CASE_AND_VALUE.md 引用官方材料，不说宿主做不到 |
+| 通用库忽略宿主语义 | 新建限定 VS Code profile：原生贡献格式、平台覆盖、布尔条件、规则顺序；未知或不支持返回 inconclusive | docs/HOST_PROFILE.md，不把旧 DSL 的 priority/context 模型当成 VS Code |
+| 独立库复用价值不明 | 一个纯 MoonBit 内核供文件 CLI 和直接导入 JS 的 Node 调用端共用 | scripts/test_vscode.mjs 做三种声明平台×反例/修复的12次结果比较，不是两个独立宿主 |
+| 结论过于乐观 | 保留实机核对和外部反馈为空的事实；旧 CI、包发布与本轮本地开发分开记录 | 不伪造外部用户、真实事故、VS Code GUI 测试或新发布状态 |
 
-MVP 可通过 README 的安装和运行指令复现。`examples/basic` 展示解析、冲突分析、分派回放和可达性；`examples/baseline` 展示新增风险门禁。本地使用配套 MoonBit 0.10.12 完整复验，89/89 测试通过。
-[Mooncakes 0.2.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard) 已实际发布，manifest 显示构建成功。
-八月项目 MoonBVHKit 不在本次申报范围内。
+## 建议评审先复现这一差异
 
-## 公开验证结果
-2026-09-14 已核对公开默认分支 main，工程修复已同步至验证提交 `fa7161ad6d1fde75d464317de14f49b1d2b831ff`。
-[GitHub Actions 运行 34864976303](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34864976303) 的结论为 success，check、build、test、format、公开 API、包清单、CLI 和两个示例均成功，没有跳过失败后的检查。
-本说明记录上述已完成验证，不把以后未经运行的提交预先标记为成功。
+使用 extension/package.regression.json 时，在正常编辑、选区但未开启模式、只读状态三个场景中，
+选中命令与契约不符；使用 extension/package.json 时五个状态通过。
+两者按键字符串没有改变，错误来自条件范围变化。输出可追到规则序号和 when 判定，而不是仅列出重复键。
 
-我们据此补充申报材料，请组委会重新审核有效开发记录与 MVP 完成度；本说明不预先认定初审或最终验收已通过。
+操作步骤见 examples/vscode-review/README.md。
+MoonBit 文件入口：`moon run cmd/main -- vscode --help`。
+第二调用端：`moon build --release --target js` 后运行 scripts/check_vscode.mjs，直接使用导出的纯库。
+
+## 尚需闭环
+
+- 推送本轮真实代码并取得对应提交的新 CI 记录，再更新报名表。
+- 如需发布新版，先核对模块版本与包清单，再真实执行发布；0.2.0 不能冒充本轮新增功能。
+- 在目标 VS Code 版本上按示例手工核对，记录真实版本、布局和排障日志；目前未执行这一实机流程。
+- 征求真实扩展维护者的使用反馈。公开问题和自建样例只支持选题论证，不等于已验证市场需求。
+
+我们申请的是对这一收窄范围和已实现复用路径的重新审核，不预先承诺官方认可、通过或获奖。

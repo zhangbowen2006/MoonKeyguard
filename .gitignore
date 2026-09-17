@@ -4,4 +4,5 @@ target/
 target
 .mooncakes/
 .moonagent/
+examples/vscode-review/extension/.dev-profile/
 submission/MoonKeyguard_9月黑客松申报书_报名版.md

@@ -200,7 +200,7 @@ test "timeline json is append-only" {
   let timeline = timeline_append(
     AuditTimeline::new("x"),
     "import",
-    "alice",
+    "maintainer",
     Imported,
     analyze(parse_keymap(clean_demo_source()).keymap),
     note="source",

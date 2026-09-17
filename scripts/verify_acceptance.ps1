@@ -32,6 +32,12 @@ Invoke-CheckedMoon -MoonArgs @('run', 'examples/baseline')
 
 # A malformed declaration must fail the explicit CI gate; this guards the
 # parser-diagnostics path without pretending a failing command is a test pass.
-Invoke-CheckedMoon -MoonArgs @('run', 'cmd/main', '--', '--source', 'wat value=1', '--fail-on-warning') -ExpectedExitCode 1
-Write-Host 'Parser gate negative test returned expected exit code 1'
+Invoke-CheckedMoon -MoonArgs @('run', 'cmd/main', '--', '--source', 'wat value=1', '--fail-on-warning') -ExpectedExitCode 2
+Write-Host 'Parser negative test returned expected input-error exit code 2'
+node scripts/test_cli.mjs wasm
+if ($LASTEXITCODE -ne 0) { throw 'CLI subprocess regression tests failed' }
+node scripts/test_vscode.mjs
+if ($LASTEXITCODE -ne 0) { throw 'VS Code consumer contract tests failed' }
+node scripts/benchmark.mjs --quick
+if ($LASTEXITCODE -ne 0) { throw 'Measured benchmark smoke test failed' }
 Write-Host 'All local checks completed. This script does not publish to Mooncakes.'

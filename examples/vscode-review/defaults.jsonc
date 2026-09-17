@@ -1,0 +1,9 @@
+// A declared test snapshot of the relevant save rule, NOT a full VS Code export.
+// Replace with relevant ordered defaults from the target installation for real use.
+[
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.files.save",
+    "when": "editorTextFocus && !editorReadonly"
+  }
+]

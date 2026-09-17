@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Keyguard isolated development host",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [ "--extensionDevelopmentPath=${workspaceFolder}", "--user-data-dir=${workspaceFolder}/.dev-profile" ]
+    }
+  ]
+}

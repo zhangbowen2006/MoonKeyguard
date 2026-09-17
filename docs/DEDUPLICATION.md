@@ -1,28 +1,33 @@
-# 查重与独立性记录
+# 相似方案与独立价值核对
 
-审查日期：2026-09-14。目标是判断 MoonKeyguard 是否只是 MoonBVHKit、近期参赛项目或已有 Mooncakes 包的改名包装。
+日期：2026-09-17。该记录不再以“未发现同功能组合”作为独特性的充分证明。
 
-## 检索范围
+## 本轮实际检索
 
-- GitHub MoonBit 仓库搜索：`language:MoonBit created:2026-08-20..2026-09-14`，抽查近期约 239 个结果及其 README/包描述。
-- Mooncakes API：`https://mooncakes.io/api/v0/search?kw=<keyword>&limit=20`。
-- 关键词：`keybinding`、`keyboard shortcut`、`shortcut conflict`、`keymap`、`hotkey`、`accessibility`、`conflict graph`、`SARIF`、`chord parser`。
+查询 Mooncakes API（每个关键词最多10条）：vscode、keybinding、shortcut。
+同时搜索 GitHub/Mooncakes 中 MoonBit、VS Code keybindings regression/contract 相关结果。
+返回了模糊匹配、命令注册、终端输入等项目，以及 MoonKeyguard 自身的0.2.0描述。
+本轮未逐一审阅整个生态全部代码，不能宣称排除了所有相似实现；历史广泛查重说法不作为本轮验收保证。
 
-## 相近但不同的项目
+## 必须承认的现有能力
 
-| 项目/方向 | 已有能力 | MoonKeyguard 的独立边界 |
-| --- | --- | --- |
-| `vectie/moonedit` | 编辑器运行时 keybinding/编辑器功能 | 不提供静态 keymap 冲突图、context 继承和 CI 门禁 |
-| `moonbit-community/proton_global_hotkey` | 桌面全局热键绑定 | 不安装 OS hook，不捕获用户按键，专注离线声明分析 |
-| `wzzc-dev/moui`、窗口/GUI 项目 | GUI 输入路由和组件 | 不做 GUI 框架、渲染、焦点运行时 |
-| `Jay7724/paletteguard`、`palette_forge` | 颜色/调色板可访问性 | 不分析视觉 token 或颜色，只分析键盘声明和交互边界 |
-| `moonverity`、`moon-stream-quality` | CSV/JSONL 数据质量 | CSV 在本项目只是 keymap 适配输入，不做通用数据契约 |
-| `moonchange`、`moondiff` | 仓库/文本变更治理 | 本项目的 diff 针对快捷键语义：命令、context、platform、dispatcher 风险 |
-| 运行时 hotkey/输入路由库 | 负责注册或分发按键 | 本项目新增方向性可达性矩阵，证明声明在具体 context/platform 中的实际赢家 |
-| [`moonbit-community/proton_global_hotkey@0.2.8`](https://mooncakes.io/docs/moonbit-community/proton_global_hotkey%400.2.8) | 跨平台原生全局热键注册/分发 | 运行时 OS backend 与权限范围不同；MoonKeyguard 只做离线声明分析、冲突图、可达性和 CI 门禁 |
+VS Code 自带 Show Same Keybindings 和 Keyboard Shortcuts Troubleshooting，
+也有真实宿主测试与可编写的项目脚本。这些方案已经解决“有没有同键”“按下后实际执行什么”等问题。
+官方还解释了扩展默认规则覆盖与键盘布局的复杂性：
+[键盘文档](https://code.visualstudio.com/docs/configure/keybindings)、
+[官方排障说明](https://github.com/microsoft/vscode/wiki/Keybinding-Issues)。
 
-## 独立价值结论
+## 本项目收窄后的贡献
 
-未发现一个同时提供“快捷键 DSL + 父子 context 重叠 + chord 前缀 + 平台保留键 + 冲突图 + SARIF + 可达性矩阵 + 迁移门禁”的 MoonBit 项目。MoonKeyguard 也不是对上述项目的移植：生产代码、结构体、规则和 89 个测试均为本仓库重新实现。
+不是重做所有宿主输入路由，也不是给已有项目改名或做简单 CLI 包装。
+本轮新增的是原创 MoonBit 的限定布尔条件解析、顺序规则判定、指定状态契约对照、未知语义处理与轨迹报告，
+并由 wasm 文件 CLI 和直接编译到 JS 的调用端共用。
+目标是让维护者把已约定的状态行为保留成 CI 回归数据，而不是每次只看一张同键列表。
 
-该结论不是永久保证。提交前应重新搜索 GitHub 和 Mooncakes；若出现功能重合，应在 Issue/设计说明中缩小边界或明确互操作关系，而不是只改项目名。
+这条贡献是否足以形成独立库价值，仍需要实际使用反馈和组委会判断。
+请结合 USE_CASE_AND_VALUE.md 的适用/不适用条件，不对相似项目作未经代码核验的功能否定。
+
+## 与八月项目的关系
+
+MoonBVHKit 是申请人的八月项目；空间几何/BVH 与快捷键宿主契约在用途及核心实现上不同。
+本轮保持独立仓库与真实历史，不重建同名项目、不伪造外部贡献、不复用其他选手报名信息。

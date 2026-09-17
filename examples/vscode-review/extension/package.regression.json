@@ -1,0 +1,11 @@
+{
+  "name": "keyguard-review-example",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Deliberately injected regression fixture, not a released version.",
+  "contributes": {
+    "keybindings": [
+      { "key": "ctrl+s", "mac": "cmd+s", "command": "keyguard.wrapSelection", "when": "editorTextFocus" }
+    ]
+  }
+}

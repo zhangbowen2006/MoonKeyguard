@@ -1,0 +1,26 @@
+{
+  "name": "keyguard-review-example",
+  "displayName": "Keyguard Review Example",
+  "description": "Original development-host fixture for shortcut contract review; not a published extension.",
+  "version": "0.0.1",
+  "publisher": "zhangbowen2006",
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": { "vscode": "^1.85.0" },
+  "main": "./extension.cjs",
+  "activationEvents": [ "onStartupFinished" ],
+  "contributes": {
+    "commands": [
+      { "command": "keyguard.toggleWrapMode", "title": "Keyguard Demo: Toggle Wrap Mode" },
+      { "command": "keyguard.wrapSelection", "title": "Keyguard Demo: Wrap Selection" }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+s",
+        "mac": "cmd+s",
+        "command": "keyguard.wrapSelection",
+        "when": "editorTextFocus && editorHasSelection && keyguard.wrapMode && !editorReadonly"
+      }
+    ]
+  }
+}

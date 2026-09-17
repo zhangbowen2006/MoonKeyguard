@@ -13,6 +13,10 @@ name = "zhangbowen2006/moonkeyguard"
 
 version = "0.2.0"
 
+import {
+  "moonbitlang/x@0.5.4",
+}
+
 readme = "README.md"
 
 repository = "https://github.com/zhangbowen2006/MoonKeyguard.git"

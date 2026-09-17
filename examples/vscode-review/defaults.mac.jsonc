@@ -1,0 +1,4 @@
+// Original, scoped macOS test snapshot; replace with the target host's rules.
+[
+  { "key": "cmd+s", "command": "workbench.action.files.save", "when": "editorTextFocus && !editorReadonly" }
+]

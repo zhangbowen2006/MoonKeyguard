@@ -1,0 +1,11 @@
+import {
+  "zhangbowen2006/moonkeyguard" @kit,
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+  "moonbitlang/core/string",
+  "moonbitlang/x/json5",
+}
+
+options(
+  link: { "js": { "exports": [ "audit_json" ], "format": "esm" } },
+)

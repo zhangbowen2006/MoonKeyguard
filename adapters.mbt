@@ -302,35 +302,62 @@ pub fn import_rows(
 }
 
 ///|
-fn vscode_context(when : String) -> String {
+fn pipe_context(when : String) -> Result[String, String] {
   let clean = lower_ascii(trim_ascii(when))
-  if clean.length() == 0 || clean == "editortextfocus" || clean == "editorfocus" {
-    "editor"
+  if clean.length() == 0 {
+    Ok("global")
+  } else if clean == "editortextfocus" || clean == "editorfocus" {
+    Ok("editor")
   } else {
-    "global"
+    Err(
+      "legacy pipe import cannot evaluate this condition; use the vscode package with explicit scenarios",
+    )
   }
 }
 
 ///|
-/// Import a deliberately small VS Code-style line format:
+/// Import a legacy pipe format, NOT a native VS Code keybindings file:
 /// `command | key | when | platform`.
 pub fn import_pipe(
   source : String,
   name? : String = "pipe-keymap",
 ) -> ImportReport {
   let rows : Array[BindingRow] = []
+  let diagnostics : Array[ParseDiagnostic] = []
+  let mut source_rows = 0
   let lines = source.split("\n").map(x => x.to_owned()).to_array()
-  for line in lines {
+  for index, line in lines {
     let clean = trim_ascii(line)
     if clean.length() == 0 || clean[0] == '#' {
       continue
     }
+    source_rows += 1
     let fields = clean.split("|").map(x => trim_ascii(x.to_owned())).to_array()
+    if fields.length() < 2 || fields.length() > 4 {
+      diagnostics.push({
+        line: index + 1,
+        code: "invalid-pipe-record",
+        message: "expected 2..4 fields; boolean OR is not supported by the legacy pipe format",
+        source: name,
+      })
+      continue
+    }
     if fields.length() >= 2 {
       let command = fields[0]
       let keys = fields[1]
       let context = if fields.length() > 2 {
-        vscode_context(fields[2])
+        match pipe_context(fields[2]) {
+          Ok(context) => context
+          Err(message) => {
+            diagnostics.push({
+              line: index + 1,
+              code: "unsupported-pipe-condition",
+              message,
+              source: name,
+            })
+            continue
+          }
+        }
       } else {
         "global"
       }
@@ -347,7 +374,12 @@ pub fn import_pipe(
       )
     }
   }
-  import_rows(rows, name~)
+  let report = import_rows(rows, name~)
+  {
+    ..report,
+    rows_seen: source_rows,
+    diagnostics: diagnostics + report.diagnostics,
+  }
 }
 
 ///|

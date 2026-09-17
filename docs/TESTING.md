@@ -1,5 +1,8 @@
 # 测试记录
 
+本页保留2026-09-14基础版记录。本轮宿主契约与文件 CLI 的实际本地记录见
+[LOCAL_REVIEW_20260917.md](LOCAL_REVIEW_20260917.md)，旧结果不能替代新代码验证。
+
 ## 2026-09-14 本轮完整复验
 
 使用隔离工具链，不替换全局安装：
@@ -25,7 +28,7 @@
 | moon run cmd/main -- --source "wat value=1" --fail-on-warning | 预期 1，包含 unknown-directive 与 parser gate 失败信息 |
 
 演示输入故意包含冲突；其报告中的错误数量不是测试失败。
-CLI 的非零退出当前通过 abort 实现，负向测试会输出 RuntimeError；这是现有退出机制，不隐瞒该限制。
+当时0.2.0 CLI 的非零退出通过 abort 实现，负向测试会输出 RuntimeError。本地整改版已改为正常退出，输入错误为2、策略失败为1，详见新记录。
 
 ## 自查脚本回归验证
 

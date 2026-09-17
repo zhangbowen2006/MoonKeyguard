@@ -28,6 +28,9 @@ jobs:
       - name: Show MoonBit version
         run: moon version --all
 
+      - name: Resolve pinned dependencies
+        run: moon update
+
       - name: Check
         run: moon check --deny-warn
 
@@ -84,6 +87,20 @@ jobs:
 
       - name: CLI smoke test
         run: moon run cmd/main -- --format json --metrics --suggest
+
+      - name: CLI subprocess regression tests
+        run: |
+          node scripts/test_cli.mjs wasm
+          node scripts/test_cli.mjs js
+
+      - name: JavaScript tests
+        run: moon test --target js --deny-warn
+
+      - name: VS Code contract consumers
+        run: node scripts/test_vscode.mjs
+
+      - name: Measured benchmark smoke test
+        run: node scripts/benchmark.mjs --quick
 
       - name: Example smoke test
         run: moon run examples/basic
