@@ -21,7 +21,7 @@ fn main {
   println(@moonkeyguard.reachability_to_markdown(reachability))
   let gate = @moonkeyguard.release_gate(
     "basic-example",
-    "0.2.0",
+    "0.3.0",
     @moonkeyguard.release_input(parsed.keymap),
   )
   println(@moonkeyguard.release_gate_to_markdown(gate))

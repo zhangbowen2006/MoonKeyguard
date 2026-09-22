@@ -226,7 +226,7 @@ pub fn analysis_to_sarif(analysis : Analysis) -> String {
   for item in analysis.findings {
     results.push(finding_sarif(item))
   }
-  "{\"version\":\"2.1.0\",\"$schema\":\"https://json.schemastore.org/sarif-2.1.0.json\",\"runs\":[{\"tool\":{\"driver\":{\"name\":\"MoonKeyguard\",\"version\":\"0.2.0\"}},\"results\":[" +
+  "{\"version\":\"2.1.0\",\"$schema\":\"https://json.schemastore.org/sarif-2.1.0.json\",\"runs\":[{\"tool\":{\"driver\":{\"name\":\"MoonKeyguard\",\"version\":\"0.3.0\"}},\"results\":[" +
   results.join(",") +
   "]}]}"
 }

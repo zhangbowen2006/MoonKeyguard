@@ -11,7 +11,7 @@
 
 name = "zhangbowen2006/moonkeyguard"
 
-version = "0.2.0"
+version = "0.3.0"
 
 import {
   "moonbitlang/x@0.5.4",
@@ -24,14 +24,13 @@ repository = "https://github.com/zhangbowen2006/MoonKeyguard.git"
 license = "Apache-2.0"
 
 keywords = [
-  "keymap",
-  "keyboard",
-  "shortcut",
-  "static-analysis",
-  "accessibility",
+  "vscode",
+  "keybindings",
+  "behavior-contracts",
+  "regression-testing",
   "ci",
 ]
 
 preferred_target = "wasm"
 
-description = "MoonBit-native keyboard shortcut conflict, context, platform, accessibility, and CI analysis toolkit."
+description = "MoonBit library for CI regression checks of scoped VS Code extension keybinding behavior contracts."

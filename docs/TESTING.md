@@ -46,6 +46,16 @@
 
 ## 远程状态
 
+2026-09-22，公开整改提交 `8a5e4f2` 的
+[运行 35731134763](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35731134763)
+因 MoonBit 0.10.14 新增的 trait 方法提升废弃告警，在 `--deny-warn` 下失败。
+项目保留该失败，并在 `46a667d` 中增加显式 extend、黑盒测试包限定和 test-only import。
+
+[运行 35734768586](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586)
+对 `46a667d1ed57c219fc876ab6a6b2599a8075add5` 返回 success；Check、Build、Test、
+Format、Public API snapshot、Package inspection、CLI 子进程、JavaScript 测试、
+VS Code 双调用端、性能 smoke test和两个示例步骤全部 success。
+
 [运行 34842814155](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34842814155) 对 5c84363：
 check/build/test 成功，Format 失败，后续检查未执行。这条失败保留为真实修复历史。
 

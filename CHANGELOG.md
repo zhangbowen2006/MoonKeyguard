@@ -4,7 +4,7 @@ All notable changes to MoonKeyguard are recorded here. Entries describe real
 repository changes; release links and package status are recorded only after
 verification.
 
-## Unreleased — local development, not pushed or published
+## 0.3.0 — 2026-09-22
 
 - Updated explicit trait-method promotions, black-box test qualification and
   test-only imports for MoonBit 0.10.14 strict warning checks.

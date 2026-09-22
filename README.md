@@ -1,8 +1,9 @@
 # MoonKeyguard
 
-开发状态：以下文件输入、CLI 退出码和性能测量为 **Unreleased 本地改进**，
-尚未发布到 Mooncakes；已发布的 0.2.0 与其验证记录保持不变。
-本轮 CI 配置新增的检查也须等后续推送后才有远程运行记录。
+开发状态：VS Code profile、文件 CLI 和性能测量已进入公开 `main`；提交
+`46a667d` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586)
+在 MoonBit 0.10.14 下全部成功。`0.3.0` 正在按发布清单复核；在 Mooncakes
+页面出现该版本前，已发布稳定版仍是 `0.2.0`。
 
 MoonKeyguard 本轮聚焦 **VS Code 扩展快捷键的发布前行为回归检查**：
 维护者提交相关默认规则、扩展 package.json、用户覆盖配置，以及“在这个状态下应该触发哪个命令”的场景契约。
@@ -121,7 +122,7 @@ bind jump_line command=editor.jump_line keys=Ctrl+K,Ctrl+L context=editor platfo
 在自己的 MoonBit 模块中安装已发布的版本：
 
 ```bash
-moon add zhangbowen2006/moonkeyguard@0.2.0
+moon add zhangbowen2006/moonkeyguard@0.3.0
 ```
 
 在调用方的 `moon.pkg` 中添加导入：
@@ -250,9 +251,9 @@ moon test --deny-warn
 
 - 变更应保持一个有意义的提交一个主题，保留真实 Git 提交、Issue、PR、测试和发布记录。
 - 发布前运行 `moon package --list`，确认包中没有 `_build`、临时文件或敏感数据。
-- `0.2.0` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)；2026-09-14 复核 manifest 的 `build_status=success`、`has_package=true`。后续仓库的格式/CI/文档修复不等于重新发布同版本。
+- `0.2.0` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)；`0.3.0` 只有在实际执行发布并核对 manifest 后才标记为已发布。
 - 发布流程、验收证据和风险记录见 `docs/` 与 `submission/`。
 
-## 查重结论（截至 2026-09-13）
+## 相似方案核对（截至 2026-09-17）
 
-已检索 GitHub 近期 MoonBit 仓库和 Mooncakes API。`moonedit`、`proton_global_hotkey` 等提供运行时编辑器/桌面按键支持；它们不提供静态 keymap 冲突图、context 继承分析、保留键策略、SARIF/迁移门禁组合。查重范围、检索关键词、排除项和独立价值记录在 [docs/DEDUPLICATION.md](docs/DEDUPLICATION.md)。这不是“改名避重”：MoonKeyguard 的核心数据模型、规则和测试均为本项目重新设计。
+VS Code 内置同键查看、排障日志、实机测试及其他按键项目都应优先用于各自擅长的问题。本项目的限定差异是把给定规则快照和显式状态契约放入 CI，并对未知宿主语义返回 `inconclusive`。查重范围和限制记录在 [docs/DEDUPLICATION.md](docs/DEDUPLICATION.md)；有限检索不能证明绝对首创，也不等于已有外部采用。
