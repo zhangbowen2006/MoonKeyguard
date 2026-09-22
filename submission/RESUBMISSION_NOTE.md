@@ -1,8 +1,9 @@
 # 2026-09-22 初审反馈整改复核说明
 
 申请人：张博文。项目：MoonKeyguard。仓库：https://github.com/zhangbowen2006/MoonKeyguard
-本轮整改已推送至公开默认分支；提交 `46a667d` 的 CI 全部成功：
-https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586
+本轮整改已推送至公开默认分支；提交 `31aeb1b` 的 CI 全部成功：
+https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114
+0.3.0 已发布：https://mooncakes.io/docs/zhangbowen2006/moonkeyguard
 该事实只证明公开代码通过工程检查，不代表组委会已经认可选题或通过初审。
 
 ## 对反馈的理解
@@ -28,9 +29,14 @@ https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586
 MoonBit 文件入口：`moon run cmd/main -- vscode --help`。
 第二调用端：`moon build --release --target js` 后运行 scripts/check_vscode.mjs，直接使用导出的纯库。
 
-## 尚需闭环
+## 已完成的发布闭环
 
-- `0.3.0` 发布前再次核对模块版本与包清单，真实执行发布并保存 manifest；0.2.0 不冒充本轮功能。
+- 0.3.0 已在最终 CI 成功后执行 `moon package --list --frozen` 与 `moon publish --frozen`。
+- 正式发布命令退出 0、服务端返回 `200 OK`；公开 manifest 已核对版本、构建状态和包可用状态。
+- 首次 frozen 校验失败及修复过程保留在 docs/PUBLISHING.md，没有用 dry-run 或旧版冒充本轮发布。
+
+## 尚需外部闭环
+
 - 在目标 VS Code 版本上按示例手工核对，记录真实版本、布局和排障日志；目前未执行这一实机流程。
 - 征求真实扩展维护者的使用反馈。公开问题和自建样例只支持选题论证，不等于已验证市场需求。
 

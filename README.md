@@ -1,9 +1,11 @@
 # MoonKeyguard
 
 开发状态：VS Code profile、文件 CLI 和性能测量已进入公开 `main`；提交
-`46a667d` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586)
-在 MoonBit 0.10.14 下全部成功。`0.3.0` 正在按发布清单复核；在 Mooncakes
-页面出现该版本前，已发布稳定版仍是 `0.2.0`。
+`31aeb1b` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114)
+在 MoonBit 0.10.14 下全部成功。`0.3.0` 已于 2026-09-22 通过
+`moon publish --frozen` 发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，
+[manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard) 显示
+`build_status=success`、`has_package=true`。
 
 MoonKeyguard 本轮聚焦 **VS Code 扩展快捷键的发布前行为回归检查**：
 维护者提交相关默认规则、扩展 package.json、用户覆盖配置，以及“在这个状态下应该触发哪个命令”的场景契约。
@@ -56,8 +58,8 @@ VS Code profile 只覆盖给定规则快照、显式布尔状态和受支持键�
 
 ## 环境
 
-- 本轮完整验证使用 MoonBit `moonc 0.10.12+1634b282e`、`moon 0.1.20260904` 及配套标准库。
-- 格式化请使用同一版工具链：0.10.10 与 0.10.12 的结构体尾逗号规则不同。升级编译器时必须同时更新标准库；可使用官方 `moon upgrade`。CI 会输出实际版本，不能用旧版本的本地通过代替最新远程结果。
+- 本轮最终验证使用 MoonBit `moonc 0.10.14+7d59c7ec9`、`moon 0.1.20260920` 及配套标准库。
+- 格式化请使用配套工具链；不同版本的格式化及严格告警规则可能变化。升级编译器时必须同时更新标准库；可使用官方 `moon upgrade`。CI 会输出实际版本，不能用旧版本的本地通过代替最新远程结果。
 - 发布模块只依赖随工具链提供的 `moonbitlang/core`，没有需要在包复验时下载的 registry 依赖。JSONC 注释/尾逗号预处理由纯 MoonBit 完成，再交给 core JSON 解析器；宿主接口来源见 THIRD_PARTY_NOTICES。
 - 文件 CLI 的 wasm / wasm-gc 版本依赖配套 moonrun 的宿主 IO 接口，不声称可在任意 WASI 运行时运行；JS 版本使用 Node.js。native/LLVM 当前只支持内联输入，文件输入会返回明确错误。
 
@@ -97,7 +99,7 @@ moon run cmd/main -- --input examples/editor.keymap --format json --fail-on-erro
 错误文档含 `error`；人类诊断写 stderr，JSON/SARIF 写 stdout。
 参数解析阶段失败时格式选项尚未确立，直接输出 stderr；不会假装已经生成 JSON。
 SARIF 不支持附加 metrics/suggest/baseline，避免混入不符合格式的内容。
-这是未发布的 CLI 输出结构变化；核心库的 `analysis_to_json` API 不变。
+这是 `0.3.0` 的 CLI 输出结构；核心库的 `analysis_to_json` API 不变。
 
 文件先完整读入，再检查 2 MiB 字节限制及 1048576 UTF-16 码元限制。
 解析后、成对分析前检查每份配置的绑定数量，默认 2000；
@@ -122,7 +124,7 @@ bind jump_line command=editor.jump_line keys=Ctrl+K,Ctrl+L context=editor platfo
 在自己的 MoonBit 模块中安装已发布的版本：
 
 ```bash
-moon add zhangbowen2006/moonkeyguard@0.3.0
+moon add zhangbowen2006/moonkeyguard@0.3.1
 ```
 
 在调用方的 `moon.pkg` 中添加导入：
@@ -251,7 +253,7 @@ moon test --deny-warn
 
 - 变更应保持一个有意义的提交一个主题，保留真实 Git 提交、Issue、PR、测试和发布记录。
 - 发布前运行 `moon package --list`，确认包中没有 `_build`、临时文件或敏感数据。
-- `0.2.0` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)；`0.3.0` 只有在实际执行发布并核对 manifest 后才标记为已发布。
+- `0.3.0` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，并已核对公开 manifest 的版本、构建状态和包可用状态。
 - 发布流程、验收证据和风险记录见 `docs/` 与 `submission/`。
 
 ## 相似方案核对（截至 2026-09-17）

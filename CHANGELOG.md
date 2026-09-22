@@ -4,6 +4,13 @@ All notable changes to MoonKeyguard are recorded here. Entries describe real
 repository changes; release links and package status are recorded only after
 verification.
 
+## 0.3.1 — 2026-09-22
+
+- Synchronized the registry-facing README, proposal and acceptance evidence
+  after the verified 0.3.0 publication.
+- Updated release metadata shown by the example and SARIF reporter; analysis
+  behavior and the public API are unchanged.
+
 ## 0.3.0 — 2026-09-22
 
 - Updated explicit trait-method promotions, black-box test qualification and

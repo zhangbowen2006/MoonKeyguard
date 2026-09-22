@@ -7,6 +7,7 @@ VS Code 扩展快捷键的指定状态回归检查：读取实际贡献格式，
 原创扩展样例不是客户采用证明，真实宿主实测与外部反馈仍待补充。
 想请您确认，这样的收窄范围和复用路径是否回应了独立价值问题，还需要哪些具体场景或宿主证据？
 仓库：https://github.com/zhangbowen2006/MoonKeyguard
-本轮 CI：https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586
+本轮 CI：https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114
+Mooncakes 0.3.0：https://mooncakes.io/docs/zhangbowen2006/moonkeyguard
 
 以上消息可在更新报名信息后用于确认方向；不要把工程检查成功表述为组委会已经认可。

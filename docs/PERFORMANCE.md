@@ -1,6 +1,6 @@
 # 实际性能测量
 
-0.3.0 发布候选功能，已推送并通过远程 CI，尚待核对 Mooncakes 发布结果。这里测的是时间，不是旧
+0.3.0 功能已推送、通过远程 CI 并发布至 Mooncakes。这里测的是时间，不是旧
 run_benchmark 的匹配率分数；旧 API 是确定性的 dispatcher 回归 fixture。
 
 ## 复现

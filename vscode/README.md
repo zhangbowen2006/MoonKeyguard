@@ -1,7 +1,7 @@
 # Scoped VS Code dispatch contracts
 
 Unreleased pure MoonBit package. No filesystem, environment lookup, editor API
-or process exit is used here. This API first appears in the 0.3.0 release candidate.
+or process exit is used here. This API first appeared in the 0.3.0 release.
 
 `audit_sources(defaults, extension, overrides, scenarios, platform)` accepts
 the source strings for a declared host snapshot and explicit expected-command

@@ -6,8 +6,9 @@
 
 - 场景与复用整改：`8a5e4f275231b111498dd801ed3431d3e1ed3619`
 - MoonBit 0.10.14 兼容修复：`46a667d1ed57c219fc876ab6a6b2599a8075add5`
+- frozen 自包含发布修复：`31aeb1b668d7d05ddf4415893e9fc2cbce810254`
 - 默认分支：`main`
-- 远程 CI：[运行 35734768586](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586)
+- 最终发布提交 CI：[运行 35739802114](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114)
 
 该 CI 在 MoonBit `moon 0.1.20260920`、`moonc 0.10.14` 下完成并成功，
 Check、Build、Test、Format、Public API、Package inspection、CLI 子进程、
@@ -24,8 +25,8 @@ JavaScript 测试、VS Code 双调用端、性能 smoke test 和示例步骤均�
 
 - `moon check --deny-warn`：成功。
 - `moon build`：成功。
-- `moon test --deny-warn`：117/117。
-- `moon test --target js --deny-warn`：117/117。
+- `moon test --deny-warn`：118/118。
+- `moon test --target js --deny-warn`：118/118。
 - `moon fmt --check`、`moon info`、`moon package --list`：成功。
 - `node scripts/test_cli.mjs wasm`：26 个真实子进程用例通过。
 - `node scripts/test_vscode.mjs`：6 组 fixture/声明平台、12 次消费者结果对照及 mock handler 通过。
@@ -37,9 +38,8 @@ JavaScript 测试、VS Code 双调用端、性能 smoke test 和示例步骤均�
 - 原创故障注入样例不是客户事故，公开问题也不是外部采用证明。
 - 评审是否认可收窄后的独立价值只能由组委会决定。
 
-`0.3.0` 只有在执行 `moon publish --frozen` 并核对 Mooncakes manifest 后，
-才能从发布候选改为已发布版本。
-
 首次发布尝试在上传前暴露了 frozen 解压包不能安装 registry 依赖的问题；
 项目没有绕过 `--frozen`，而是移除运行时 registry 依赖。后续 dry-run 已通过
-干净解压包检查，正式发布结果仍需单独记录。
+干净解压包检查。最终在提交 `31aeb1b` 的 CI 成功后正式运行 `moon publish --frozen`，
+命令退出 0、服务端返回 `200 OK`；[Mooncakes manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard)
+已核对为 0.3.0、`build_status=success`、`has_package=true`。

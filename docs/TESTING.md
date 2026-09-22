@@ -56,6 +56,10 @@
 Format、Public API snapshot、Package inspection、CLI 子进程、JavaScript 测试、
 VS Code 双调用端、性能 smoke test和两个示例步骤全部 success。
 
+[运行 35739802114](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114)
+对最终发布提交 `31aeb1b668d7d05ddf4415893e9fc2cbce810254` 返回 success；同一门禁完整通过。
+本地同版工具链复验为 MoonBit 118/118、JS 118/118，CLI wasm/JS/wasm-gc 各 26 个子进程用例通过。
+
 [运行 34842814155](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/34842814155) 对 5c84363：
 check/build/test 成功，Format 失败，后续检查未执行。这条失败保留为真实修复历史。
 

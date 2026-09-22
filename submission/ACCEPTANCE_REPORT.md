@@ -1,6 +1,6 @@
 # MoonKeyguard 复审证据入口
 
-申请人：张博文｜更新：2026-09-22｜本轮状态：公开整改已推送，新 CI 已成功，0.3.0 待发布核验。
+申请人：张博文｜更新：2026-09-22｜本轮状态：公开整改已推送，最终 CI 已成功，0.3.0 已发布并核验。
 
 九月第二次初审指出用途、现有方案不足和独立库必要性论证不充分。
 本轮不再用代码规模作为主要答案，而是提供具体宿主配置契约和可复用调用端。
@@ -14,5 +14,6 @@
 - [前序本地记录](../docs/LOCAL_REVIEW_20260917.md)：保留推送前的历史状态。
 - [差距表](../docs/ACCEPTANCE_GAP.md)与[最后清单](FINAL_CHECKLIST.md)。
 
-提交 `46a667d` 的 [新 CI](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586)
-是本轮远程工程证据；Mooncakes 0.3.0 仍以实际发布结果为准。组委会尚未批准本轮初审，不能提前标为通过。
+提交 `31aeb1b` 的 [最终发布提交 CI](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114)
+是本轮远程工程证据；[Mooncakes 0.3.0](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)
+已正式发布，公开 manifest 显示构建成功且包可用。组委会尚未批准本轮初审，不能提前标为通过。

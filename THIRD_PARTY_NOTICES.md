@@ -26,7 +26,7 @@ is not claimed for the CLI.
 The JavaScript host calls Node.js `node:fs.readFileSync` and `writeFileSync`;
 the wrapper catches host errors and does not scan for files. The native host's
 `streams.c` is original C stdio glue, not analysis code or a third-party port;
-native/LLVM file input is explicitly unsupported in 0.3.0.
+native/LLVM file input is explicitly unsupported from 0.3.0 onward.
 Node.js is also used to orchestrate subprocess tests and record benchmark
 outputs; all shortcut analysis, gate decisions and timed work run in MoonBit.
 
