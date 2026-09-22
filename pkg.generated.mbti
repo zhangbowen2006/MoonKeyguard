@@ -251,15 +251,21 @@ pub(all) struct Analysis {
   fingerprint : String
 } derive(Eq, @debug.Debug)
 pub fn Analysis::count_kind(Self, IssueKind) -> Int
+pub fn Analysis::equal(Self, Self) -> Bool
+pub fn Analysis::not_equal(Self, Self) -> Bool
 pub fn Analysis::ok(Self) -> Bool
 pub fn Analysis::summary(Self) -> String
+pub fn Analysis::to_repr(Self) -> @debug.Repr
 
 pub(all) struct AuditTimeline {
   project : String
   events : Array[TimelineEvent]
   baseline : String
 } derive(Eq, @debug.Debug)
+pub fn AuditTimeline::equal(Self, Self) -> Bool
 pub fn AuditTimeline::new(String, baseline? : String) -> Self
+pub fn AuditTimeline::not_equal(Self, Self) -> Bool
+pub fn AuditTimeline::to_repr(Self) -> @debug.Repr
 
 pub(all) struct BaselineReport {
   baseline_fingerprint : String
@@ -275,7 +281,10 @@ pub(all) struct BaselineReport {
   fail_on_warning : Bool
   passed : Bool
 } derive(Eq, @debug.Debug)
+pub fn BaselineReport::equal(Self, Self) -> Bool
+pub fn BaselineReport::not_equal(Self, Self) -> Bool
 pub fn BaselineReport::summary(Self) -> String
+pub fn BaselineReport::to_repr(Self) -> @debug.Repr
 
 pub(all) struct BenchmarkCase {
   name : String
@@ -285,6 +294,9 @@ pub(all) struct BenchmarkCase {
   expected_status : DispatchStatus
   repetitions : Int
 } derive(Eq, @debug.Debug)
+pub fn BenchmarkCase::equal(Self, Self) -> Bool
+pub fn BenchmarkCase::not_equal(Self, Self) -> Bool
+pub fn BenchmarkCase::to_repr(Self) -> @debug.Repr
 
 pub(all) struct BenchmarkResult {
   name : String
@@ -296,6 +308,9 @@ pub(all) struct BenchmarkResult {
   score : Int
   notes : Array[String]
 } derive(Eq, @debug.Debug)
+pub fn BenchmarkResult::equal(Self, Self) -> Bool
+pub fn BenchmarkResult::not_equal(Self, Self) -> Bool
+pub fn BenchmarkResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Binding {
   id : String
@@ -309,8 +324,11 @@ pub(all) struct Binding {
   enabled : Bool
   description : String
 } derive(Eq, @debug.Debug)
+pub fn Binding::equal(Self, Self) -> Bool
 pub fn Binding::label(Self) -> String
 pub fn Binding::new(String, String, KeySequence, context? : String, platform? : String, source? : String, line? : Int, priority? : Int, enabled? : Bool, description? : String) -> Self
+pub fn Binding::not_equal(Self, Self) -> Bool
+pub fn Binding::to_repr(Self) -> @debug.Repr
 
 pub(all) struct BindingChange {
   kind : ChangeKind
@@ -320,6 +338,9 @@ pub(all) struct BindingChange {
   summary : String
   risk : Severity
 } derive(Eq, @debug.Debug)
+pub fn BindingChange::equal(Self, Self) -> Bool
+pub fn BindingChange::not_equal(Self, Self) -> Bool
+pub fn BindingChange::to_repr(Self) -> @debug.Repr
 
 pub(all) struct BindingQuery {
   binding : Binding
@@ -327,6 +348,9 @@ pub(all) struct BindingQuery {
   platform_match : Bool
   command_match : Bool
 } derive(Eq, @debug.Debug)
+pub fn BindingQuery::equal(Self, Self) -> Bool
+pub fn BindingQuery::not_equal(Self, Self) -> Bool
+pub fn BindingQuery::to_repr(Self) -> @debug.Repr
 
 pub(all) struct BindingRow {
   id : String
@@ -338,6 +362,9 @@ pub(all) struct BindingRow {
   enabled : String
   description : String
 } derive(Eq, @debug.Debug)
+pub fn BindingRow::equal(Self, Self) -> Bool
+pub fn BindingRow::not_equal(Self, Self) -> Bool
+pub fn BindingRow::to_repr(Self) -> @debug.Repr
 
 pub(all) struct CatalogReport {
   keymap : Keymap
@@ -345,6 +372,9 @@ pub(all) struct CatalogReport {
   unmatched : Array[ReservedRule]
   findings : Array[Finding]
 } derive(Eq, @debug.Debug)
+pub fn CatalogReport::equal(Self, Self) -> Bool
+pub fn CatalogReport::not_equal(Self, Self) -> Bool
+pub fn CatalogReport::to_repr(Self) -> @debug.Repr
 
 pub(all) enum ChangeKind {
   Added
@@ -352,6 +382,9 @@ pub(all) enum ChangeKind {
   Modified
   Unchanged
 } derive(Eq, @debug.Debug)
+pub fn ChangeKind::equal(Self, Self) -> Bool
+pub fn ChangeKind::not_equal(Self, Self) -> Bool
+pub fn ChangeKind::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ComplexityReport {
   bindings : Int
@@ -362,6 +395,9 @@ pub(all) struct ComplexityReport {
   dispatch_complexity : String
   memory_notes : Array[String]
 } derive(Eq, @debug.Debug)
+pub fn ComplexityReport::equal(Self, Self) -> Bool
+pub fn ComplexityReport::not_equal(Self, Self) -> Bool
+pub fn ComplexityReport::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ConflictEdge {
   left : String
@@ -370,12 +406,18 @@ pub(all) struct ConflictEdge {
   severity : Severity
   weight : Int
 } derive(Eq, @debug.Debug)
+pub fn ConflictEdge::equal(Self, Self) -> Bool
+pub fn ConflictEdge::not_equal(Self, Self) -> Bool
+pub fn ConflictEdge::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ConflictGraph {
   nodes : Array[ConflictNode]
   edges : Array[ConflictEdge]
   components : Array[Array[String]]
 } derive(Eq, @debug.Debug)
+pub fn ConflictGraph::equal(Self, Self) -> Bool
+pub fn ConflictGraph::not_equal(Self, Self) -> Bool
+pub fn ConflictGraph::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ConflictNode {
   id : String
@@ -385,6 +427,9 @@ pub(all) struct ConflictNode {
   warning_degree : Int
   info_degree : Int
 } derive(Eq, @debug.Debug)
+pub fn ConflictNode::equal(Self, Self) -> Bool
+pub fn ConflictNode::not_equal(Self, Self) -> Bool
+pub fn ConflictNode::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Context {
   name : String
@@ -392,6 +437,9 @@ pub(all) struct Context {
   rank : Int
   description : String
 } derive(Eq, @debug.Debug)
+pub fn Context::equal(Self, Self) -> Bool
+pub fn Context::not_equal(Self, Self) -> Bool
+pub fn Context::to_repr(Self) -> @debug.Repr
 
 pub(all) struct DispatchResult {
   status : DispatchStatus
@@ -403,6 +451,9 @@ pub(all) struct DispatchResult {
   platform : String
   message : String
 } derive(Eq, @debug.Debug)
+pub fn DispatchResult::equal(Self, Self) -> Bool
+pub fn DispatchResult::not_equal(Self, Self) -> Bool
+pub fn DispatchResult::to_repr(Self) -> @debug.Repr
 
 pub(all) enum DispatchStatus {
   Matched
@@ -412,12 +463,18 @@ pub(all) enum DispatchStatus {
   Disabled
   Invalid
 } derive(Eq, @debug.Debug)
+pub fn DispatchStatus::equal(Self, Self) -> Bool
+pub fn DispatchStatus::not_equal(Self, Self) -> Bool
+pub fn DispatchStatus::to_repr(Self) -> @debug.Repr
 
 pub(all) struct DispatchStep {
   input : String
   result : DispatchResult
   elapsed_ms : Int
 } derive(Eq, @debug.Debug)
+pub fn DispatchStep::equal(Self, Self) -> Bool
+pub fn DispatchStep::not_equal(Self, Self) -> Bool
+pub fn DispatchStep::to_repr(Self) -> @debug.Repr
 
 pub(all) struct DispatchTrace {
   context : String
@@ -427,12 +484,18 @@ pub(all) struct DispatchTrace {
   prefix_count : Int
   no_match_count : Int
 } derive(Eq, @debug.Debug)
+pub fn DispatchTrace::equal(Self, Self) -> Bool
+pub fn DispatchTrace::not_equal(Self, Self) -> Bool
+pub fn DispatchTrace::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Effort {
   Small
   Medium
   Large
 } derive(Eq, @debug.Debug)
+pub fn Effort::equal(Self, Self) -> Bool
+pub fn Effort::not_equal(Self, Self) -> Bool
+pub fn Effort::to_repr(Self) -> @debug.Repr
 
 pub(all) struct FieldSpec {
   name : String
@@ -440,6 +503,9 @@ pub(all) struct FieldSpec {
   description : String
   example : String
 } derive(Eq, @debug.Debug)
+pub fn FieldSpec::equal(Self, Self) -> Bool
+pub fn FieldSpec::not_equal(Self, Self) -> Bool
+pub fn FieldSpec::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Finding {
   code : String
@@ -454,7 +520,10 @@ pub(all) struct Finding {
   line : Int
   suggestion : String
 } derive(Eq, @debug.Debug)
+pub fn Finding::equal(Self, Self) -> Bool
+pub fn Finding::not_equal(Self, Self) -> Bool
 pub fn Finding::to_line(Self) -> String
+pub fn Finding::to_repr(Self) -> @debug.Repr
 
 pub(all) struct GateItem {
   code : String
@@ -464,6 +533,9 @@ pub(all) struct GateItem {
   evidence : String
   remediation : String
 } derive(Eq, @debug.Debug)
+pub fn GateItem::equal(Self, Self) -> Bool
+pub fn GateItem::not_equal(Self, Self) -> Bool
+pub fn GateItem::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ImportReport {
   keymap : Keymap
@@ -471,6 +543,9 @@ pub(all) struct ImportReport {
   rows_imported : Int
   diagnostics : Array[ParseDiagnostic]
 } derive(Eq, @debug.Debug)
+pub fn ImportReport::equal(Self, Self) -> Bool
+pub fn ImportReport::not_equal(Self, Self) -> Bool
+pub fn ImportReport::to_repr(Self) -> @debug.Repr
 
 pub(all) enum IssueKind {
   ExactConflict
@@ -485,7 +560,10 @@ pub(all) enum IssueKind {
   DisabledBinding
   PlatformOverlap
 } derive(Eq, @debug.Debug)
+pub fn IssueKind::equal(Self, Self) -> Bool
 pub fn IssueKind::name(Self) -> String
+pub fn IssueKind::not_equal(Self, Self) -> Bool
+pub fn IssueKind::to_repr(Self) -> @debug.Repr
 
 pub(all) struct KeySequence {
   raw : String
@@ -495,7 +573,10 @@ pub(all) struct KeySequence {
   modifier_count : Int
   key_count : Int
 } derive(Eq, @debug.Debug)
+pub fn KeySequence::equal(Self, Self) -> Bool
 pub fn KeySequence::new(String, Array[String], String, Bool, Int) -> Self
+pub fn KeySequence::not_equal(Self, Self) -> Bool
+pub fn KeySequence::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Keymap {
   name : String
@@ -505,6 +586,9 @@ pub(all) struct Keymap {
   reserved : Array[String]
 } derive(Eq, @debug.Debug)
 pub fn Keymap::empty(name? : String) -> Self
+pub fn Keymap::equal(Self, Self) -> Bool
+pub fn Keymap::not_equal(Self, Self) -> Bool
+pub fn Keymap::to_repr(Self) -> @debug.Repr
 
 pub(all) struct KeymapDiff {
   from_name : String
@@ -519,6 +603,9 @@ pub(all) struct KeymapDiff {
   reserved_added : Int
   reserved_removed : Int
 } derive(Eq, @debug.Debug)
+pub fn KeymapDiff::equal(Self, Self) -> Bool
+pub fn KeymapDiff::not_equal(Self, Self) -> Bool
+pub fn KeymapDiff::to_repr(Self) -> @debug.Repr
 
 pub(all) struct KeymapMetrics {
   binding_count : Int
@@ -533,6 +620,9 @@ pub(all) struct KeymapMetrics {
   duplicate_command_count : Int
   density_score : Int
 } derive(Eq, @debug.Debug)
+pub fn KeymapMetrics::equal(Self, Self) -> Bool
+pub fn KeymapMetrics::not_equal(Self, Self) -> Bool
+pub fn KeymapMetrics::to_repr(Self) -> @debug.Repr
 
 pub(all) struct KeymapSchema {
   version : String
@@ -541,6 +631,9 @@ pub(all) struct KeymapSchema {
   formats : Array[String]
   guarantees : Array[String]
 } derive(Eq, @debug.Debug)
+pub fn KeymapSchema::equal(Self, Self) -> Bool
+pub fn KeymapSchema::not_equal(Self, Self) -> Bool
+pub fn KeymapSchema::to_repr(Self) -> @debug.Repr
 
 pub(all) struct KeymapSelection {
   name : String
@@ -548,6 +641,9 @@ pub(all) struct KeymapSelection {
   contexts : Array[Context]
   query : String
 } derive(Eq, @debug.Debug)
+pub fn KeymapSelection::equal(Self, Self) -> Bool
+pub fn KeymapSelection::not_equal(Self, Self) -> Bool
+pub fn KeymapSelection::to_repr(Self) -> @debug.Repr
 
 pub(all) struct MergeResult {
   keymap : Keymap
@@ -555,6 +651,9 @@ pub(all) struct MergeResult {
   adopted : Int
   skipped : Int
 } derive(Eq, @debug.Debug)
+pub fn MergeResult::equal(Self, Self) -> Bool
+pub fn MergeResult::not_equal(Self, Self) -> Bool
+pub fn MergeResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ParseDiagnostic {
   line : Int
@@ -562,12 +661,18 @@ pub(all) struct ParseDiagnostic {
   message : String
   source : String
 } derive(Eq, @debug.Debug)
+pub fn ParseDiagnostic::equal(Self, Self) -> Bool
+pub fn ParseDiagnostic::not_equal(Self, Self) -> Bool
+pub fn ParseDiagnostic::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ParseResult {
   keymap : Keymap
   diagnostics : Array[ParseDiagnostic]
   ok : Bool
 } derive(Eq, @debug.Debug)
+pub fn ParseResult::equal(Self, Self) -> Bool
+pub fn ParseResult::not_equal(Self, Self) -> Bool
+pub fn ParseResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct PolicyProfile {
   name : String
@@ -579,6 +684,9 @@ pub(all) struct PolicyProfile {
   fail_on_warning : Bool
   allowed_platforms : Array[String]
 } derive(Eq, @debug.Debug)
+pub fn PolicyProfile::equal(Self, Self) -> Bool
+pub fn PolicyProfile::not_equal(Self, Self) -> Bool
+pub fn PolicyProfile::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ProfileReport {
   profile : PolicyProfile
@@ -588,6 +696,9 @@ pub(all) struct ProfileReport {
   passed : Bool
   gate_messages : Array[String]
 } derive(Eq, @debug.Debug)
+pub fn ProfileReport::equal(Self, Self) -> Bool
+pub fn ProfileReport::not_equal(Self, Self) -> Bool
+pub fn ProfileReport::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ProjectRules {
   command_prefix : String
@@ -599,6 +710,9 @@ pub(all) struct ProjectRules {
   fail_on_info : Bool
 } derive(Eq, @debug.Debug)
 pub fn ProjectRules::default() -> Self
+pub fn ProjectRules::equal(Self, Self) -> Bool
+pub fn ProjectRules::not_equal(Self, Self) -> Bool
+pub fn ProjectRules::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ReachabilityCell {
   binding_id : String
@@ -608,6 +722,9 @@ pub(all) struct ReachabilityCell {
   selected_id : String
   message : String
 } derive(Eq, @debug.Debug)
+pub fn ReachabilityCell::equal(Self, Self) -> Bool
+pub fn ReachabilityCell::not_equal(Self, Self) -> Bool
+pub fn ReachabilityCell::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ReachabilityReport {
   keymap_name : String
@@ -621,7 +738,10 @@ pub(all) struct ReachabilityReport {
   unavailable_count : Int
   disabled_count : Int
 } derive(Eq, @debug.Debug)
+pub fn ReachabilityReport::equal(Self, Self) -> Bool
+pub fn ReachabilityReport::not_equal(Self, Self) -> Bool
 pub fn ReachabilityReport::summary(Self) -> String
+pub fn ReachabilityReport::to_repr(Self) -> @debug.Repr
 
 pub(all) enum ReachabilityStatus {
   Reachable
@@ -630,6 +750,9 @@ pub(all) enum ReachabilityStatus {
   Unavailable
   Disabled
 } derive(Eq, @debug.Debug)
+pub fn ReachabilityStatus::equal(Self, Self) -> Bool
+pub fn ReachabilityStatus::not_equal(Self, Self) -> Bool
+pub fn ReachabilityStatus::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Recommendation {
   code : String
@@ -641,6 +764,9 @@ pub(all) struct Recommendation {
   rationale : String
   action : String
 } derive(Eq, @debug.Debug)
+pub fn Recommendation::equal(Self, Self) -> Bool
+pub fn Recommendation::not_equal(Self, Self) -> Bool
+pub fn Recommendation::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ReleaseGate {
   project : String
@@ -649,6 +775,9 @@ pub(all) struct ReleaseGate {
   passed : Bool
   score : Int
 } derive(Eq, @debug.Debug)
+pub fn ReleaseGate::equal(Self, Self) -> Bool
+pub fn ReleaseGate::not_equal(Self, Self) -> Bool
+pub fn ReleaseGate::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ReleaseInput {
   keymap : Keymap
@@ -658,6 +787,9 @@ pub(all) struct ReleaseInput {
   benchmark : Array[BenchmarkResult]
   diff : KeymapDiff?
 } derive(Eq, @debug.Debug)
+pub fn ReleaseInput::equal(Self, Self) -> Bool
+pub fn ReleaseInput::not_equal(Self, Self) -> Bool
+pub fn ReleaseInput::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ReservedRule {
   platform : String
@@ -666,19 +798,28 @@ pub(all) struct ReservedRule {
   source : String
   severity : Severity
 } derive(Eq, @debug.Debug)
+pub fn ReservedRule::equal(Self, Self) -> Bool
+pub fn ReservedRule::not_equal(Self, Self) -> Bool
+pub fn ReservedRule::to_repr(Self) -> @debug.Repr
 
 pub(all) struct RuleReport {
   rules : ProjectRules
   findings : Array[Finding]
   passed : Bool
 } derive(Eq, @debug.Debug)
+pub fn RuleReport::equal(Self, Self) -> Bool
+pub fn RuleReport::not_equal(Self, Self) -> Bool
+pub fn RuleReport::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Severity {
   Info
   Warning
   Error
 } derive(Eq, @debug.Debug)
+pub fn Severity::equal(Self, Self) -> Bool
 pub fn Severity::name(Self) -> String
+pub fn Severity::not_equal(Self, Self) -> Bool
+pub fn Severity::to_repr(Self) -> @debug.Repr
 
 pub(all) struct StructuralIssue {
   kind : StructuralKind
@@ -688,6 +829,9 @@ pub(all) struct StructuralIssue {
   line : Int
   severity : Severity
 } derive(Eq, @debug.Debug)
+pub fn StructuralIssue::equal(Self, Self) -> Bool
+pub fn StructuralIssue::not_equal(Self, Self) -> Bool
+pub fn StructuralIssue::to_repr(Self) -> @debug.Repr
 
 pub(all) enum StructuralKind {
   MissingRootContext
@@ -703,6 +847,9 @@ pub(all) enum StructuralKind {
   InvalidShortcut
   EmptyDescription
 } derive(Eq, @debug.Debug)
+pub fn StructuralKind::equal(Self, Self) -> Bool
+pub fn StructuralKind::not_equal(Self, Self) -> Bool
+pub fn StructuralKind::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Suggestion {
   binding_id : String
@@ -712,6 +859,9 @@ pub(all) struct Suggestion {
   reason : String
   confidence : Int
 } derive(Eq, @debug.Debug)
+pub fn Suggestion::equal(Self, Self) -> Bool
+pub fn Suggestion::not_equal(Self, Self) -> Bool
+pub fn Suggestion::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TimelineDelta {
   previous : TimelineEvent?
@@ -721,6 +871,9 @@ pub(all) struct TimelineDelta {
   warnings_delta : Int
   regressed : Bool
 } derive(Eq, @debug.Debug)
+pub fn TimelineDelta::equal(Self, Self) -> Bool
+pub fn TimelineDelta::not_equal(Self, Self) -> Bool
+pub fn TimelineDelta::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TimelineEvent {
   sequence : Int
@@ -733,6 +886,9 @@ pub(all) struct TimelineEvent {
   score : Int
   note : String
 } derive(Eq, @debug.Debug)
+pub fn TimelineEvent::equal(Self, Self) -> Bool
+pub fn TimelineEvent::not_equal(Self, Self) -> Bool
+pub fn TimelineEvent::to_repr(Self) -> @debug.Repr
 
 pub(all) enum TimelineEventKind {
   Imported
@@ -741,6 +897,9 @@ pub(all) enum TimelineEventKind {
   Rejected
   Migrated
 } derive(Eq, @debug.Debug)
+pub fn TimelineEventKind::equal(Self, Self) -> Bool
+pub fn TimelineEventKind::not_equal(Self, Self) -> Bool
+pub fn TimelineEventKind::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ValidationReport {
   keymap_name : String
@@ -749,6 +908,9 @@ pub(all) struct ValidationReport {
   warning_count : Int
   valid : Bool
 } derive(Eq, @debug.Debug)
+pub fn ValidationReport::equal(Self, Self) -> Bool
+pub fn ValidationReport::not_equal(Self, Self) -> Bool
+pub fn ValidationReport::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

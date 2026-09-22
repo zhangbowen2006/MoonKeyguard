@@ -32,12 +32,18 @@ pub(all) struct Options {
   max_bindings : Int
   help : Bool
 } derive(Eq, @debug.Debug)
+pub fn Options::equal(Self, Self) -> Bool
+pub fn Options::not_equal(Self, Self) -> Bool
+pub fn Options::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Response {
   stdout : String
   stderr : String
   exit_code : Int
 } derive(Eq, @debug.Debug)
+pub fn Response::equal(Self, Self) -> Bool
+pub fn Response::not_equal(Self, Self) -> Bool
+pub fn Response::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

@@ -6,6 +6,8 @@ verification.
 
 ## Unreleased — local development, not pushed or published
 
+- Updated explicit trait-method promotions, black-box test qualification and
+  test-only imports for MoonBit 0.10.14 strict warning checks.
 - Reframed the submission around scoped VS Code extension dispatch contracts,
   not a claim of a universal host-independent keyboard resolver.
 - Added native contribution/keybindings imports, ordered rule selection,
