@@ -1,14 +1,9 @@
 ///|
 /// Read only a user-supplied regular file. No directory traversal or discovery.
 fn read_keymap(path : String) -> Result[String, String] {
-  let regular = @fs.is_file(path) catch {
-    @fs.IOError(message) => return Err(path + ": " + message)
-  }
-  if !regular {
-    return Err(path + ": expected a regular file")
-  }
-  let bytes = @fs.read_file_to_bytes(path) catch {
-    @fs.IOError(message) => return Err(path + ": " + message)
+  let bytes = match read_file_bytes(path) {
+    Ok(content) => content
+    Err(message) => return Err(path + ": " + message)
   }
   if bytes.length() > 2097152 {
     return Err(
@@ -85,5 +80,5 @@ fn main {
   if response.stderr != "" {
     write_stream(2, response.stderr + "\n")
   }
-  @sys.exit(response.exit_code)
+  exit_process(response.exit_code)
 }

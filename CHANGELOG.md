@@ -28,8 +28,9 @@ verification.
   and baseline results; core analysis JSON APIs remain unchanged.
 - Added original editor/plugin regression and repair fixtures, subprocess
   checks for wasm/wasm-gc/JS, and actual monotonic-clock scale measurements.
-- Added pinned official x@0.5.4 for executable IO/exit and documented host ABI,
-  dependency licenses, non-streaming limits and unpublished status.
+- Replaced the registry runtime dependency with a pure MoonBit JSONC normalizer,
+  core JSON parsing and documented target-specific IO/exit adapters, allowing a
+  clean extracted package to pass `moon publish --frozen` validation.
 
 ## 0.2.0 — 2026-09-14
 

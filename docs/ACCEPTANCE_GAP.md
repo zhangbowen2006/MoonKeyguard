@@ -13,7 +13,7 @@
 | README/API/示例 | README 首屏改为具体场景；HOST_PROFILE 和原生格式案例可复现 | 已同步公开仓库 |
 | 测试/构建/格式/API | docs/REMOTE_REVIEW_20260922.md 记录本地与远程结果 | 对应提交可核对 |
 | CI | [运行35734768586](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35734768586) 在 MoonBit 0.10.14 全部成功 | 工程门禁满足，不等于选题获批 |
-| Mooncakes | 0.2.0 是旧基础；moon.mod 已准备 0.3.0 发布候选 | 执行 publish 并核对 manifest 前不得称0.3.0已发布 |
+| Mooncakes | 0.2.0 是旧基础；0.3.0 frozen dry-run 已通过干净解压包检查 | 正式 publish 并核对 manifest 前不得称0.3.0已发布 |
 | 许可证与信息 | Apache-2.0；官方依赖/接口来源已说明；只保留本人报名身份，不引入其他选手资料 | 示例均为原创测试输入，不伪造客户信息 |
 | 真实宿主验证 | 示例提供开发宿主启动和排障日志核对步骤 | 未完成，不能把 mock/跨后端对比标成 VS Code 实机测试 |
 | 复审流程 | 新版申报书和逐项整改说明就绪 | 建议先让组委会确认收窄方向；正式通过只能由官方判定 |

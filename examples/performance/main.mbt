@@ -62,7 +62,7 @@ fn measure(shape : String, count : Int, repetitions : Int) -> String {
   let warm = @kit.parse_keymap(source)
   let warm_analysis = @kit.analyze(warm.keymap)
   if !warm.ok || warm_analysis.findings.length() != expected {
-    @sys.exit(2)
+    abort("benchmark warmup produced an unexpected result")
   }
   let parse_samples : Array[Double] = []
   let analysis_samples : Array[Double] = []
@@ -78,7 +78,7 @@ fn measure(shape : String, count : Int, repetitions : Int) -> String {
     if !parsed.ok ||
       parsed.keymap.bindings.length() != count ||
       observed != expected {
-      @sys.exit(2)
+      abort("benchmark sample produced an unexpected result")
     }
   }
   "{\"shape\":\"" +

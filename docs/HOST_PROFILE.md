@@ -45,7 +45,8 @@ isWindows/isMac/isLinux 由 platform 注入，与输入冲突时拒绝。
 args、systemWide、未知规则字段、真实键盘布局/AltGr/IME、OS 截获、
 chord 超时、运行过程中 context 更新、命令执行及实际的第三方扩展注册顺序。
 命中探针的未覆盖规则不会被悄悄丢弃为“无冲突”。不相关键位上的未知 when 不影响该探针，
-但不因此宣称那条规则本身已经验证。文件用 JSON5 阅读器兼容 JSONC；解析成功不替代 VS Code schema 校验。
+但不因此宣称那条规则本身已经验证。文件先由纯 MoonBit 处理 JSONC 注释和尾逗号，
+再用 core JSON 解析；解析成功不替代 VS Code schema 校验。
 每份源文档最多1 Mi码元，规则层各最多2000条；这是资源限制而非恶意输入沙箱。
 
 ## 输出语义

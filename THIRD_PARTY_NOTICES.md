@@ -2,30 +2,31 @@
 
 ## Runtime dependencies
 
-The analysis package and pure CLI policy package import `moonbitlang/core`,
-supplied by the MoonBit toolchain (Apache-2.0).
-The unpublished file CLI also imports `moonbitlang/x@0.5.4` (`fs` and `sys`),
-the official experimental extensions, under Apache-2.0. The new pure
-`vscode` package also uses the dependency's JSON5 reader for JSON/JSONC inputs:
-https://github.com/moonbitlang/x
-https://mooncakes.io/docs/moonbitlang/x/fs
-Only regular-file reading, process exit and JSON5 parsing are used. No dependency source is
-vendored; the downloaded .mooncakes cache is excluded from Git and package output.
+The published module imports only `moonbitlang/core`, supplied by the MoonBit
+toolchain under Apache-2.0. It has no Mooncakes registry dependency. JSONC
+comments and trailing commas are normalized by original MoonBit code before
+the document is passed to the core JSON parser.
 
 ## CLI host interfaces
 
-`cmd/main/streams_wasm.mbt` declares the moonrun host ABI
-`__moonbit_io_unstable.write_char(fd, codepoint)` and `flush(fd)`.
-The declarations and MoonBit adapter are original; no Rust/V8 runtime
-implementation was copied or ported. Interface reference:
+`cmd/main/streams_wasm.mbt` declares the moonrun host ABI for stream output,
+read-only file input and process exit. The stdout/stderr adapter is original.
+The string/byte conversion and read-only file subset is adapted from
+`moonbitlang/x@0.5.4` files `fs/fs_wasm.mbt` and
+`sys/internal/ffi/sys_wasm.mbt`, both Apache-2.0:
+https://github.com/moonbitlang/x
+https://mooncakes.io/docs/moonbitlang/x/fs
+
+The port excludes directory enumeration, writes, mutation and path discovery.
+The moonrun runtime implementation is not copied. Host interface reference:
 https://github.com/moonbitlang/moon/blob/main/crates/moonrun/src/v8/host_imports.rs
-That runtime source is a reference, not code redistributed in this project.
 These unstable imports require the tested moonrun; generic WASI compatibility
 is not claimed for the CLI.
 
-The JavaScript host calls Node.js `node:fs.writeFileSync` on stdout/stderr file
-descriptors, ensuring output is complete before process exit. The native host's
-`streams.c` is original C stdio glue, not analysis code or a third-party port.
+The JavaScript host calls Node.js `node:fs.readFileSync` and `writeFileSync`;
+the wrapper catches host errors and does not scan for files. The native host's
+`streams.c` is original C stdio glue, not analysis code or a third-party port;
+native/LLVM file input is explicitly unsupported in 0.3.0.
 Node.js is also used to orchestrate subprocess tests and record benchmark
 outputs; all shortcut analysis, gate decisions and timed work run in MoonBit.
 

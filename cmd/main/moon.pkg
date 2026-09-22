@@ -4,8 +4,6 @@ import {
   "zhangbowen2006/moonkeyguard/vscode",
   "moonbitlang/core/env",
   "moonbitlang/core/encoding/utf8",
-  "moonbitlang/x/fs",
-  "moonbitlang/x/sys",
 }
 
 pkgtype(kind: "executable")

@@ -58,8 +58,8 @@ VS Code profile 只覆盖给定规则快照、显式布尔状态和受支持键�
 
 - 本轮完整验证使用 MoonBit `moonc 0.10.12+1634b282e`、`moon 0.1.20260904` 及配套标准库。
 - 格式化请使用同一版工具链：0.10.10 与 0.10.12 的结构体尾逗号规则不同。升级编译器时必须同时更新标准库；可使用官方 `moon upgrade`。CI 会输出实际版本，不能用旧版本的本地通过代替最新远程结果。
-- DSL 核心和 CLI 策略层只导入 core；模块锁定 `moonbitlang/x@0.5.4`，供文件 IO、正常退出及 vscode profile 的 JSON5/JSONC 读取使用。依赖与宿主接口来源见 THIRD_PARTY_NOTICES。
-- 文件 CLI 的 wasm / wasm-gc 版本依赖配套 moonrun 的宿主 IO 接口，不声称可在任意 WASI 运行时运行；JS 版本使用 Node.js。
+- 发布模块只依赖随工具链提供的 `moonbitlang/core`，没有需要在包复验时下载的 registry 依赖。JSONC 注释/尾逗号预处理由纯 MoonBit 完成，再交给 core JSON 解析器；宿主接口来源见 THIRD_PARTY_NOTICES。
+- 文件 CLI 的 wasm / wasm-gc 版本依赖配套 moonrun 的宿主 IO 接口，不声称可在任意 WASI 运行时运行；JS 版本使用 Node.js。native/LLVM 当前只支持内联输入，文件输入会返回明确错误。
 
 ## 快速开始
 

@@ -28,3 +28,9 @@ moon publish --frozen
 
 0.3.0 当前是发布候选。只有实际执行 `moon publish --frozen`、命令成功且 manifest
 出现 0.3.0 后，才能在 README 和申报材料中改为“已发布”。
+
+2026-09-22 首次执行 0.3.0 的 `moon publish --frozen` 时，上传前的解压包检查
+因 registry 依赖不能在 frozen 模式安装而失败；服务器 manifest 仍为 0.2.0。
+随后发布模块移除 registry 依赖，以纯 MoonBit JSONC 预处理和有来源记录的宿主适配层替代。
+`moon publish --frozen --dry-run` 已通过解压包 `moon check`，服务端返回
+`202 Accepted: Dry run completed successfully`。dry-run 不等于正式发布。

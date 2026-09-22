@@ -35,11 +35,157 @@ fn string_field(
 }
 
 ///|
+fn jsonc_char(text : String, index : Int) -> Char {
+  UInt16::unsafe_to_char(text.code_unit_at(index))
+}
+
+///|
+fn jsonc_space(char : Char) -> Bool {
+  char == ' ' || char == '\t' || char == '\r' || char == '\n'
+}
+
+///|
+/// Strip JSONC comments while preserving line breaks and code-unit offsets.
+fn strip_jsonc_comments(text : String) -> Result[String, String] {
+  let output = StringBuilder()
+  let mut index = 0
+  let mut in_string = false
+  let mut escaped = false
+  while index < text.length() {
+    let char = jsonc_char(text, index)
+    if in_string {
+      output.write_char(char)
+      if escaped {
+        escaped = false
+      } else if char == '\\' {
+        escaped = true
+      } else if char == '"' {
+        in_string = false
+      }
+      index += 1
+      continue
+    }
+    if char == '"' {
+      in_string = true
+      output.write_char(char)
+      index += 1
+      continue
+    }
+    if char == '/' && index + 1 < text.length() {
+      let next = jsonc_char(text, index + 1)
+      if next == '/' {
+        output.write_string("  ")
+        index += 2
+        while index < text.length() {
+          let comment_char = jsonc_char(text, index)
+          if comment_char == '\r' || comment_char == '\n' {
+            break
+          }
+          output.write_char(' ')
+          index += 1
+        }
+        continue
+      }
+      if next == '*' {
+        output.write_string("  ")
+        index += 2
+        let mut closed = false
+        while index < text.length() {
+          let comment_char = jsonc_char(text, index)
+          if comment_char == '*' &&
+            index + 1 < text.length() &&
+            jsonc_char(text, index + 1) == '/' {
+            output.write_string("  ")
+            index += 2
+            closed = true
+            break
+          }
+          output.write_char(
+            if comment_char == '\r' || comment_char == '\n' {
+              comment_char
+            } else {
+              ' '
+            },
+          )
+          index += 1
+        }
+        if !closed {
+          return Err("unterminated block comment")
+        }
+        continue
+      }
+    }
+    output.write_char(char)
+    index += 1
+  }
+  Ok(output.to_string())
+}
+
+///|
+/// JSONC permits a comma immediately before a closing object or array token.
+fn strip_jsonc_trailing_commas(text : String) -> String {
+  let output = StringBuilder()
+  let mut index = 0
+  let mut in_string = false
+  let mut escaped = false
+  while index < text.length() {
+    let char = jsonc_char(text, index)
+    if in_string {
+      output.write_char(char)
+      if escaped {
+        escaped = false
+      } else if char == '\\' {
+        escaped = true
+      } else if char == '"' {
+        in_string = false
+      }
+      index += 1
+      continue
+    }
+    if char == '"' {
+      in_string = true
+      output.write_char(char)
+      index += 1
+      continue
+    }
+    if char == ',' {
+      let mut next = index + 1
+      while next < text.length() && jsonc_space(jsonc_char(text, next)) {
+        next += 1
+      }
+      if next < text.length() &&
+        (jsonc_char(text, next) == ']' || jsonc_char(text, next) == '}') {
+        output.write_char(' ')
+      } else {
+        output.write_char(char)
+      }
+      index += 1
+      continue
+    }
+    output.write_char(char)
+    index += 1
+  }
+  output.to_string()
+}
+
+///|
+fn normalize_jsonc(text : String) -> Result[String, String] {
+  match strip_jsonc_comments(text) {
+    Ok(without_comments) => Ok(strip_jsonc_trailing_commas(without_comments))
+    Err(error) => Err(error)
+  }
+}
+
+///|
 fn decode(text : String, label : String) -> Result[Json, String] {
   if text.length() > 1048576 {
     return Err(label + ": document exceeds 1 Mi code units")
   }
-  let result = @json5.parse(text) catch {
+  let normalized = match normalize_jsonc(text) {
+    Ok(value) => value
+    Err(error) => return Err(label + ": invalid JSON/JSONC: " + error)
+  }
+  let result = @json.parse(normalized) catch {
     error => return Err(label + ": invalid JSON/JSONC: " + error.to_string())
   }
   Ok(result)

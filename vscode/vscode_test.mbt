@@ -286,3 +286,25 @@ test "JSONC inputs and Unicode scenario names preserve deterministic reports" {
   assert_true(@json.valid(one))
   assert_true(one.contains("普通编辑"))
 }
+
+///|
+test "JSONC block comments preserve string markers and reject truncation" {
+  let base =
+    #|[ /* fixture comment */
+    #|  { "key": "ctrl+s", "command": "save//literal" },
+    #|]
+  let scenario =
+    #|[{"name":"marker","key":"ctrl+s","context":{},"expected_command":"save//literal"}]
+  assert_eq(
+    @vscode.audit_sources(
+      base, "{\"contributes\":{\"keybindings\":[]}}", "[]", scenario, "windows",
+    ).exit_code,
+    0,
+  )
+  let invalid = @vscode.audit_sources(
+    "/* unterminated", "{\"contributes\":{\"keybindings\":[]}}", "[]", scenario,
+    "windows",
+  )
+  assert_eq(invalid.exit_code, 2)
+  assert_true(invalid.json.contains("unterminated block comment"))
+}

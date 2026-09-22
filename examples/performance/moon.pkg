@@ -2,7 +2,6 @@ import {
   "zhangbowen2006/moonkeyguard" @kit,
   "moonbitlang/core/bench",
   "moonbitlang/core/env",
-  "moonbitlang/x/sys",
 }
 
 pkgtype(kind: "executable")

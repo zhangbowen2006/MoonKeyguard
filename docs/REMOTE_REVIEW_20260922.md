@@ -39,3 +39,7 @@ JavaScript 测试、VS Code 双调用端、性能 smoke test 和示例步骤均�
 
 `0.3.0` 只有在执行 `moon publish --frozen` 并核对 Mooncakes manifest 后，
 才能从发布候选改为已发布版本。
+
+首次发布尝试在上传前暴露了 frozen 解压包不能安装 registry 依赖的问题；
+项目没有绕过 `--frozen`，而是移除运行时 registry 依赖。后续 dry-run 已通过
+干净解压包检查，正式发布结果仍需单独记录。
