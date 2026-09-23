@@ -7,8 +7,9 @@
 - 场景与复用整改：`8a5e4f275231b111498dd801ed3431d3e1ed3619`
 - MoonBit 0.10.14 兼容修复：`46a667d1ed57c219fc876ab6a6b2599a8075add5`
 - frozen 自包含发布修复：`31aeb1b668d7d05ddf4415893e9fc2cbce810254`
+- 注册表说明同步：`c3dd6f2aa5ad7f5735cb800b0ad1d88c67213df5`
 - 默认分支：`main`
-- 最终发布提交 CI：[运行 35739802114](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114)
+- 最终发布提交 CI：[运行 35838483070](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070)
 
 该 CI 在 MoonBit `moon 0.1.20260920`、`moonc 0.10.14` 下完成并成功，
 Check、Build、Test、Format、Public API、Package inspection、CLI 子进程、
@@ -42,4 +43,6 @@ JavaScript 测试、VS Code 双调用端、性能 smoke test 和示例步骤均�
 项目没有绕过 `--frozen`，而是移除运行时 registry 依赖。后续 dry-run 已通过
 干净解压包检查。最终在提交 `31aeb1b` 的 CI 成功后正式运行 `moon publish --frozen`，
 命令退出 0、服务端返回 `200 OK`；[Mooncakes manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard)
-已核对为 0.3.0、`build_status=success`、`has_package=true`。
+先核对为 0.3.0。为修正 0.3.0 包内的发布前 README，项目随后发布 0.3.1 文档同步补丁；
+其 CI 成功，正式发布命令退出 0，manifest 最终核对为 0.3.1、
+`build_status=success`、`has_package=true`、`yanked=false`。

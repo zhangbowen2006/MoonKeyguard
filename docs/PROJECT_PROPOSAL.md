@@ -1,9 +1,9 @@
 # MoonKeyguard｜VS Code 扩展快捷键行为回归检查
 申请人：张博文｜账户：zhangbowen2006｜九月新项目赛道｜Apache-2.0。
 仓库：https://github.com/zhangbowen2006/MoonKeyguard
-公开整改版（2026-09-22）；提交 `31aeb1b` 的 CI 已全部成功：
-https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114
-Mooncakes 0.3.0：https://mooncakes.io/docs/zhangbowen2006/moonkeyguard
+公开整改版（2026-09-23）；提交 `c3dd6f2` 的 CI 已全部成功：
+https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070
+Mooncakes 0.3.1：https://mooncakes.io/docs/zhangbowen2006/moonkeyguard
 
 ## 要解决的具体问题
 面向维护 VS Code 扩展和键位包的开发者：修改 when 条件或平台键位后，确认“普通编辑仍保存、显式模式触发扩展、只读及非编辑焦点不误触发”等既定行为没有改变。
@@ -31,6 +31,6 @@ CLI 与 JS 的跨平台声明输入对照可运行 `node scripts/test_vscode.mjs
 
 ## 工程基础与后续维护
 核心为 MoonBit，发布模块仅依赖工具链 core；JSONC 预处理和宿主边界的来源、许可证、测试及设计均有记录。
-0.3.0 已真实执行 `moon publish --frozen`；公开 manifest 显示版本 0.3.0、构建成功且包可用，计入本轮发布证据。
+0.3.1 已真实执行 `moon publish --frozen`；公开 manifest 显示版本 0.3.1、构建成功且包可用，计入本轮发布证据。
 优先维护具体宿主配置边界、反例和消费者一致性；补充实机排障日志与真实维护者反馈后再扩展支持范围。
 本项目与八月 MoonBVHKit 独立；不以代码量、绝对首创或获奖承诺代替用途论证，请组委会审核本轮收窄后的价值。

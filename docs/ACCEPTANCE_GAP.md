@@ -1,6 +1,6 @@
 # 九月验收差距与本轮复审重点
 
-更新：2026-09-22。整改代码已进入公开默认分支，最终 CI 和 Mooncakes 0.3.0 发布均已成功；选题认可仍由组委会决定。
+更新：2026-09-23。整改代码已进入公开默认分支，最终 CI 和 Mooncakes 0.3.1 发布均已成功；选题认可仍由组委会决定。
 
 | 要求/风险 | 证据 | 当前判断 |
 | --- | --- | --- |
@@ -12,8 +12,8 @@
 | 可追踪开发 | `8a5e4f2` 实现场景/复用，`46a667d` 修复新版工具链严格检查，`31aeb1b` 完成 frozen 自包含发布；失败 CI 保留 | 真实提交已公开，无空提交或历史重写 |
 | README/API/示例 | README 首屏改为具体场景；HOST_PROFILE 和原生格式案例可复现 | 已同步公开仓库 |
 | 测试/构建/格式/API | docs/REMOTE_REVIEW_20260922.md 记录本地与远程结果 | 对应提交可核对 |
-| CI | [运行35739802114](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114) 在 MoonBit 0.10.14 全部成功 | 最终发布提交的工程门禁满足，不等于选题获批 |
-| Mooncakes | 0.3.0 已通过 `moon publish --frozen` 正式发布；公开 manifest 为 success 且 has_package=true | 发布硬要求已满足，旧版本仍保留在版本历史 |
+| CI | [运行35838483070](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070) 在 MoonBit 0.10.14 全部成功 | 0.3.1 发布提交的工程门禁满足，不等于选题获批 |
+| Mooncakes | 0.3.1 已通过 `moon publish --frozen` 正式发布；公开 manifest 为 success 且 has_package=true | 发布硬要求已满足，旧版本仍保留在版本历史 |
 | 许可证与信息 | Apache-2.0；官方依赖/接口来源已说明；只保留本人报名身份，不引入其他选手资料 | 示例均为原创测试输入，不伪造客户信息 |
 | 真实宿主验证 | 示例提供开发宿主启动和排障日志核对步骤 | 未完成，不能把 mock/跨后端对比标成 VS Code 实机测试 |
 | 复审流程 | 新版申报书和逐项整改说明就绪 | 建议先让组委会确认收窄方向；正式通过只能由官方判定 |

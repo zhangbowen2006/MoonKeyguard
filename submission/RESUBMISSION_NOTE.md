@@ -1,9 +1,9 @@
-# 2026-09-22 初审反馈整改复核说明
+# 2026-09-23 初审反馈整改复核说明
 
 申请人：张博文。项目：MoonKeyguard。仓库：https://github.com/zhangbowen2006/MoonKeyguard
-本轮整改已推送至公开默认分支；提交 `31aeb1b` 的 CI 全部成功：
-https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114
-0.3.0 已发布：https://mooncakes.io/docs/zhangbowen2006/moonkeyguard
+本轮整改已推送至公开默认分支；提交 `c3dd6f2` 的 CI 全部成功：
+https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070
+0.3.1 已发布：https://mooncakes.io/docs/zhangbowen2006/moonkeyguard
 该事实只证明公开代码通过工程检查，不代表组委会已经认可选题或通过初审。
 
 ## 对反馈的理解
@@ -31,7 +31,7 @@ MoonBit 文件入口：`moon run cmd/main -- vscode --help`。
 
 ## 已完成的发布闭环
 
-- 0.3.0 已在最终 CI 成功后执行 `moon package --list --frozen` 与 `moon publish --frozen`。
+- 0.3.1 已在最终 CI 成功后执行 `moon package --list --frozen` 与 `moon publish --frozen`。
 - 正式发布命令退出 0、服务端返回 `200 OK`；公开 manifest 已核对版本、构建状态和包可用状态。
 - 首次 frozen 校验失败及修复过程保留在 docs/PUBLISHING.md，没有用 dry-run 或旧版冒充本轮发布。
 

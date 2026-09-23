@@ -1,8 +1,8 @@
 # MoonKeyguard
 
 开发状态：VS Code profile、文件 CLI 和性能测量已进入公开 `main`；提交
-`31aeb1b` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35739802114)
-在 MoonBit 0.10.14 下全部成功。`0.3.0` 已于 2026-09-22 通过
+`c3dd6f2` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070)
+在 MoonBit 0.10.14 下全部成功。`0.3.1` 已于 2026-09-23 通过
 `moon publish --frozen` 发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，
 [manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard) 显示
 `build_status=success`、`has_package=true`。
@@ -253,7 +253,7 @@ moon test --deny-warn
 
 - 变更应保持一个有意义的提交一个主题，保留真实 Git 提交、Issue、PR、测试和发布记录。
 - 发布前运行 `moon package --list`，确认包中没有 `_build`、临时文件或敏感数据。
-- `0.3.0` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，并已核对公开 manifest 的版本、构建状态和包可用状态。
+- `0.3.1` 已发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，并已核对公开 manifest 的版本、构建状态和包可用状态。
 - 发布流程、验收证据和风险记录见 `docs/` 与 `submission/`。
 
 ## 相似方案核对（截至 2026-09-17）

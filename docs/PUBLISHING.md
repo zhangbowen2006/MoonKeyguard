@@ -38,3 +38,10 @@ moon publish --frozen
 公开 manifest 已核对为 `zhangbowen2006/moonkeyguard@0.3.0`、
 `build_status=success`、`has_package=true`，创建时间为 2026-09-22T22:25:07+08:00。
 以上记录保留首次失败和最终成功，不把 dry-run 冒充发布。
+
+0.3.0 的注册表 README 仍是发布前快照，包含已经过时的“待发布”说明。项目没有覆盖
+既有版本，而是以提交 `c3dd6f2` 同步说明和发布元数据；其
+[GitHub Actions 35838483070](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070)
+成功后，于 2026-09-23 正式执行 `moon publish --frozen` 发布 0.3.1。
+命令退出 0、服务端返回 `200 OK`；公开 manifest 已核对为 0.3.1、
+`build_status=success`、`has_package=true`、`yanked=false`，注册表页面不再含旧待发布说明。

@@ -1,7 +1,7 @@
 # VS Code 宿主配置边界
 
 Profile ID：vscode-ordered-boolean-v1。2026-09-22 已进入公开 `main` 并通过对应远程 CI；
-Mooncakes 0.3.0 已发布，公开 manifest 显示构建成功且包可用。
+Mooncakes 0.3.1 已发布，公开 manifest 显示构建成功且包可用。
 工程测试证明声明模型按以下范围工作，不代表与完整 VS Code resolver 等价。
 
 ## 输入与判定
