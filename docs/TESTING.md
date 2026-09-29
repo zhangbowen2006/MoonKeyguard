@@ -16,6 +16,14 @@
 这些是本地结果；新提交的远程 CI 需要在推送后单独核对。报名系统状态也不能由
 本地测试推断。
 
+随后提交 `0cb34d1` 已推送到公开默认分支；
+[GitHub Actions 36530532486](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/36530532486)
+对该提交返回 `completed/success`。通过 GitHub jobs API 核对：新增的报名身份检查、
+Check、Build、Test、Format、Public API snapshot、Package inspection、CLI
+正负路径、JavaScript 测试、VS Code 双调用端、性能 smoke test 和示例均为 success。
+Mooncakes 公开 manifest 同日复核：`0.3.1`、`build_status=success`、
+`has_package=true`、`yanked=false`。此结果不代表报名系统已更新或初审通过。
+
 本页保留2026-09-14基础版记录。本轮宿主契约与文件 CLI 的实际本地记录见
 [LOCAL_REVIEW_20260917.md](LOCAL_REVIEW_20260917.md)，旧结果不能替代新代码验证。
 

@@ -10,7 +10,9 @@
 已将 `submission/MoonKeyguard_9月黑客松申报书_报名版.md` 与
 `docs/PROJECT_PROPOSAL.md` 统一到当前已实现主题，纳入版本管理，并增加
 `scripts/verify_submission.mjs` 检查项目名称、仓库、模块、版本及两份申报书的一致性。
-此次本地修复必须推送并在报名系统重新提交才会影响组委会看到的材料。
+修复提交 `0cb34d1` 已推送到公开默认分支，
+[本次 CI](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/36530532486)
+已成功；仍须在报名系统重新提交，才会影响组委会看到的申报材料。
 报名字段及尚需完成的验收动作见 `submission/FINAL_CHECKLIST.md`。
 
 申请人：张博文。项目：MoonKeyguard。仓库：https://github.com/zhangbowen2006/MoonKeyguard

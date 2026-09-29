@@ -1,7 +1,7 @@
 # MoonKeyguard
 
 开发状态：VS Code profile、文件 CLI 和性能测量已进入公开 `main`；提交
-`c3dd6f2` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/35838483070)
+`0cb34d1` 的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/36530532486)
 在 MoonBit 0.10.14 下全部成功。`0.3.1` 已于 2026-09-23 通过
 `moon publish --frozen` 发布至 [Mooncakes](https://mooncakes.io/docs/zhangbowen2006/moonkeyguard)，
 [manifest](https://mooncakes.io/api/v0/manifest/zhangbowen2006/moonkeyguard) 显示

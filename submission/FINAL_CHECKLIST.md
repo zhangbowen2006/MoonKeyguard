@@ -18,6 +18,7 @@ CI 新增与 `docs/PROJECT_PROPOSAL.md`、`moon.mod` 的一致性检查。
 - [ ] 项目名称：`MoonKeyguard`。
 - [ ] 项目仓库：`https://github.com/zhangbowen2006/MoonKeyguard`。
 - [ ] 项目主题：`VS Code 扩展快捷键行为回归检查`。
+- [ ] GitHub 仓库右侧 About 简介目前仍写着较宽泛的 `MoonBit-native keyboard shortcut conflict analyzer`；编辑为 `MoonBit library for CI regression checks of VS Code extension keybinding behavior contracts.`，与申报主题一致。
 - [ ] 申报书：复制或上传本目录 `MoonKeyguard_9月黑客松申报书_报名版.md` 的最新完整内容；不要再使用旧缓存文件或 MoonBit Target Parity 申报书。
 - [ ] 赛道：九月新项目赛道；八月 MoonBVHKit 是独立项目，不将其成果混入本项目。
 - [ ] 姓名及联系方式：只在报名平台核对申请人本人信息；公开仓库不提交手机号和邮箱。
@@ -29,8 +30,8 @@ CI 新增与 `docs/PROJECT_PROPOSAL.md`、`moon.mod` 的一致性检查。
 - [x] MoonBit 核心、清晰 README、可运行 VS Code 配置反例/修复示例、测试和 CI 已存在于仓库。
 - [x] Apache-2.0、第三方来源、AI 使用说明、设计与发布记录已存在。
 - [x] Mooncakes 0.3.1 发布记录及对应旧提交的绿色 CI 已留档。
-- [ ] 将此次申报书及检查脚本的真实改动提交并推送到公开默认分支。
-- [ ] 查看这次新提交的 GitHub Actions 全部成功；旧 CI 成功不能代表新提交。
+- [x] 此次申报书及检查脚本已随提交 `0cb34d1` 推送到公开默认分支。
+- [x] 该提交的 [GitHub Actions](https://github.com/zhangbowen2006/MoonKeyguard/actions/runs/36530532486) 已全部成功，包括新的一致性检查。
 - [ ] 如组委会要求实机证据，在目标 VS Code 版本按 `examples/vscode-review/README.md` 操作并留真实日志。目前尚无实机键盘测试或外部维护者使用反馈。
 
 本清单不保证选题获批或获奖；初审结果及赛道资格由组委会确认。
