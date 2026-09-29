@@ -15,6 +15,8 @@ function Invoke-CheckedMoon {
 }
 
 Write-Host 'MoonKeyguard local acceptance checks'
+node scripts/verify_submission.mjs
+if ($LASTEXITCODE -ne 0) { throw 'Proposal identity or copy-ready submission check failed' }
 Invoke-CheckedMoon -MoonArgs @('version', '--all')
 Invoke-CheckedMoon -MoonArgs @('check', '--deny-warn')
 Invoke-CheckedMoon -MoonArgs @('build')

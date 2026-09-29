@@ -4,6 +4,14 @@ All notable changes to MoonKeyguard are recorded here. Entries describe real
 repository changes; release links and package status are recorded only after
 verification.
 
+## Unreleased
+
+- Aligned the copy-ready September proposal with the actual VS Code
+  keybinding contract project and tracked it in Git.
+- Added a CI check that rejects mismatched proposal copies, repository
+  identity and MoonBit module metadata.
+- Updated the resubmission checklist after the 2026-09-29 review feedback.
+
 ## 0.3.1 — 2026-09-22
 
 - Synchronized the registry-facing README, proposal and acceptance evidence

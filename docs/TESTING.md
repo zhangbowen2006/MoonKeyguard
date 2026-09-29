@@ -1,5 +1,21 @@
 # 测试记录
 
+## 2026-09-29 本地申报材料修复复验
+
+在尚未提交的工作区，用隔离工具链 `moon 0.1.20260920`、
+`moonc v0.10.14+7d59c7ec9` 执行 `scripts/verify_acceptance.ps1`，脚本退出 0：
+
+- 新增的 `node scripts/verify_submission.mjs` 通过，两份申报书和 `moon.mod` 身份一致。
+- `moon check --deny-warn`、`moon build`、`moon fmt --check`、`moon info`
+  与 `moon package --list` 均退出 0，生成接口文件没有差异。
+- `moon test --deny-warn`：118/118 通过；基础示例、基线示例及 CLI 正负路径通过。
+- CLI wasm 子进程 26 组、VS Code 三平台六组 fixture 与 12 次跨调用端对照通过；
+  mock 扩展处理器通过。性能 smoke test 输出实际测量，但不属于 VS Code 实机测试。
+- 包清单包括新的报名版申报书与一致性脚本；本轮没有重新发布新版本。
+
+这些是本地结果；新提交的远程 CI 需要在推送后单独核对。报名系统状态也不能由
+本地测试推断。
+
 本页保留2026-09-14基础版记录。本轮宿主契约与文件 CLI 的实际本地记录见
 [LOCAL_REVIEW_20260917.md](LOCAL_REVIEW_20260917.md)，旧结果不能替代新代码验证。
 

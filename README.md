@@ -16,6 +16,8 @@ MoonKeyguard 本轮聚焦 **VS Code 扩展快捷键的发布前行为回归检�
 如果只是给自己的编辑器改几个快捷键，优先使用 VS Code 内置同键查看和排障日志，无需引入本库。
 它不是所有编辑器的通用解析器，更不替代 VS Code 对真实键盘、布局、焦点和命令执行的最终判定。
 本项目与八月 MoonBVHKit 的选题、仓库和核心实现独立。
+九月报名请使用[与当前仓库一致的申报书](submission/MoonKeyguard_9月黑客松申报书_报名版.md)；
+仓库 CI 会校验它与 `docs/PROJECT_PROPOSAL.md`、`moon.mod` 的项目身份一致。
 
 ## 先看一个可以复验的用途
 

@@ -1,4 +1,17 @@
-# 2026-09-23 初审反馈整改复核说明
+# MoonKeyguard 初审反馈整改复核说明
+
+## 2026-09-29：申报材料与仓库不一致
+
+最新初审邮件明确指出申报书与 GitHub 仓库及项目主题不一致。查得本地曾留有一份
+被 `.gitignore` 排除的旧“报名版”申报书，仍描述通用桌面/终端快捷键工具及 0.2.0 证据，
+而公开仓库现在的核心场景是 VS Code 扩展快捷键行为回归。该旧文件可能被误用；
+无法从本地仓库确认报名系统里实际上传的文件，故不把它断言为唯一原因。
+
+已将 `submission/MoonKeyguard_9月黑客松申报书_报名版.md` 与
+`docs/PROJECT_PROPOSAL.md` 统一到当前已实现主题，纳入版本管理，并增加
+`scripts/verify_submission.mjs` 检查项目名称、仓库、模块、版本及两份申报书的一致性。
+此次本地修复必须推送并在报名系统重新提交才会影响组委会看到的材料。
+报名字段及尚需完成的验收动作见 `submission/FINAL_CHECKLIST.md`。
 
 申请人：张博文。项目：MoonKeyguard。仓库：https://github.com/zhangbowen2006/MoonKeyguard
 本轮整改已推送至公开默认分支；提交 `c3dd6f2` 的 CI 全部成功：
