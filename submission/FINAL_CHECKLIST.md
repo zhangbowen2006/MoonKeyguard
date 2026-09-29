@@ -18,7 +18,7 @@ CI 新增与 `docs/PROJECT_PROPOSAL.md`、`moon.mod` 的一致性检查。
 - [ ] 项目名称：`MoonKeyguard`。
 - [ ] 项目仓库：`https://github.com/zhangbowen2006/MoonKeyguard`。
 - [ ] 项目主题：`VS Code 扩展快捷键行为回归检查`。
-- [ ] GitHub 仓库右侧 About 简介目前仍写着较宽泛的 `MoonBit-native keyboard shortcut conflict analyzer`；编辑为 `MoonBit library for CI regression checks of VS Code extension keybinding behavior contracts.`，与申报主题一致。
+- [x] GitHub 仓库右侧 About 简介已更新为 `MoonBit library for CI regression checks of VS Code extension keybinding behavior contracts.`，并通过 GitHub API 核验，与申报主题一致。
 - [ ] 申报书：复制或上传本目录 `MoonKeyguard_9月黑客松申报书_报名版.md` 的最新完整内容；不要再使用旧缓存文件或 MoonBit Target Parity 申报书。
 - [ ] 赛道：九月新项目赛道；八月 MoonBVHKit 是独立项目，不将其成果混入本项目。
 - [ ] 姓名及联系方式：只在报名平台核对申请人本人信息；公开仓库不提交手机号和邮箱。
